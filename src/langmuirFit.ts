@@ -2,23 +2,24 @@ import LM from 'ml-levenberg-marquardt';
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-export default function langmuirFit(data: { x: number[]; y: number[] }) {
-  //function with parameters to fit
+//inputOptions has to be fixed so that the input is either the input or a default value
 
-  let initialValues = initialGuess;
-  const options = {
-    damping: 1.5,
-    initialValues: initialValues,
-    minValues: minValues,
-    maxValues: maxValues,
+export default function langmuirFit(
+  data: { x: number[]; y: number[] },
+  inputOptions: object,
+) {
+  let options = {
+    minValues: Math.pow(10, -8),
+    maxValues: Math.pow(10, 8),
     gradientDifference: 10e-2,
     maxIterations: 100,
     errorTolerance: 10e-3,
+    initialValues: initialGuess(data),
   };
 
   let fittedParams = LM(data, baseFunction, options);
 
-  console.log(baseFunction([1, 1])(77));
+  console.log(fittedParams);
   writeFileSync(join(__dirname, '../examples/data.json'), JSON.stringify(0));
   return 0;
 }
@@ -48,5 +49,5 @@ function baseFunction([KH, nMono]: number[]) {
 function initialGuess(data: { x: number[]; y: number[] }) {
   let saturationLoading = 1.1 * Math.max(...data.y);
   let KH = data.y[0] / data.x[0] / (saturationLoading - data.y[0]);
-  return saturationLoading, KH;
+  return [KH, saturationLoading];
 }
