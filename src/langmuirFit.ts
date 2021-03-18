@@ -24,6 +24,7 @@ function MSE(
   for (let i = 0; i < data.x.length; i++) {
     sum += Math.pow(f([a, b])(x) - data.y[i], 2);
   }
+  return sum / data.x.length;
 }
 
 //langmuir function
