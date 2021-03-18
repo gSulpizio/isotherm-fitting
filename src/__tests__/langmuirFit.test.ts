@@ -1,4 +1,6 @@
 import langmuirFit from '../langmuirFit';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 
 test('test Langmuir fit', () => {
   let data = {
@@ -31,5 +33,23 @@ test('test Langmuir fit', () => {
       242.443,
     ],
   };
-  expect(langmuirFit(data)).toStrictEqual(0);
+  let results = langmuirFit(data);
+  let yFit = data.x.map((item) => baseFunction(results.parameterValues)(item));
+  for (let i = 0; i < yFit.length; i++) {
+    expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
+  }
+
+  //writing results to plot
+  writeFileSync(
+    join(__dirname, '../../examples/data.json'),
+    JSON.stringify(data),
+  );
+
+  writeFileSync(
+    join(__dirname, '../../examples/fit.json'),
+    JSON.stringify({ x: data.x, y: yFit }),
+  );
+  function baseFunction([KH, nMono]: number[]) {
+    return (p) => (nMono * KH * p) / (1 + KH * p);
+  }
 });

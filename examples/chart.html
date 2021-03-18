@@ -32,8 +32,8 @@
     //GRAPH COLOR HERE
     window.color='#FFFFFF'
     //ENTER FILE NAMES HERE:
-      fileName1 = 'data.json'
-      fileName2 = 'dataFit.json'
+      fileName1 = 'data'
+      fileName2 = 'fit'
       fileName3 = ''
       fileName4 = ''
       if (fileName2 === '') {
@@ -52,7 +52,6 @@
       fetch(fileName1 + '.json')
         .then((res) => res.json())
         .then((data) => {
-          
           var trace1 = {
             x: data.x,
             y: data.y,
