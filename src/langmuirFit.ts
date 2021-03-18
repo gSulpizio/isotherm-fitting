@@ -5,10 +5,22 @@ import { join } from 'path';
 export default function langmuirFit(data: { x: number[]; y: number[] }) {
   //function with parameters to fit
 
+  let initialValues = initialGuess;
+  const options = {
+    damping: 1.5,
+    initialValues: initialValues,
+    minValues: minValues,
+    maxValues: maxValues,
+    gradientDifference: 10e-2,
+    maxIterations: 100,
+    errorTolerance: 10e-3,
+  };
+
+  let fittedParams = LM(data, baseFunction, options);
+
   console.log(baseFunction([1, 1])(77));
   writeFileSync(join(__dirname, '../examples/data.json'), JSON.stringify(0));
   return 0;
-  a = MSE(data, [1, 2], baseFunction);
 }
 
 //MSE calculation
@@ -30,4 +42,11 @@ function MSE(
 //langmuir function
 function baseFunction([KH, nMono]: number[]) {
   return (p) => (nMono * KH * p) / (1 + KH * p);
+}
+
+//initial Guess
+function initialGuess(data: { x: number[]; y: number[] }) {
+  let saturationLoading = 1.1 * Math.max(...data.y);
+  let KH = data.y[0] / data.x[0] / (saturationLoading - data.y[0]);
+  return saturationLoading, KH;
 }
