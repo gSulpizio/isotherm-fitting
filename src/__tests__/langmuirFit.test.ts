@@ -31,5 +31,5 @@ test('test Langmuir fit', () => {
       242.443,
     ],
   };
-  expect(langmuirFit(data)).toStrictEqual(2);
+  expect(langmuirFit(data)).toStrictEqual(0);
 });
