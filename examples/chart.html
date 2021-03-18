@@ -1,0 +1,171 @@
+<head>
+  <!-- plot: -->
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- jquery to make it possible to add and remove options: -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- icons add and remove, etc.: -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</head>
+<style>
+  body {
+    background-color: #474747;
+  }
+</style>
+<body>
+
+  <br /><br />
+
+  <div {width: 100%; height: 100%;} id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+
+  <!-- Launch button: -->
+
+
+  <script type="text/javascript">
+    window.fileName1 = 0;
+    window.fileName2 = 0;
+    window.fileName3 = 0;
+    window.fileName4 = 0;
+    //GRAPH COLOR HERE
+    window.color='#FFFFFF'
+    //ENTER FILE NAMES HERE:
+      fileName1 = 'data.json'
+      fileName2 = ''
+      fileName3 = ''
+      fileName4 = ''
+      if (fileName2 === '') {
+        get1();
+      }else if(fileName3===''){
+        get2()
+      }
+      else if(fileName4===''){
+        get3()
+      }
+      else {
+        get4()
+      }
+    
+    function get1() {
+      fetch(fileName1 + '.json')
+        .then((res) => res.json())
+        .then((data) => {
+          
+          var trace1 = {
+            x: data.x,
+            y: data.y,
+            type: 'scatter',
+            name:fileName1
+          };
+
+          var tracingData = [trace1];
+
+          Plotly.newPlot('myDiv', tracingData,layout={plot_bgcolor:color,paper_bgcolor:color});
+        });
+    }
+    function get2() {
+      Promise.all([
+      fetch(fileName1 + '.json').then((resp) => resp.json()),
+      fetch(fileName2 + '.json').then((resp) => resp.json()),
+    ]).then((data) => {
+          
+          var trace1 = {
+            x: data[0].x,
+            y: data[0].y,
+            type: 'scatter',
+            name:fileName1
+          };
+          var trace2 = {
+            x: data[1].x,
+            y: data[1].y,
+            type: 'scatter',
+            name:fileName2
+          };
+
+
+          var tracingData = [trace1, trace2];
+
+          Plotly.newPlot('myDiv', tracingData,layout={plot_bgcolor:color,paper_bgcolor:color});
+
+        });
+    }
+    function get3() {
+      Promise.all([
+      fetch(fileName1 + '.json').then((resp) => resp.json()),
+      fetch(fileName2 + '.json').then((resp) => resp.json()),
+      fetch(fileName3 + '.json').then((resp) => resp.json()),
+    ]).then((data) => {
+          
+          var trace1 = {
+            x: data[0].x,
+            y: data[0].y,
+            type: 'scatter',
+            name:fileName1
+          };
+          var trace2 = {
+            x: data[1].x,
+            y: data[1].y,
+            type: 'scatter',
+            name:fileName2
+          };
+          var trace3 = {
+            x: data[2].x,
+            y: data[2].y,
+            type: 'scatter',
+            name:fileName3
+          };
+
+          var tracingData = [trace1, trace2, trace3];
+
+          Plotly.newPlot('myDiv', tracingData,layout={plot_bgcolor:color,paper_bgcolor:color});
+        });
+      }
+
+          function get4() {
+      Promise.all([
+      fetch(fileName1 + '.json').then((resp) => resp.json()),
+      fetch(fileName2 + '.json').then((resp) => resp.json()),
+      fetch(fileName3 + '.json').then((resp) => resp.json()),
+      fetch(fileName4 + '.json').then((resp) => resp.json()),
+    ]).then((data) => {
+          console.log(data)
+          var trace1 = {
+            x: data[0].x,
+            y: data[0].y,
+            type: 'scatter',
+            name:fileName1
+          };
+          var trace2 = {
+            x: data[1].x,
+            y: data[1].y,
+            type: 'scatter',
+            name:fileName2
+          };
+          var trace3 = {
+            x: data[2].x,
+            y: data[2].y,
+            type: 'scatter',
+            name:fileName3
+          };
+          var trace4 = {
+            x: data[3].x,
+            y: data[3].y,
+            type: 'scatter',
+            name:fileName4
+          };
+          var tracingData = [trace1, trace2,trace3, trace4];
+
+          Plotly.newPlot('myDiv', tracingData,layout={plot_bgcolor:color,paper_bgcolor:color});
+        });
+    }
+    /**
+    Promise.all([
+      fetch(fileName1).then((resp) => resp.json()),
+      fetch(fileName2).then((resp) => resp.json()),
+      fetch(fileName3).then((resp) => resp.json()),
+      fetch(fileName4).then((resp) => resp.json()),
+    ]).then(console.log('hellooooo'));*/
+  </script>
+</body>
