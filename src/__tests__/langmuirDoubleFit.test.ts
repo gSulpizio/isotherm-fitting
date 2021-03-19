@@ -1,8 +1,11 @@
-import langmuirFit from '../langmuirFit';
+import langmuirDoubleFit from '../langmuirDoubleFit';
+import { langmuirDoubleFunction } from '../modelFunctions';
+
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-test('test Langmuir fit', () => {
+test('test Double Langmuir fit', () => {
+  it;
   let data = {
     x: [
       0.0171192,
@@ -33,8 +36,10 @@ test('test Langmuir fit', () => {
       242.443,
     ],
   };
-  let results = langmuirFit(data);
-  let yFit = data.x.map((item) => baseFunction(results.parameterValues)(item));
+  let results = langmuirDoubleFit(data);
+  let yFit = data.x.map((item) =>
+    langmuirDoubleFunction(results.parameterValues)(item),
+  );
   for (let i = 0; i < yFit.length; i++) {
     expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
   }
@@ -46,10 +51,7 @@ test('test Langmuir fit', () => {
   );
 
   writeFileSync(
-    join(__dirname, '../../examples/fit.json'),
+    join(__dirname, '../../examples/doubleFit.json'),
     JSON.stringify({ x: data.x, y: yFit }),
   );
-  function baseFunction([KH, nMono]: number[]) {
-    return (p) => (nMono * KH * p) / (1 + KH * p);
-  }
 });
