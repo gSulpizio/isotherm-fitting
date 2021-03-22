@@ -35,8 +35,9 @@ test('test Langmuir fit', () => {
       242.443,
     ],
   };
-  let results = BETFit(data);
-  console.log(results);
+
+  let results = BETFit(data, 'N2', 290);
+  //console.log(results);
 
   let yFit = data.x.map((item) => BETFunction(results.parameterValues)(item));
   for (let i = 0; i < yFit.length; i++) {
