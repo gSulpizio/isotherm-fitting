@@ -1,5 +1,5 @@
-import langmuirSingleFit from '../langmuirSingleFit';
-import { langmuirSingleFunction } from '../modelFunctions';
+import BETFit from '../BETFit';
+import { BETFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -35,10 +35,10 @@ test('test Langmuir fit', () => {
       242.443,
     ],
   };
-  let results = langmuirSingleFit(data);
-  let yFit = data.x.map((item) =>
-    langmuirSingleFunction(results.parameterValues)(item),
-  );
+  let results = BETFit(data);
+  console.log(results);
+
+  let yFit = data.x.map((item) => BETFunction(results.parameterValues)(item));
   for (let i = 0; i < yFit.length; i++) {
     expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
   }
