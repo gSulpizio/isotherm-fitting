@@ -6,8 +6,6 @@ import { BETFunction } from './modelFunctions';
 
 export default function BETFit(
   data: { x: number[]; y: number[] },
-  gasName: string,
-  temperature: number,
   inputOptions: object = {},
 ) {
   let options = {
@@ -19,7 +17,7 @@ export default function BETFit(
   };
 
   //let fluidProperties = getProperties(gasName, temperature);
-  console.log(BETCriteria(data, Math.max(...data.y)));
+  console.log(BETCriteria(data, Math.max(...data.x)));
   //let newData=BETCriteria(data, SATURATIONPRESSURE)
   let fittedParams = LM(data, BETFunction, options);
 
@@ -52,19 +50,26 @@ function BETCriteria(data: { x: number[]; y: number[] }, p0: number) {
   let highest = 0;
   let longestX: number[];
   let longestY: number[];
+
   for (let i = 1; i < data.x.length; i++) {
-    x.push(data.x[i]);
-    y.push(data.y[i]);
-    count += 1;
     if (pOverp0(data.x[i], data.y[i]) > pOverp0(data.x[i - 1], data.y[i - 1])) {
-      if (count > highest || (i === data.x.length - 1 && !longestX)) {
+      if (count > highest) {
         highest = count;
         longestX = x;
         longestY = y;
       }
+
       x = [];
       y = [];
       count = 0;
+    }
+    x.push(data.x[i]);
+    y.push(data.y[i]);
+
+    count += 1;
+    if (i === data.x.length - 1 && count > highest) {
+      longestX = x;
+      longestY = y;
     }
   }
   return { x: longestX, y: longestY };
