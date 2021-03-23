@@ -41,16 +41,18 @@ test('test Langmuir fit', () => {
 
   //debugging:
   //plotting p vs
-  let p0 = Math.max(...data.x);
-  let firstCriteria = (p: number, N: number) => N * p0 * (1 - p / p0); //p=data.x, N=data.y
-  let yFit = [];
-  for (let i = 0; i < data.x.length; i++) {
-    yFit.push(firstCriteria(data.x[i], data.y[i]));
-  }
-  //stop debugging
+  //let p0 = Math.max(...data.x);
+  //let firstCriteria = (p: number, N: number) => N * p0 * (1 - p / p0); //p=data.x, N=data.y
+  //let yFit = [];
+  //for (let i = 0; i < data.x.length; i++) {
+  //  yFit.push(firstCriteria(data.x[i], data.y[i]));
+  //}
+  //end of debugging
 
-  //let yFit = data.x.map((item) => BETFunction(results.parameterValues)(item));
-  //for (let i = 0; i < yFit.length; i++) {expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);}
+  let yFit = data.x.map((item) => BETFunction(results.parameterValues)(item));
+  for (let i = 0; i < yFit.length; i++) {
+    expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
+  }
 
   //writing results to plot
   writeFileSync(

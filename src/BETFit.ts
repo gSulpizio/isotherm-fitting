@@ -41,9 +41,9 @@ function initialGuess(data: { x: number[]; y: number[] }) {
  * @param {object} fittedParams - ouput of LM function
  */
 function BETCriteria(data: { x: number[]; y: number[] }, p0: number) {
-  let pOverp0 = (p: number, N: number) => N * p0 * (1 - p / p0); //p=data.x, N=data.y
+  let pConsistent = (p: number, N: number) => N * p0 * (1 - p / p0); //p=data.x, N=data.y
 
-  //1st criteria :
+  //1st criteria, searches longest sequence where N*Po(1 − P/Po) increases monotonically with P:
   let x: number[] = [data.x[0]];
   let y: number[] = [data.y[0]];
   let count = 1;
@@ -52,7 +52,10 @@ function BETCriteria(data: { x: number[]; y: number[] }, p0: number) {
   let longestY: number[];
 
   for (let i = 1; i < data.x.length; i++) {
-    if (pOverp0(data.x[i], data.y[i]) > pOverp0(data.x[i - 1], data.y[i - 1])) {
+    if (
+      pConsistent(data.x[i], data.y[i]) >
+      pConsistent(data.x[i - 1], data.y[i - 1])
+    ) {
       if (count > highest) {
         highest = count;
         longestX = x;
