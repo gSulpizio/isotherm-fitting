@@ -1,5 +1,8 @@
 import LM from 'ml-levenberg-marquardt';
 import { BETFunction } from './modelFunctions';
+
+//import SG from 'ml-savitzky-golay-generalized'; //doesn't work in ts??
+
 //import { MolecularFluid, getProperties } from 'fluid-properties';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
@@ -48,8 +51,8 @@ function BETCriteria(data: { x: number[]; y: number[] }, p0: number) {
   let y: number[] = [data.y[0]];
   let count = 1;
   let highest = 0;
-  let longestX: number[];
-  let longestY: number[];
+  let longestX = [data.x[0]];
+  let longestY = [data.y[0]];
 
   for (let i = 1; i < data.x.length; i++) {
     if (
