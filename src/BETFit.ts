@@ -5,25 +5,40 @@ import { BETFunction } from './modelFunctions';
 
 //import { MolecularFluid, getProperties } from 'fluid-properties';
 
-//inputOptions has to be fixed so that the input is either the input or a default value
+//inputOptions has to be fixed so that the input is either the input or a default value!!!!!!!!!!!!!!!!!!!!
 
 export default function BETFit(
   data: { x: number[]; y: number[] },
   inputOptions: object = {},
 ) {
+  //convert to relative pressure:
+  let relativeData = {
+    x: data.x.map((x) => x / Math.max(...data.x)),
+    y: data.y,
+  };
+  //if first pressure point is 0, delete that point:
+  if (data.x[0] === 0) {
+    relativeData.x.shift();
+    relativeData.y.shift();
+  }
+  //delete last (highest) pressure:
+  relativeData.x.pop();
+  relativeData.y.pop();
+  //create weight array:
+  let weightVector = [];
+
+  weightVector = BETweight(relativeData);
+
   let options = {
     damping: 10e-2,
     gradientDifference: 10e-2,
     maxIterations: 10000,
     errorTolerance: 10e-3,
-    initialValues: initialGuess(data),
+    initialValues: initialGuess(relativeData),
+    //weights: weightVector,
   };
 
-  //let fluidProperties = getProperties(gasName, temperature);
-  console.log(BETCriteria(data, Math.max(...data.x)));
-  //let newData=BETCriteria(data, SATURATIONPRESSURE)
-  let fittedParams = LM(data, BETFunction, options);
-
+  let fittedParams = LM(relativeData, BETFunction, options);
   return fittedParams;
 }
 
@@ -35,7 +50,7 @@ export default function BETFit(
 function initialGuess(data: { x: number[]; y: number[] }) {
   let saturationLoading = 1.1 * Math.max(...data.y);
   let C = data.y[0] / data.x[0] / (saturationLoading - data.y[0]);
-  return [C, saturationLoading, 0.01];
+  return [C, saturationLoading];
 }
 /**
  * function applying consistency criteria
@@ -79,4 +94,27 @@ function BETCriteria(data: { x: number[]; y: number[] }, p0: number) {
     }
   }
   return { x: longestX, y: longestY };
+}
+
+/**
+ * returns weight of a data point according to (eq. 11): doi:10.1016/j.micromeso.2011.05.022 (https://doi.org/10.1016/j.micromeso.2011.05.022)
+ * first and last data-point get a weight of 0
+ * @param {{x:Array<number>, y:Array<number>}} data - Array of points to fit in the format [x1, x2, ... ], [y1, y2, ... ] where the x points represent relative pressure
+ * @returns {number} weight of data point
+ */
+function BETweight(data: { x: number[]; y: number[] }) {
+  let weight = [0];
+  for (let i = 0; i < data.x.length - 1; i++) {
+    weight.push(
+      (Math.sqrt(
+        (data.x[i] - data.x[i - 1]) ** 2 + (data.y[i] - data.y[i - 1]) ** 2,
+      ) +
+        Math.sqrt(
+          (data.x[i] - data.x[i + 1]) ** 2 + (data.y[i] - data.y[i + 1]) ** 2,
+        )) /
+        2,
+    );
+  }
+  weight.push(0);
+  return weight;
 }

@@ -5,7 +5,7 @@
  * @returns {function} loading as a function of pressure
  */
 export function langmuirSingleFunction([KH, nm]: number[]) {
-  return (p: number) => (nm * KH * p) / (1 + KH * p);
+  return (p: any) => (nm * KH * p) / (1 + KH * p);
 }
 
 //langmuir double function
@@ -23,9 +23,9 @@ export function langmuirDoubleFunction([K1, K2, n1, n2]: number[]) {
 //langmuir double function
 /**
  *
- * @param {Array}  [C, nm, N] : array with equilibrium constant and the saturation loading
+ * @param {Array}  [C, nm] : array with equilibrium constant and the saturation loading
  * @returns {function} loading as a function of pressure
  */
-export function BETFunction([C, nm, N]: number[]) {
-  return (p: number) => (nm * C * p) / ((1 - N * p) * (1 - N * p + C * p));
+export function BETFunction([C, nm]: number[]) {
+  return (x: number) => (nm * C * x) / ((1 - x) * (1 - x + C * x));
 }

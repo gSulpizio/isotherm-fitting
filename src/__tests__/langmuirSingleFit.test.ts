@@ -113,6 +113,7 @@ describe('test Langmuir fit', () => {
       ],
     };
     let results = langmuirSingleFit(data);
+    console.log(results);
     let yFit = data.x.map((item) =>
       langmuirSingleFunction(results.parameterValues)(item),
     );
