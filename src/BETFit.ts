@@ -1,5 +1,7 @@
 import LM from 'ml-levenberg-marquardt';
 import { BETFunction } from './modelFunctions';
+import SimpleLinearRegression from 'ml-regression-simple-linear';
+const SG = require('ml-savitzky-golay-generalized');
 
 //import SG from 'ml-savitzky-golay-generalized'; //doesn't work in ts??
 
@@ -11,34 +13,62 @@ export default function BETFit(
   data: { x: number[]; y: number[] },
   inputOptions: object = {},
 ) {
-  let options = {
-    damping: 10e-2,
-    gradientDifference: 10e-2,
-    maxIterations: 10000,
-    errorTolerance: 10e-3,
-    initialValues: initialGuess(data),
-  };
-
   //let fluidProperties = getProperties(gasName, temperature);
-  console.log(BETCriteria(data, Math.max(...data.x)));
-  //let newData=BETCriteria(data, SATURATIONPRESSURE)
-  let fittedParams = LM(data, BETFunction, options);
 
+  //let newData=BETCriteria(data, SATURATIONPRESSURE)
+  let fittedParams = getParams({
+    x: data.x.slice(0, Math.ceil(data.x.length / 2)),
+    y: data.y.slice(0, Math.ceil(data.x.length / 2)),
+  });
   return fittedParams;
 }
 
-/**
- * initial Guess
- * @param {{x:Array<number>, y:Array<number>}} data - Array of points to fit in the format [x1, x2, ... ], [y1, y2, ... ]
- * @returns {array} initial guess:[C, nm, N]
- */
-function initialGuess(data: { x: number[]; y: number[] }) {
-  let saturationLoading = 1.1 * Math.max(...data.y);
-  let C = data.y[0] / data.x[0] / (saturationLoading - data.y[0]);
-  return [C, saturationLoading, 0.01];
+function getParams(data: { x: number[]; y: number[] }): any[] {
+  let newData = { x: [...data.x], y: [...data.y] };
+  const regression = new SimpleLinearRegression(newData.x, newData.y);
+
+  console.log(newData, regression.score(newData.x, newData.y));
+
+  if (
+    newData.x.length < 4 ||
+    regression.score(newData.x, newData.y).r2 > 0.99
+  ) {
+    return [newData, regression]; //    TODO: interpolation should be implemented here
+  }
+
+  //make new dataset without last point
+  let newDataPop: { x: number[]; y: number[] } = {
+    x: [...newData.x],
+    y: [...newData.y],
+  };
+  newDataPop.x.pop();
+  newDataPop.y.pop();
+  //make new dataset without last point
+  let newDataShift: { x: number[]; y: number[] } = {
+    x: [...newData.x],
+    y: [...newData.y],
+  };
+  newDataShift.x.shift();
+  newDataShift.y.shift();
+
+  //new regression with shortened data
+  const regressionPop = new SimpleLinearRegression(newDataPop.x, newDataPop.y);
+  const regressionShift = new SimpleLinearRegression(
+    newDataShift.x,
+    newDataShift.y,
+  );
+  if (
+    regressionPop.score(newDataPop.x, newDataPop.y).r2 >
+    regressionShift.score(newDataShift.x, newDataShift.y).r2
+  ) {
+    return [newDataPop, getParams(newDataPop)];
+  }
+
+  return [newDataShift, getParams(newDataShift)];
 }
+
 /**
- * function applying consistency criteria
+ * function applying consistency criteria             ////probably not useful anymore
  * @param {{x:Array<number>, y:Array<number>}} data - Array of points to fit in the format [x1, x2, ... ], [y1, y2, ... ]
  * @param {number} p0 - saturation pressure
  * @param {object} fittedParams - ouput of LM function
