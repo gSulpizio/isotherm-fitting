@@ -26,14 +26,12 @@ export default function BETFit(
 function getParams(data: { x: number[]; y: number[] }): any[] {
   let newData = { x: [...data.x], y: [...data.y] };
   const regression = new SimpleLinearRegression(newData.x, newData.y);
-
-  console.log(newData, regression.score(newData.x, newData.y));
-
+  const score = (x: number[], y: number[]) => regression.score(x, y);
   if (
     newData.x.length < 4 ||
     regression.score(newData.x, newData.y).r2 > 0.99
   ) {
-    return [newData, regression]; //    TODO: interpolation should be implemented here
+    return [data, regression, score]; //    TODO: interpolation should be implemented here
   }
 
   //make new dataset without last point
@@ -41,6 +39,7 @@ function getParams(data: { x: number[]; y: number[] }): any[] {
     x: [...newData.x],
     y: [...newData.y],
   };
+
   newDataPop.x.pop();
   newDataPop.y.pop();
   //make new dataset without last point
@@ -61,10 +60,10 @@ function getParams(data: { x: number[]; y: number[] }): any[] {
     regressionPop.score(newDataPop.x, newDataPop.y).r2 >
     regressionShift.score(newDataShift.x, newDataShift.y).r2
   ) {
-    return [newDataPop, getParams(newDataPop)];
+    return getParams(newDataPop);
   }
 
-  return [newDataShift, getParams(newDataShift)];
+  return getParams(newDataShift);
 }
 
 /**
