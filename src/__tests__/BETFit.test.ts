@@ -97,7 +97,7 @@ describe('test BET fit', () => {
       x: x,
       y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
     };
-    data.y = data.y.map((item) => (randomGaussian() / 10 + 1) * item);
+    data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
