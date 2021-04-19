@@ -55,7 +55,7 @@ describe('test Langmuir fit', () => {
       JSON.stringify({ x: data.x, y: yFit }),
     );
   });
-  it('second dataSet', () => {
+  it('second dataSet, with 0 as first point', () => {
     let data = {
       x: [
         0.0,

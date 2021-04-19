@@ -9,18 +9,32 @@ const SG = require('ml-savitzky-golay-generalized');
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 
+//monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
+//BET constant c=1+slope/intercept
+//Total surface area: S_total=v_m*N*s/V where N is the avogadro number, s is the adsorption cross section of the adsorbate, V the molar volume of the adsorbate gas (STP)
+//Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
+//specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
+
 export default function BETFit(
   data: { x: number[]; y: number[] },
-  inputOptions: object = {},
+
+  V: number,
+  s: number,
+  alpha = 1,
+  inputOptions = {},
 ) {
   //let fluidProperties = getProperties(gasName, temperature);
 
   //let newData=BETCriteria(data, SATURATIONPRESSURE)
-  let fittedParams = getParams({
+  let [sampledData, regression, score] = getParams({
     x: data.x.slice(0, Math.ceil(data.x.length / 2)),
     y: data.y.slice(0, Math.ceil(data.x.length / 2)),
   });
-  return fittedParams;
+  const N = 6.022 * 10 ** 23;
+  let vm = 1 / (regression.slope + regression.intercept);
+  let Stotal = (vm * N * s) / V;
+  let SBET = Stotal / alpha;
+  return { sampledData, regression, score, Stotal, SBET };
 }
 
 function getParams(data: { x: number[]; y: number[] }): any[] {
