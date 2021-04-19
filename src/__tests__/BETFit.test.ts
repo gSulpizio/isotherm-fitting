@@ -97,12 +97,12 @@ describe('test BET fit', () => {
       x: x,
       y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
     };
-
+    data.y = data.y.map((item) => (randomGaussian() / 10 + 1) * item);
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     let results = BETFit(data, V, s);
-    console.log(results);
+    console.log(results.SBET);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
@@ -111,7 +111,22 @@ describe('test BET fit', () => {
       join(__dirname, '../../examples/data.json'),
       JSON.stringify(data),
     );
-
-    //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify({ x: data.x, y: Simulated }));
+    let simulated = data.x.map(
+      (item) => item * results.regression.slope + results.regression.intercept,
+    );
+    writeFileSync(
+      join(__dirname, '../../examples/BETFit.json'),
+      JSON.stringify({ x: data.x, y: simulated }),
+    );
   });
 });
+/**
+ * Generates a random number following a normal distribution
+ * @returns {number}  random number
+ */
+function randomGaussian() {
+  return (
+    Math.sqrt(-2 * Math.log(Math.random())) *
+    Math.cos(2 * Math.PI * Math.random())
+  );
+}
