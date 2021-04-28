@@ -3,6 +3,7 @@ import { BETFunction, langmuirSingleFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
+import BETFitLinear from '../BETFitLinear';
 
 describe('test BET fit', () => {
   it('first dataSet', () => {
@@ -39,7 +40,7 @@ describe('test BET fit', () => {
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
-    let results = BETFit(data, V, s);
+    let results = BETFit(data, V, s, 'linear');
 
     writeFileSync(
       join(__dirname, '../../examples/BETFit.json'),
@@ -65,34 +66,8 @@ describe('test BET fit', () => {
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify({ x: data.x, y: yFit }));
   });
-  it.only('simulated dataSet, test linear fit and deduced BET area', () => {
-    let x = [
-      0.0,
-      0.5,
-      1.0,
-      1.5,
-      2.0,
-      2.5,
-      3.0,
-      3.5,
-      4.0,
-      4.5,
-      5.0,
-      5.5,
-      6.0,
-      6.5,
-      7.0,
-      7.5,
-      8.0,
-      8.5,
-      9.0,
-      9.5,
-      10.0,
-      10.5,
-      11.0,
-      11.5,
-      12.0,
-    ];
+  it('simulated dataSet, test linear fit and deduced BET area', () => {
+    let x = [...Array(100).keys()];
     let data: { x: number[]; y: number[] } = {
       x: x,
       y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
@@ -101,8 +76,8 @@ describe('test BET fit', () => {
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
-    let results = BETFit(data, V, s);
-    console.log(results.SBET);
+    //Here it's a weird error and i have to do this, how to efficiently counter that?
+    let results: any = BETFit(data, V, s, 'linear') || BETFitLinear(data, V, s);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
@@ -111,6 +86,7 @@ describe('test BET fit', () => {
       join(__dirname, '../../examples/data.json'),
       JSON.stringify(data),
     );
+
     let simulated = data.x.map(
       (item) => item * results.regression.slope + results.regression.intercept,
     );
@@ -130,3 +106,36 @@ function randomGaussian() {
     Math.cos(2 * Math.PI * Math.random())
   );
 }
+
+describe('test BET fit Weighted', () => {
+  it('test BET Fit Weighted', () => {
+    let x = [...Array(100).keys()];
+    let data: { x: number[]; y: number[] } = {
+      x: x,
+      y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
+    };
+    //data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
+    const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
+
+    let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
+    //Here it's a weird error and i have to do this, how to efficiently counter that?
+    let results = BETFit(data, V, s, 'weighted') || {
+      regression: { slope: 0, intercept: 0 },
+    };
+
+    //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
+    /*
+    //writing results to plot
+    writeFileSync(
+      join(__dirname, '../../examples/data.json'),
+      JSON.stringify(data),
+    );
+    let simulated = data.x.map(
+      (item) => item * results.regression.slope + results.regression.intercept,
+    );
+    writeFileSync(
+      join(__dirname, '../../examples/BETFit.json'),
+      JSON.stringify({ x: data.x, y: simulated }),
+    );*/
+  });
+});
