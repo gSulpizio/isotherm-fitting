@@ -1,4 +1,5 @@
 import BETFitLinear from './BETFitLinear';
+import BETFitLinearDouble from './BETFitLinearDouble';
 import BETFitWeighted from './BETFitWeighted';
 
 export default function main(
@@ -10,13 +11,19 @@ export default function main(
   inputOptions = {},
 ) {
   const N = 6.022 * 10 ** 23;
-
+  let sampledData, regression, score, vm, Stotal, SBET;
   switch (algorithm) {
     case 'linearBET':
-      let [sampledData, regression, score] = BETFitLinear(data);
-      let vm = 1 / (regression.slope + regression.intercept);
-      let Stotal = (vm * N * s) / V;
-      let SBET = Stotal / alpha;
+      [sampledData, regression, score] = BETFitLinear(data);
+      vm = 1 / (regression.slope + regression.intercept);
+      Stotal = (vm * N * s) / V;
+      SBET = Stotal / alpha;
+      return { SBET, sampledData, regression, score };
+    case 'linearDoubleBET':
+      [sampledData, regression, score] = BETFitLinearDouble(data);
+      vm = 1 / (regression.slope + regression.intercept);
+      Stotal = (vm * N * s) / V;
+      SBET = Stotal / alpha;
       return { SBET, sampledData, regression, score };
     case 'weightedBET':
       return BETFitWeighted(data, V, s);
