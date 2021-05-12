@@ -15,25 +15,15 @@ const SG = require('ml-savitzky-golay-generalized');
 //Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
 //specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
 
-export default function BETFitLinear(
-  data: { x: number[]; y: number[] },
-  V: number,
-  s: number,
-  alpha = 1,
-  inputOptions = {},
-) {
+export default function BETFitLinear(data: { x: number[]; y: number[] }) {
   //let fluidProperties = getProperties(gasName, temperature);
 
   //let newData=BETCriteria(data, SATURATIONPRESSURE)
-  let [sampledData, regression, score] = getParams({
-    x: data.x.slice(0, Math.ceil(data.x.length / 2)),
-    y: data.y.slice(0, Math.ceil(data.x.length / 2)),
+
+  return getParams({
+    x: data.x.slice(0, Math.ceil(data.x.length / 3)),
+    y: data.y.slice(0, Math.ceil(data.x.length / 3)),
   });
-  const N = 6.022 * 10 ** 23;
-  let vm = 1 / (regression.slope + regression.intercept);
-  let Stotal = (vm * N * s) / V;
-  let SBET = Stotal / alpha;
-  return { sampledData, regression, score, Stotal, SBET };
 }
 
 function getParams(data: { x: number[]; y: number[] }): any[] {
@@ -41,7 +31,7 @@ function getParams(data: { x: number[]; y: number[] }): any[] {
   const regression = new SimpleLinearRegression(newData.x, newData.y);
   const score = (x: number[], y: number[]) => regression.score(x, y);
   if (
-    newData.x.length < 4 ||
+    newData.x.length < 5 ||
     regression.score(newData.x, newData.y).r2 > 0.99
   ) {
     return [data, regression, score]; //    TODO: interpolation should be implemented here

@@ -1,4 +1,4 @@
-import BETFit from '../BETFit';
+import main from '../main';
 import { BETFunction, langmuirSingleFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
@@ -40,7 +40,7 @@ describe('test BET fit', () => {
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
-    let results = BETFit(data, V, s, 'linear');
+    let results = main(data, V, s, 'linearBET');
 
     writeFileSync(
       join(__dirname, '../../examples/BETFit.json'),
@@ -77,7 +77,7 @@ describe('test BET fit', () => {
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
-    let results: any = BETFit(data, V, s, 'linear') || BETFitLinear(data, V, s);
+    let results: any = main(data, V, s, 'linearBET') || BETFitLinear(data);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
@@ -93,6 +93,10 @@ describe('test BET fit', () => {
     writeFileSync(
       join(__dirname, '../../examples/BETFit.json'),
       JSON.stringify({ x: data.x, y: simulated }),
+    );
+    writeFileSync(
+      join(__dirname, '../../examples/BETFitSampled.json'),
+      JSON.stringify({ x: results.sampledData.x, y: results.sampledData.y }),
     );
   });
 });
@@ -119,10 +123,10 @@ describe('test BET fit Weighted', () => {
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
-    let results = BETFit(data, V, s, 'weighted') || {
+    let results = main(data, V, s, 'weightedBET') || {
       regression: { slope: 0, intercept: 0 },
     };
-
+    console.log(results);
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
     /*
     //writing results to plot
