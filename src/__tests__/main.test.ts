@@ -39,7 +39,7 @@ describe('test BET fit', () => {
       JSON.stringify({ x: results.sampledData.x, y: results.sampledData.y }),
     );
   });
-  it('simulated dataSet, test linear fit and deduced BET area', () => {
+  it('simulated dataSet, test linear DOUBLE fit and deduced BET area', () => {
     let x = [...Array(100).keys()];
     let data: { x: number[]; y: number[] } = {
       x: x,
