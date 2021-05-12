@@ -9,7 +9,7 @@ export default function BETFitWeighted(
   s: number,
   inputOptions: object = {},
 ) {
-  let weights = [1];
+  let weights = [0];
   for (let i = 1; i < data.x.length - 1; i++) {
     weights.push(
       Math.sqrt(
@@ -22,7 +22,7 @@ export default function BETFitWeighted(
           2,
     );
   }
-  weights.push(1);
+  weights.push(0);
   let options = {
     damping: 10e-2,
     gradientDifference: 10e-2,
