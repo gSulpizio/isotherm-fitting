@@ -1,10 +1,10 @@
-import BETFit from '../BETFitLinear';
+import main from '../main';
 import { BETFunction, langmuirSingleFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
-describe('test BET fit', () => {
-  it.only('simulated dataSet, test linear fit and deduced BET area', () => {
+describe('tool to make accuracy statistics', () => {
+  it.only('test the accuracy of BET linear script', () => {
     let n = 100;
     let x = Array.from(Array(n).keys());
     x.map((x) => x / n);
@@ -16,7 +16,7 @@ describe('test BET fit', () => {
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V1, s1] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
-    let idealResults = BETFit(data, V1, s1);
+    let idealResults = main(data, V1, s1);
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     let x1: number[] = [];
@@ -25,7 +25,7 @@ describe('test BET fit', () => {
     let stat = { x1, y1 };
     for (let i = 0; i < 10000; i++) {
       data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
-      stat.x1.push(BETFit(data, V, s).SBET / idealResults.SBET);
+      stat.x1.push(main(data, V, s, 'linearBET').SBET / idealResults.SBET);
       stat.y1.push(i);
     }
 

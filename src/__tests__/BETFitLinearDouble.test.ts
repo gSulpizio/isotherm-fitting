@@ -1,5 +1,5 @@
 import main from '../main';
-import { BETFunction, langmuirSingleFunction } from '../modelFunctions';
+import { langmuirSingleFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';

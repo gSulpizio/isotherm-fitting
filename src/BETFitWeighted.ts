@@ -3,12 +3,7 @@ import { BETFunction } from './modelFunctions';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 
-export default function BETFitWeighted(
-  data: { x: number[]; y: number[] },
-  V: number,
-  s: number,
-  inputOptions: object = {},
-) {
+export default function BETFitWeighted(data: { x: number[]; y: number[] }) {
   let weights = [0];
   for (let i = 1; i < data.x.length - 1; i++) {
     weights.push(
@@ -33,9 +28,8 @@ export default function BETFitWeighted(
   };
 
   let result = LM(data, BETFunction, options);
-  console.log(result);
 
-  return 0;
+  return [weights, result];
 }
 
 //initial Guess
