@@ -7,12 +7,7 @@ import BETFitLinear from '../BETFitLinear';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear fit and deduced BET area', () => {
-    let x = [...Array(100).keys()];
-    let data: { x: number[]; y: number[] } = {
-      x: x,
-      y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
-    };
-    data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
+    let data = makeNoisyData(100);
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
@@ -40,12 +35,7 @@ describe('test BET fit', () => {
     );
   });
   it('simulated dataSet, test linear DOUBLE fit and deduced BET area', () => {
-    let x = [...Array(100).keys()];
-    let data: { x: number[]; y: number[] } = {
-      x: x,
-      y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
-    };
-    data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
+    let data = makeNoisyData(100);
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
@@ -87,11 +77,7 @@ function randomGaussian() {
 
 describe('test BET fit Weighted', () => {
   it('test BET Fit Weighted', () => {
-    let x = [...Array(100).keys()];
-    let data: { x: number[]; y: number[] } = {
-      x: x,
-      y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
-    };
+    let data = makeNoisyData(100);
     //data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
     const R = 8.31446261815324; //m^3⋅Pa⋅K^−1⋅mol^−1
 
@@ -117,3 +103,13 @@ describe('test BET fit Weighted', () => {
     );*/
   });
 });
+
+function makeNoisyData(n: number) {
+  let x = [...Array(n).keys()];
+  let data: { x: number[]; y: number[] } = {
+    x: x,
+    y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
+  };
+  data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
+  return data;
+}
