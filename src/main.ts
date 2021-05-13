@@ -1,4 +1,4 @@
-import BETFitLinear from './BETFitLinearSingle';
+import BETFitLinearSingle from './BETFitLinearSingle';
 import BETFitLinearDouble from './BETFitLinearDouble';
 import BETFitWeighted from './BETFitWeighted';
 
@@ -14,7 +14,7 @@ export default function main(
   let sampledData, regression, score, Stotal: number, SBET: number;
   switch (algorithm) {
     case 'linearBET':
-      [sampledData, regression, score] = BETFitLinear(data);
+      [sampledData, regression, score] = BETFitLinearSingle(data);
       [Stotal, SBET] = getSurfaces(
         regression.slope,
         regression.intercept,

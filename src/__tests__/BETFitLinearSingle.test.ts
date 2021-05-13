@@ -4,7 +4,6 @@ import makeNoisyData from './makeNoisyData';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
-import BETFitLinear from '../BETFitLinearSingle';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear Single fit and deduced BET area', () => {
@@ -13,7 +12,7 @@ describe('test BET fit', () => {
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
-    let results = BETFitLinearSingle(data);
+    let [sampledData, regression, score] = BETFitLinearSingle(data);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
@@ -24,7 +23,7 @@ describe('test BET fit', () => {
     );
 
     let simulated = data.x.map(
-      (item) => item * results.regression.slope + results.regression.intercept,
+      (item) => item * regression.slope + regression.intercept,
     );
     writeFileSync(
       join(__dirname, '../../examples/BETFit.json'),
@@ -32,7 +31,7 @@ describe('test BET fit', () => {
     );
     writeFileSync(
       join(__dirname, '../../examples/BETFitSampled.json'),
-      JSON.stringify({ x: results.sampledData.x, y: results.sampledData.y }),
+      JSON.stringify({ x: sampledData.x, y: sampledData.y }),
     );
   });
 });

@@ -3,7 +3,7 @@ import { BETFunction, langmuirSingleFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
-import BETFitLinear from '../BETFitLinearSingle';
+import BETFitLinearSingle from '../BETFitLinearSingle';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear fit and deduced BET area', () => {
@@ -12,7 +12,8 @@ describe('test BET fit', () => {
 
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
-    let results: any = main(data, V, s, 'linearBET') || BETFitLinear(data);
+    let results: any =
+      main(data, V, s, 'linearBET') || BETFitLinearSingle(data);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
@@ -41,7 +42,7 @@ describe('test BET fit', () => {
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
     let results: any =
-      main(data, V, s, 'linearDoubleBET') || BETFitLinear(data);
+      main(data, V, s, 'linearDoubleBET') || BETFitLinearSingle(data);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
