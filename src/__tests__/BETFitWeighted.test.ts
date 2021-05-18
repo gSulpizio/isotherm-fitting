@@ -1,5 +1,6 @@
 import BETFitWeighted from '../BETFitWeighted';
 import makeNoisyData from './makeNoisyData';
+import { BETFunction } from '../modelFunctions';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -12,8 +13,13 @@ describe('test BET fit weighted', () => {
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
     let [weights, results] = BETFitWeighted(data);
+    console.log(Object.keys(results));
     console.log(results);
-    console.log(weights);
+    //uncomment this line to get the error
+    //let fittedResults = data.x.map((x) => BETFunction(results.parameterValues));
+
+    //writeFileSync(join(__dirname, '../../examples/data.json'),JSON.stringify(data),);
+    //writeFileSync(join(__dirname, '../../examples/dataFIT.json'),JSON.stringify(data),);
 
     //let simulated = data.x.map((item) => item * results.regression.slope + results.regression.intercept);
   });
