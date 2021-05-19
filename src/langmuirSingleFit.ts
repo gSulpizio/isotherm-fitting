@@ -1,5 +1,5 @@
 import LM from 'ml-levenberg-marquardt';
-import { langmuirSingleFunction } from './modelFunctions';
+import langmuirSingleFunction from './modelFunctions/langmuirSingleFunction';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 

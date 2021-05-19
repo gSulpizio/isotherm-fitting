@@ -1,6 +1,6 @@
 import BETFitWeighted from '../BETFitWeighted';
-import makeNoisyData from './makeNoisyData';
-import { BETFunction } from '../modelFunctions';
+import makeNoisyData from './generateData/makeNoisyData';
+import { BETFunction } from '../modelFunctions/BETFunction';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';

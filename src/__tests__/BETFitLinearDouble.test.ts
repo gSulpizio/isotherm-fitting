@@ -1,6 +1,5 @@
 import BETFitLinearDouble from '../BETFitLinearDouble';
-import { langmuirSingleFunction } from '../modelFunctions';
-import makeNoisyData from './makeNoisyData';
+import makeNoisyData from './generateData/makeNoisyData';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';

@@ -1,6 +1,7 @@
-import { langmuirSingleFunction } from '../modelFunctions';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 export default function makeNoisyData(n: number) {
   let x = [...Array(n).keys()];
+  x = x.map((x) => x / n);
   let data: { x: number[]; y: number[] } = {
     x: x,
     y: x.map((item) => langmuirSingleFunction([2, 5])(item)),

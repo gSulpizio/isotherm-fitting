@@ -1,5 +1,5 @@
 import langmuirDoubleFit from '../langmuirDoubleFit';
-import { langmuirDoubleFunction } from '../modelFunctions';
+import langmuirDoubleFunction from '../modelFunctions/langmuirDoubleFunction';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';

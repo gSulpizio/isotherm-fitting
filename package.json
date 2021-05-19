@@ -33,7 +33,10 @@
   "homepage": "https://github.com/cheminfo/isotherm-analysis#readme",
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "src/__tests__/generateData"
+    ]
   },
   "prettier": {
     "arrowParens": "always",

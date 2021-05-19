@@ -1,5 +1,5 @@
 import LM from 'ml-levenberg-marquardt';
-import { BETFunction } from './modelFunctions';
+import { BETFunction } from './modelFunctions/BETFunction';
 import SimpleLinearRegression from 'ml-regression-simple-linear';
 import { getParams } from './getParams';
 const SG = require('ml-savitzky-golay-generalized');

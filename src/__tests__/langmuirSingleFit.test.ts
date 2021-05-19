@@ -1,5 +1,5 @@
 import langmuirSingleFit from '../langmuirSingleFit';
-import { langmuirSingleFunction } from '../modelFunctions';
+import langmuirSingleFunction from '../modelFunctions/langmuirSingleFunction';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
