@@ -1,4 +1,9 @@
 import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+/**
+ *generates a langmuir single site isotherm with random gaussian noise
+ * @param {number} n amount of points
+ * @returns {dataXY} data object
+ */
 export default function makeNoisyData(n: number) {
   let x = [...Array(n).keys()];
   x = x.map((x) => x / n);

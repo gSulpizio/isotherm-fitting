@@ -6,5 +6,5 @@
  */
 export default function langmuirDoubleFunction([K1, K2, n1, n2]: number[]) {
   return (p: number) =>
-    (n1 * K1 * p) / (1 + K1 * p) + (n2 * K1 * p) / (1 + K2 * p);
+    (n1 * K1 * p) / (1 + K1 * p) + (n2 * K2 * p) / (1 + K2 * p);
 }
