@@ -1,9 +1,5 @@
 import BETFitWeighted from '../BETFitWeighted';
-import makeNoisyData from './generateData/makeNoisyData';
-import { BETFunction } from '../modelFunctions/BETFunction';
-
-import { writeFileSync } from 'fs';
-import { join } from 'path';
+import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
 
 describe('test BET fit weighted', () => {
   it('simulated dataSet, test weighted fit and deduced BET area', () => {

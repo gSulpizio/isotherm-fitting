@@ -1,6 +1,6 @@
-import BETFitLinearSingle from './BETFitLinearSingle';
-import BETFitLinearDouble from './BETFitLinearDouble';
-import BETFitWeighted from './BETFitWeighted';
+import BETFitLinearSingle from './BET/BETFitLinearSingle';
+import BETFitLinearDouble from './BET/BETFitLinearDouble';
+import BETFitWeighted from './BET/BETFitWeighted';
 
 export default function main(
   data: { x: number[]; y: number[] },

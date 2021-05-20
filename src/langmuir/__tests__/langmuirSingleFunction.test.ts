@@ -1,4 +1,4 @@
-import langmuirSingleFunction from '../langmuirSingleFunction';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 describe('test BET function', () => {
   it('tests output of BET fuction', () => {
     let params = [5, 2];

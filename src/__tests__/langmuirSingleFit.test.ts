@@ -1,4 +1,4 @@
-import langmuirSingleFit from '../langmuirSingleFit';
+import langmuirSingleFit from '../langmuir/langmuirSingleFit';
 import langmuirSingleFunction from '../modelFunctions/langmuirSingleFunction';
 
 import { writeFileSync } from 'fs';

@@ -1,5 +1,5 @@
 import LM from 'ml-levenberg-marquardt';
-import { BETFunction } from './modelFunctions/BETFunction';
+import BETFunction from '../modelFunctions/BETFunction';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 

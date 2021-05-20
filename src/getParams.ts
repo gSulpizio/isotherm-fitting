@@ -1,5 +1,9 @@
 import SimpleLinearRegression from 'ml-regression-simple-linear';
-
+/**
+ * returns fitted data points, linear regression params and regression score function
+ * @param {dataXY} data
+ * @returns {Array} [data, regression, score]:fitted data points, linear regression params and regression score function
+ */
 export function getParams(data: { x: number[]; y: number[] }): any[] {
   let newData = { x: [...data.x], y: [...data.y] };
   const regression = new SimpleLinearRegression(newData.x, newData.y);

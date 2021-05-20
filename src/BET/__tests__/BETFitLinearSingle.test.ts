@@ -1,5 +1,5 @@
 import BETFitLinearSingle from '../BETFitLinearSingle';
-import makeNoisyData from './generateData/makeNoisyData';
+import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -17,7 +17,7 @@ describe('test BET fit', () => {
 
     //writing results to plot
     writeFileSync(
-      join(__dirname, '../../examples/data.json'),
+      join(__dirname, '../../../examples/data.json'),
       JSON.stringify(data),
     );
 
@@ -25,11 +25,11 @@ describe('test BET fit', () => {
       (item) => item * regression.slope + regression.intercept,
     );
     writeFileSync(
-      join(__dirname, '../../examples/BETFit.json'),
+      join(__dirname, '../../../examples/BETFit.json'),
       JSON.stringify({ x: data.x, y: simulated }),
     );
     writeFileSync(
-      join(__dirname, '../../examples/BETFitSampled.json'),
+      join(__dirname, '../../../examples/BETFitSampled.json'),
       JSON.stringify({ x: sampledData.x, y: sampledData.y }),
     );
   });
