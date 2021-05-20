@@ -1,4 +1,4 @@
-import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
+import langmuirDoubleFunction from '../langmuirDoubleFunction';
 describe('test langmuir double function output', () => {
   it('tests output of BET fuction', () => {
     let params = [5, 4, 2, 3];

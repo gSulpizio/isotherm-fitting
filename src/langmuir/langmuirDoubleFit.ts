@@ -1,5 +1,5 @@
 import LM from 'ml-levenberg-marquardt';
-import langmuirDoubleFunction from './modelFunctions/langmuirDoubleFunction';
+import langmuirDoubleFunction from '../modelFunctions/langmuirDoubleFunction';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 
