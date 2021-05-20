@@ -1,5 +1,5 @@
 import langmuirDoubleFit from '../langmuirDoubleFit';
-import langmuirDoubleFunction from '../modelFunctions/langmuirDoubleFunction';
+import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -46,12 +46,12 @@ test('test Double Langmuir fit', () => {
 
   //writing results to plot
   writeFileSync(
-    join(__dirname, '../../examples/data.json'),
+    join(__dirname, '../../../examples/data.json'),
     JSON.stringify(data),
   );
 
   writeFileSync(
-    join(__dirname, '../../examples/doubleFit.json'),
+    join(__dirname, '../../../examples/doubleFit.json'),
     JSON.stringify({ x: data.x, y: yFit }),
   );
 });

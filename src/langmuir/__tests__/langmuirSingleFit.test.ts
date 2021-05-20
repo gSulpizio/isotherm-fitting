@@ -1,5 +1,5 @@
-import langmuirSingleFit from '../langmuir/langmuirSingleFit';
-import langmuirSingleFunction from '../modelFunctions/langmuirSingleFunction';
+import langmuirSingleFit from '../langmuirSingleFit';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 
 import { writeFileSync } from 'fs';
 import { join } from 'path';
@@ -46,12 +46,12 @@ describe('test Langmuir fit', () => {
 
     //writing results to plot
     writeFileSync(
-      join(__dirname, '../../examples/data.json'),
+      join(__dirname, '../../../examples/data.json'),
       JSON.stringify(data),
     );
 
     writeFileSync(
-      join(__dirname, '../../examples/singleFit.json'),
+      join(__dirname, '../../../examples/singleFit.json'),
       JSON.stringify({ x: data.x, y: yFit }),
     );
   });
