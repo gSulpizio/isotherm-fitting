@@ -11,7 +11,9 @@ describe('test BET fit weighted', () => {
     let [weights, results] = BETFitWeighted(data);
     console.log(Object.keys(results));
     console.log(results);
-    //uncomment this next line to get the error
+    //If we remove the next line it works, parameterValues is a parameter of results.
+    console.log(results.parameterValues)
+    
     //let fittedResults = data.x.map((x) => BETFunction(results.parameterValues));
 
     //writeFileSync(join(__dirname, '../../examples/data.json'),JSON.stringify(data),);
