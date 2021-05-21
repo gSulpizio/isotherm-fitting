@@ -11,7 +11,7 @@ import { initialGuess, getParams } from '../getParams';
 //Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
 //specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
 
-export default function BETFitLinear(data: { x: number[]; y: number[] }) {
+export default function BETFitLinearDouble(data: { x: number[]; y: number[] }) {
   //let fluidProperties = getProperties(gasName, temperature);
 
   //let newData=BETCriteria(data, SATURATIONPRESSURE)
