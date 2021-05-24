@@ -24,7 +24,6 @@ export default function BETFitLinear(data: { x: number[]; y: number[] }) {
   };
 
   let fittedParams = LM(data, BETFunction, options);
-  console.log(fittedParams);
   //let newData = {x: data.x,y: data.x.map((x) => BETFunction(fittedParams)(x)),};
   return getParams({
     x: data.x.slice(0, Math.ceil(data.x.length / 3)),
