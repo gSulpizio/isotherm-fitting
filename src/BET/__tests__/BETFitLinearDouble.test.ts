@@ -1,8 +1,8 @@
-import BETFitLinearDouble from '../BETFitLinearDouble';
-import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
-
 import { writeFileSync } from 'fs';
 import { join } from 'path';
+
+import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
+import BETFitLinearDouble from '../BETFitLinearDouble';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear Single fit and deduced BET area', () => {
@@ -12,7 +12,7 @@ describe('test BET fit', () => {
     let [V, s] = [(R * 273.15) / 1, 0.162 * Math.pow(10, -18)]; //s:[m^2]
     //Here it's a weird error and i have to do this, how to efficiently counter that?
     let [sampledData, regression, score] = BETFitLinearDouble(data);
-
+    console.log(regression);
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
     //writing results to plot
@@ -34,13 +34,3 @@ describe('test BET fit', () => {
     );
   });
 });
-/**
- * Generates a random number following a normal distribution
- * @returns {number}  random number
- */
-function randomGaussian() {
-  return (
-    Math.sqrt(-2 * Math.log(Math.random())) *
-    Math.cos(2 * Math.PI * Math.random())
-  );
-}

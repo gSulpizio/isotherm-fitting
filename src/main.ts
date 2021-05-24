@@ -1,5 +1,5 @@
-import BETFitLinearSingle from './BET/BETFitLinearSingle';
 import BETFitLinearDouble from './BET/BETFitLinearDouble';
+import BETFitLinearSingle from './BET/BETFitLinearSingle';
 import BETFitWeighted from './BET/BETFitWeighted';
 
 export default function main(

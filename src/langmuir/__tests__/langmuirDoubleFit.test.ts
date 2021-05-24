@@ -1,10 +1,10 @@
-import langmuirDoubleFit from '../langmuirDoubleFit';
-import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
-
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-test('test Double Langmuir fit', () => {
+import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
+import langmuirDoubleFit from '../langmuirDoubleFit';
+
+test('Double Langmuir fit', () => {
   it;
   let data = {
     x: [
