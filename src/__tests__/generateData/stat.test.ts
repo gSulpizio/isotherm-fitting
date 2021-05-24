@@ -2,10 +2,7 @@ import { writeFileSync } from 'fs';
 import { join } from 'path';
 
 import main from '../../main';
-import {
-  BETFunction,
-  langmuirSingleFunction,
-} from '../modelFunctions/modelFunctions';
+import { langmuirSingleFunction } from '../modelFunctions/modelFunctions';
 
 describe('tool to make accuracy statistics', () => {
   it.only('test the accuracy of BET linear script', () => {
