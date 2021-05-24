@@ -30,7 +30,7 @@ export default function BETFitWeighted(data: { x: number[]; y: number[] }) {
 
   let result = LM(data, BETFunction, options);
 
-  return [weights, result];
+  return {weights: weights, result: result};
 }
 
 //initial Guess

@@ -23,10 +23,12 @@ export default function BETFitLinearDouble(data: { x: number[]; y: number[] }) {
   };
 
   let fittedParams = LM(data, BETFunction, options);
+
   let newData = {
     x: data.x,
     y: data.x.map((x) => BETFunction(fittedParams.parameterValues)(x)),
   };
+
   return getParams({
     x: data.x.slice(0, Math.ceil(newData.x.length / 3)),
     y: data.y.slice(0, Math.ceil(newData.x.length / 3)),
