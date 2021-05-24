@@ -1,4 +1,5 @@
 import BETFunction from '../BETFunction';
+
 describe('test BET function', () => {
   it('tests output of BET fuction', () => {
     let params = [2, 5, 0.1];

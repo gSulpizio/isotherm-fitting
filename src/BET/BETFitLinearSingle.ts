@@ -1,4 +1,5 @@
 import { getParams } from '../getParams';
+
 const SG = require('ml-savitzky-golay-generalized');
 
 //import SG from 'ml-savitzky-golay-generalized'; //doesn't work in ts??

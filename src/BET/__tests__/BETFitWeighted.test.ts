@@ -1,5 +1,5 @@
-import BETFitWeighted from '../BETFitWeighted';
 import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
+import BETFitWeighted from '../BETFitWeighted';
 
 describe('test BET fit weighted', () => {
   it('simulated dataSet, test weighted fit and deduced BET area', () => {

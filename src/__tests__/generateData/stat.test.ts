@@ -1,11 +1,12 @@
+import { writeFileSync } from 'fs';
+import { join } from 'path';
+
 import main from '../../main';
 import {
   BETFunction,
   langmuirSingleFunction,
 } from '../modelFunctions/modelFunctions';
 
-import { writeFileSync } from 'fs';
-import { join } from 'path';
 describe('tool to make accuracy statistics', () => {
   it.only('test the accuracy of BET linear script', () => {
     let n = 100;
