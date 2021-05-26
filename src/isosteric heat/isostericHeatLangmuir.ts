@@ -12,5 +12,5 @@ export default function isostericHeatLangmuir(
 ) {
   let p1 = (n: number) => n / (KH1 * (nm1 - n));
   let p2 = (n: number) => n / (KH2 * (nm2 - n));
-  return (p1(n) - p2(n)) / (T1 - T2);
+  return (Math.log(p1(n)) - Math.log(p2(n))) / (T1 - T2);
 }
