@@ -19,7 +19,7 @@ describe('test Langmuir fit', () => {
     let [T1, T2, T3] = [273, 283, 293];
 
     let heat = isostericHeatLangmuirOnFit(
-      0.01,
+      5.7,
       [...regression1.parameterValues, T1],
       [...regression2.parameterValues, T2],
       [...regression3.parameterValues, T3],

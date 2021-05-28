@@ -18,7 +18,7 @@ export default function isostericHeatLangmuirOnFit(
 
   let regression = new SimpleLinearRegression(
     [1 / T1, 1 / T2, 1 / T3],
-    [p1(n), p2(n), p3(n)],
+    [Math.log(p1(n)), Math.log(p2(n)), Math.log(p3(n))],
   );
 
   let R = 0.00831446261815324; //[L⋅bar⋅K−1⋅mol−1]
