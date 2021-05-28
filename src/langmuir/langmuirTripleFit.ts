@@ -27,7 +27,9 @@ function initialGuess(data: { x: number[]; y: number[] }) {
   let KH = data.y[0] / data.x[0] / (saturationLoading - data.y[0]);
   let nm1 = 0.5 * saturationLoading;
   let nm2 = 0.5 * saturationLoading;
+  let nm3 = 0.5 * saturationLoading;
   let K1 = 0.6 * KH; //why 0.4 and 0.6?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   let K2 = 0.4 * KH;
-  return [K1, K2, nm1, nm2];
+  let K3 = 0.4 * KH;
+  return [K1, K2, K3, nm1, nm2, nm3];
 }
