@@ -1,8 +1,9 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+
 import LM from 'ml-levenberg-marquardt';
 
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 import isostericHeatLangmuirOnFit from '../isostericHeatLangmuirOnFit';
 
 describe('test Langmuir fit', () => {

@@ -1,6 +1,9 @@
 import BETFitLinearDouble from './BET/BETFitLinearDouble';
 import BETFitLinearSingle from './BET/BETFitLinearSingle';
 import BETFitWeighted from './BET/BETFitWeighted';
+import langmuirDoubleFit from './langmuir/langmuirDoubleFit';
+import langmuirSingleFit from './langmuir/langmuirSingleFit';
+import langmuirTripleFit from './langmuir/langmuirTripleFit';
 
 export default function main(
   data: { x: number[]; y: number[] },
@@ -12,6 +15,7 @@ export default function main(
 ) {
   const N = 6.022 * 10 ** 23;
   let sampledData, regression, score, Stotal: number, SBET: number;
+  let parameters;
   switch (algorithm) {
     case 'linearBET':
       [sampledData, regression, score] = BETFitLinearSingle(data);
@@ -37,6 +41,15 @@ export default function main(
       return { SBET, sampledData, regression, score };
     case 'weightedBET':
       return BETFitWeighted(data);
+    case 'langmuirSingle':
+      parameters=langmuirSingleFit(data, inputOptions);
+      return parameters;
+    case 'langmuirDouble':
+      parameters=langmuirDoubleFit(data, inputOptions);
+      return parameters;
+    case 'langmuirTriple':
+      parameters=langmuirTripleFit(data, inputOptions);
+      return parameters;
     default:
       throw 'unknown algorithm';
   }
