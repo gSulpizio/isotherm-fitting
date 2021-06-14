@@ -1,1 +1,1 @@
-declare module 'fmin';
+declare module "fmin";

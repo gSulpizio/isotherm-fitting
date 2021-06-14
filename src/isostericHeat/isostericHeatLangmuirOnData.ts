@@ -1,5 +1,7 @@
-import langmuirFunction from '../modelFunctions/langmuirSingleFunction';
 import { nelderMeads } from 'fmin';
+
+import langmuirFunction from '../modelFunctions/langmuirSingleFunction';
+
 import meanSquaredError from './meanSquaredError';
 /**
  * evaluates the isosteric heat of adsorption using the langmuir equation on the isotherm's real data. Takes pressures from 3 isotherms as an input
@@ -33,8 +35,7 @@ export default function isostericHeatLangmuirOnData(
     1.1 * Math.max(...data1.y, ...data2.y, ...data3.y),
   ]; //kh1, kh2, kh3,nm
 
-  loss({ data1, data2, data3 });
-  //let fitted = fmin.nelderMeads(loss(data), parameters);
+  let fitted = nelderMeads(loss({ data1, data2, data3 }), parameters);
 }
 
 function loss(data: any) {
@@ -49,6 +50,7 @@ function loss(data: any) {
         cumulatedLoss += (yHat - y) ** 2;
       }
     }
+    return cumulatedLoss
   };
 }
 
