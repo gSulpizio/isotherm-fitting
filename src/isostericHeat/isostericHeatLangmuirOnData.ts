@@ -1,8 +1,5 @@
 import { nelderMead } from 'fmin';
-
-import langmuirFunction from '../modelFunctions/langmuirSingleFunction';
-
-import meanSquaredError from './meanSquaredError';
+import langmuirSingleLoss from './loss/langmuirSingleLoss';
 /**
  * evaluates the isosteric heat of adsorption using the langmuir equation on the isotherm's real data. Takes pressures from 3 isotherms as an input
  * @param {Array<Number>} p1 pressures of isotherm at T1, in kPa
@@ -35,23 +32,8 @@ export default function isostericHeatLangmuirOnData(
     1.1 * Math.max(...data1.y, ...data2.y, ...data3.y),
   ]; //kh1, kh2, kh3,nm
 
-  let fitted = nelderMead(loss({ data1, data2, data3 }), parameters);
-}
-
-function loss(data: any) {
-  let yHat, y;
-
-  return function totalLoss(params: number[]) {
-    let cumulatedLoss = 0;
-    for (let i = 0; i < data.length; i++) {
-      for (let p = 0; p < data[i].x.length; p++) {
-        yHat = langmuirFunction([params[i], params[params.length - 1]])(p);
-        y = data[i].y[p];
-        cumulatedLoss += (yHat - y) ** 2;
-      }
-    }
-    return cumulatedLoss
-  };
+  let fitted = nelderMead(langmuirSingleLoss(aggregatedData), parameters);
+  return fitted;
 }
 
 //initial Guess
