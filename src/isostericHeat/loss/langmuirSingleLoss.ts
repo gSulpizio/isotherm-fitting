@@ -1,4 +1,11 @@
 import langmuirFunction from '../../modelFunctions/langmuirSingleFunction';
+
+/**
+ * Curried function that returns a cumulated loss function
+ * @param data {object} aggregated data object {{T, x, y}, {T, x, y}, {T, x, y}}
+ * @returns {number} cumulated loss
+ */
+
 export default function langmuirSingleLoss(data: any) {
   let yHat, y;
 
