@@ -1,4 +1,4 @@
-import { nelderMeads } from 'fmin';
+import { nelderMead } from 'fmin';
 
 import langmuirFunction from '../modelFunctions/langmuirSingleFunction';
 
@@ -35,7 +35,7 @@ export default function isostericHeatLangmuirOnData(
     1.1 * Math.max(...data1.y, ...data2.y, ...data3.y),
   ]; //kh1, kh2, kh3,nm
 
-  let fitted = nelderMeads(loss({ data1, data2, data3 }), parameters);
+  let fitted = nelderMead(loss({ data1, data2, data3 }), parameters);
 }
 
 function loss(data: any) {
