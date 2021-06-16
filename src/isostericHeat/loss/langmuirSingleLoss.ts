@@ -1,7 +1,7 @@
 import langmuirFunction from '../../modelFunctions/langmuirSingleFunction';
-export default function langmuirSingleLoss(data: any) {
-  let yHat, y;
 
+export default function langmuirSingleLoss(data: any[]) {
+  let yHat, y;
   return function totalLoss(params: number[]) {
     let cumulatedLoss = 0;
     for (let i = 0; i < data.length; i++) {
