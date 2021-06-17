@@ -4,12 +4,12 @@ import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction'
  * @param {number} n amount of points
  * @returns {dataXY} data object
  */
-export default function makeNoisyData(n: number) {
+export default function makeNoisyData([KH, nm]: number[], n: number) {
   let x = [...Array(n).keys()];
   x = x.map((x) => x / n);
   let data: { x: number[]; y: number[] } = {
     x: x,
-    y: x.map((item) => langmuirSingleFunction([2, 5])(item)),
+    y: x.map((item) => langmuirSingleFunction([KH, nm])(item)),
   };
   data.y = data.y.map((item) => (randomGaussian() / 100 + 1) * item);
   return data;

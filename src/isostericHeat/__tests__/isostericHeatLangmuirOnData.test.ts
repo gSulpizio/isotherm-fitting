@@ -65,14 +65,14 @@ describe('test Langmuir fit', () => {
   });
   it.only('simulated dataset', () => {
     interface LooseObject {
-      [key: string]: any
-  }//this allows to add properties to objects later on
-    let data:LooseObject=makeNoisyData(250)
-    data.T=293
+      [key: string]: any;
+    } //this allows to add properties to objects later on
+    let data: LooseObject = makeNoisyData([2, 5], 250);
+    data.T = 293;
     let deltaH = isostericHeatLangmuirOnData([data]);
     writeFileSync(
       join(__dirname, '../../../examples/data1.json'),
-      JSON.stringify({ x: data.x, y: data.y}),
+      JSON.stringify({ x: data.x, y: data.y }),
     );
     writeFileSync(
       join(__dirname, '../../../examples/data1SIM.json'),
@@ -83,7 +83,5 @@ describe('test Langmuir fit', () => {
         ),
       }),
     );
-
-
   });
 });

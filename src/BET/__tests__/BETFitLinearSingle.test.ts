@@ -6,7 +6,7 @@ import BETFitLinearSingle from '../BETFitLinearSingle';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear Single fit and deduced BET area', () => {
-    let data = makeNoisyData(100);
+    let data = makeNoisyData([2, 5], 100);
 
     //Here it's a weird error and i have to do this, how to efficiently counter that?
     let [sampledData, regression, score] = BETFitLinearSingle(data);
