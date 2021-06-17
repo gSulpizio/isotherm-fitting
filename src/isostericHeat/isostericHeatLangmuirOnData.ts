@@ -1,4 +1,5 @@
 import { nelderMead } from 'fmin';
+
 import langmuirSingleLoss from './loss/langmuirSingleLoss';
 /**
  * evaluates the isosteric heat of adsorption using the langmuir equation on the isotherm's real data. Takes pressures from 3 isotherms as an input
@@ -9,30 +10,21 @@ import langmuirSingleLoss from './loss/langmuirSingleLoss';
  * @returns {Number} isosteric heat of adsorption
  */
 export default function isostericHeatLangmuirOnData(
-  data1: { T: number; x: number[]; y: number[] },
-  data2: { T: number; x: number[]; y: number[] },
-  data3: { T: number; x: number[]; y: number[] },
+data:any[]
 ) {
-  let lnp1 = data1.x.map((p) => Math.log(p));
-  let lnp2 = data2.x.map((p) => Math.log(p));
-  let lnp3 = data3.x.map((p) => Math.log(p));
+
   let deltaH = [];
   let regression: any;
   let R = 0.00831446261815324; //[L⋅bar⋅K−1⋅mol−1]
   let solution;
-  let aggregatedData: any[] = [
-    { x: data1.x, y: data1.y, T: data1.T },
-    { x: data2.x, y: data2.y, T: data2.T },
-    { x: data3.x, y: data3.y, T: data3.T },
-  ];
-  let parameters = [
-    initialGuess(data1),
-    initialGuess(data2),
-    initialGuess(data3),
-    1.1 * Math.max(...data1.y, ...data2.y, ...data3.y),
-  ]; //kh1, kh2, kh3,nm
+  let parameters=[];
+  for(const dataSet of data){
+    parameters.push(initialGuess(dataSet))
+  }
+  parameters.push(1.1*Math.max(...data[0].y))
+//kh1, kh2, kh3,...,nm
 
-  let fitted = nelderMead(langmuirSingleLoss(aggregatedData), parameters);
+  let fitted = nelderMead(langmuirSingleLoss(data), parameters);
   return fitted;
 }
 

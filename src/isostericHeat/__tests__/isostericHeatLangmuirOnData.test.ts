@@ -1,11 +1,12 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import langmuirFunction from '../../modelFunctions/langmuirSingleFunction';
 
+import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
+import langmuirFunction from '../../modelFunctions/langmuirSingleFunction';
 import isostericHeatLangmuirOnData from '../isostericHeatLangmuirOnData';
 
 describe('test Langmuir fit', () => {
-  it.only('first dataSet', () => {
+  it('first dataSet', () => {
     let rawData = readFileSync(join(__dirname, './data/data.json'));
     let data = JSON.parse(rawData.toString());
 
@@ -14,11 +15,11 @@ describe('test Langmuir fit', () => {
     data.p2 = data.p2.map((p: number) => p * 1000);
     data.p3 = data.p3.map((p: number) => p * 1000);
 
-    let deltaH = isostericHeatLangmuirOnData(
+    let deltaH = isostericHeatLangmuirOnData([
       { T: T1, x: data.p1, y: data.n },
       { T: T2, x: data.p2, y: data.n },
       { T: T3, x: data.p3, y: data.n },
-    );
+    ]);
     console.log(deltaH);
     writeFileSync(
       join(__dirname, '../../../examples/data1.json'),
@@ -61,5 +62,28 @@ describe('test Langmuir fit', () => {
       }),
     );
     //for (let i = 0; i < p1.length; i++) {expect(deltaH[i]).toBeCloseTo(data.Hads[i]);}
+  });
+  it.only('simulated dataset', () => {
+    interface LooseObject {
+      [key: string]: any
+  }//this allows to add properties to objects later on
+    let data:LooseObject=makeNoisyData(250)
+    data.T=293
+    let deltaH = isostericHeatLangmuirOnData([data]);
+    writeFileSync(
+      join(__dirname, '../../../examples/data1.json'),
+      JSON.stringify({ x: data.x, y: data.y}),
+    );
+    writeFileSync(
+      join(__dirname, '../../../examples/data1SIM.json'),
+      JSON.stringify({
+        x: data.x,
+        y: data.x.map((x: number) =>
+          langmuirFunction([deltaH.x[0], deltaH.x[3]])(x),
+        ),
+      }),
+    );
+
+
   });
 });
