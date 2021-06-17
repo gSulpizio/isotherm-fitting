@@ -22,7 +22,7 @@ export default function langmuirSingleLoss(data: any[]) {
     }
     //LOGGING PARAMETERS:
 
-    logParameters(params);
+    logParameters(params, cumulatedLoss);
     return cumulatedLoss;
   };
 }

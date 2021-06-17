@@ -68,7 +68,7 @@ describe('test Langmuir fit', () => {
     //clear logging file, only use if you're logging each iteration
     writeFileSync(
       join(__dirname, '../../../examples/logParams.json'),
-      JSON.stringify({ nm: [], KH: [] }),
+      JSON.stringify({ nm: [], KH: [], loss: [] }),
     );
     //end of file clearing
     interface LooseObject {

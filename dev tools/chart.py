@@ -16,7 +16,7 @@ with open(path) as myfile:
     data = myfile.read()
 data1 = json.loads(data)
 
-dataset = "nm"
+dataset = "loss"
 
 y = data1[dataset]
 
