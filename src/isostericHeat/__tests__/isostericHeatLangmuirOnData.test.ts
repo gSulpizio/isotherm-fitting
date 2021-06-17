@@ -63,7 +63,8 @@ describe('test Langmuir fit', () => {
     );
     //for (let i = 0; i < p1.length; i++) {expect(deltaH[i]).toBeCloseTo(data.Hads[i]);}
   });
-  it.only('simulated dataset', () => {
+
+  it.only('simulated dataset: Taking just one dataSet', () => {
     interface LooseObject {
       [key: string]: any;
     } //this allows to add properties to objects later on
@@ -79,7 +80,7 @@ describe('test Langmuir fit', () => {
       JSON.stringify({
         x: data.x,
         y: data.x.map((x: number) =>
-          langmuirFunction([deltaH.x[0], deltaH.x[3]])(x),
+          langmuirFunction([deltaH.x[0], deltaH.x[1]])(x),
         ),
       }),
     );
