@@ -65,6 +65,12 @@ describe('test Langmuir fit', () => {
   });
 
   it.only('simulated dataset: Taking just one dataSet', () => {
+    //clear logging file, only use if you're logging each iteration
+    writeFileSync(
+      join(__dirname, '../../../examples/logParams.json'),
+      JSON.stringify({ nm: [], KH: [] }),
+    );
+    //end of file clearing
     interface LooseObject {
       [key: string]: any;
     } //this allows to add properties to objects later on

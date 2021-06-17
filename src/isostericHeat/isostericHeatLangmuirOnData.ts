@@ -32,6 +32,5 @@ function initialGuess(data: { x: number[]; y: number[]; T: number }) {
   let a = data.x[0] == 0 ? data.x[1] : data.x[0];
   let b = data.y[0] == 0 ? data.y[1] : data.y[0];
   let KH = b / a / (saturationLoading - data.y[0]);
-
   return KH;
 }

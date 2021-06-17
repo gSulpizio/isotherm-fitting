@@ -1,5 +1,4 @@
 {
-
   "compilerOptions": {
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -9,6 +8,7 @@
   },
   "include": [
     "./src/**/*",
-    "./typings/*"
+    "./typings/*",
+    "dev tools/logParameters.ts"
   ]
 }
