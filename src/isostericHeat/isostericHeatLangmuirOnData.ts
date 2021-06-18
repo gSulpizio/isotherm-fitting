@@ -20,9 +20,10 @@ export default function isostericHeatLangmuirOnData(data: any[]) {
     parameters.push(initialGuess(dataSet));
   }
   parameters.push(1.1 * Math.max(...data[0].y));
+
   //params: [kh1, kh2, kh3,...,nm]
   let fitted = nelderMead(langmuirSingleLoss(data), parameters);
-  console.log(fitted);
+
   return fitted;
 }
 

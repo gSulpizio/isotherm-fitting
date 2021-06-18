@@ -11,9 +11,9 @@ describe('test Langmuir fit', () => {
     let data = JSON.parse(rawData.toString());
 
     let [T1, T2, T3] = [273, 283, 293];
-    data.p1 = data.p1.map((p: number) => p * 1000);
-    data.p2 = data.p2.map((p: number) => p * 1000);
-    data.p3 = data.p3.map((p: number) => p * 1000);
+    data.p1 = data.p1.map((p: number) => p / Math.max(...data.p1));
+    data.p2 = data.p2.map((p: number) => p / Math.max(...data.p2));
+    data.p3 = data.p3.map((p: number) => p / Math.max(...data.p3));
 
     let deltaH = isostericHeatLangmuirOnData([
       { T: T1, x: data.p1, y: data.n },
@@ -64,7 +64,7 @@ describe('test Langmuir fit', () => {
     //for (let i = 0; i < p1.length; i++) {expect(deltaH[i]).toBeCloseTo(data.Hads[i]);}
   });
 
-  it.only('simulated dataset: Taking just one dataSet', () => {
+  it('simulated dataset: Taking just one dataSet', () => {
     //clear logging file, only use if you're logging each iteration
     writeFileSync(
       join(__dirname, '../../../examples/logParams.json'),
@@ -74,7 +74,7 @@ describe('test Langmuir fit', () => {
     interface LooseObject {
       [key: string]: any;
     } //this allows to add properties to objects later on
-    let data: LooseObject = makeNoisyData([2, 5], 250);
+    let data: LooseObject = makeNoisyData([2, 5], 250, 10000000);
     data.T = 293;
     let deltaH = isostericHeatLangmuirOnData([data]);
     writeFileSync(
