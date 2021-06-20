@@ -1,15 +1,20 @@
 import getFunction from '../getFunction';
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
-import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
-import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
-import BETFunction from '../../modelFunctions/BETFunction';
+import langmuirSingleFunction from '../../../modelFunctions/langmuirSingleFunction';
+import langmuirDoubleFunction from '../../../modelFunctions/langmuirDoubleFunction';
+import langmuirTripleFunction from '../../../modelFunctions/langmuirTripleFunction';
+import BETFunction from '../../../modelFunctions/BETFunction';
 
 describe('test getFunction', () => {
-  it('get langmuir single function', () => {
+  let data = [
+    { x: [0, 0.1], y: [0, 0.4], T: 273 },
+    { x: [0.2, 0.4], y: [0.5, 0.9], T: 293 },
+  ];
+  it.only('get langmuir single function', () => {
     expect(getFunction('langmuirSingle')([2, 5])(0.5)).toStrictEqual(
       langmuirSingleFunction([2, 5])(0.5),
     );
   });
+
   it('get langmuir Double function', () => {
     expect(getFunction('langmuirDouble')([2, 5, 4, 9])(0.5)).toStrictEqual(
       langmuirDoubleFunction([2, 5, 4, 9])(0.5),

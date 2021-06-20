@@ -1,9 +1,10 @@
-import langmuirSingleFunction from '../modelFunctions/langmuirSingleFunction';
-import langmuirDoubleFunction from '../modelFunctions/langmuirDoubleFunction';
-import langmuirTripleFunction from '../modelFunctions/langmuirTripleFunction';
-import BETFunction from '../modelFunctions/BETFunction';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
+import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
+import BETFunction from '../../modelFunctions/BETFunction';
+import initialGuess from './initialGuess';
 /**
- * Returns the function indicated in the string
+ * Returns the function indicated in the string and the initiation parameters
  * @param {string} functionName string containing the name of the function to be used
  */
 

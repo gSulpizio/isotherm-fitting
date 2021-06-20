@@ -15,11 +15,14 @@ describe('test Langmuir fit', () => {
     data.p2 = data.p2.map((p: number) => p / Math.max(...data.p2));
     data.p3 = data.p3.map((p: number) => p / Math.max(...data.p3));
 
-    let deltaH = isostericHeatLangmuirOnData([
-      { T: T1, x: data.p1, y: data.n },
-      { T: T2, x: data.p2, y: data.n },
-      { T: T3, x: data.p3, y: data.n },
-    ]);
+    let deltaH = isostericHeatLangmuirOnData(
+      [
+        { T: T1, x: data.p1, y: data.n },
+        { T: T2, x: data.p2, y: data.n },
+        { T: T3, x: data.p3, y: data.n },
+      ],
+      'langmuirSingle',
+    );
     console.log(deltaH);
     writeFileSync(
       join(__dirname, '../../../examples/data1.json'),
@@ -76,7 +79,7 @@ describe('test Langmuir fit', () => {
     } //this allows to add properties to objects later on
     let data: LooseObject = makeNoisyData([2, 5], 250, 10000000);
     data.T = 293;
-    let deltaH = isostericHeatLangmuirOnData([data]);
+    let deltaH = isostericHeatLangmuirOnData([data], 'langmuirSingle');
     writeFileSync(
       join(__dirname, '../../../examples/data1.json'),
       JSON.stringify({ x: data.x, y: data.y }),
