@@ -9,7 +9,7 @@ import langmuirSingleLoss from './loss/langmuirSingleLoss';
  * @param {Array<Number>} [T1,T2,T3] temperatures T1,T2,T3
  * @returns {Number} isosteric heat of adsorption
  */
-export default function isostericHeatLangmuirOnData(data: any[]) {
+export default function isostericHeatLangmuirOnData(data: any[], function:string) {
   let deltaH = [];
   let regression: any;
   let R = 0.00831446261815324; //[L⋅bar⋅K−1⋅mol−1]
@@ -22,7 +22,7 @@ export default function isostericHeatLangmuirOnData(data: any[]) {
   parameters.push(1.1 * Math.max(...data[0].y));
 
   //params: [kh1, kh2, kh3,...,nm]
-  let fitted = nelderMead(langmuirSingleLoss(data), parameters);
+  let fitted = nelderMead(langmuirSingleLoss(data, function), parameters);
 
   return fitted;
 }
