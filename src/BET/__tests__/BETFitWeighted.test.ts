@@ -3,7 +3,7 @@ import BETFitWeighted from '../BETFitWeighted';
 
 describe('test BET fit weighted', () => {
   it('simulated dataSet, test weighted fit and deduced BET area', () => {
-    let data = makeNoisyData(100);
+    let data = makeNoisyData([2, 5], 100);
 
     let output = BETFitWeighted(data);
 
