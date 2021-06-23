@@ -23,6 +23,7 @@ describe('test isosteric heat calculations', () => {
       ],
       'langmuirSingle',
     );
+    console.log(deltaH);
     writeFileSync(
       join(__dirname, '../../../examples/data1.json'),
       JSON.stringify({ x: data.p1, y: data.n }),

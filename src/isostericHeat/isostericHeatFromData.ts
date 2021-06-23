@@ -45,9 +45,9 @@ export default function isostericHeatFromData(
     regression = new SimpleLinearRegression(inverseTemperatures, lnP);
     lnP = [];
     deltaH.push(regression.slope);
-    console.log(lnP, regression.slope);
   }
   //console.log(loadings, data[0].lnP);
   deltaH = deltaH.map((x) => x * R);
+
   return [loadings, deltaH];
 }
