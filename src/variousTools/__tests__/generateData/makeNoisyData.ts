@@ -1,4 +1,4 @@
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import langmuirSingleFunction from '../../../modelFunctions/langmuirSingleFunction';
 /**
  *generates a langmuir single site isotherm with random gaussian noise
  * @param {Array} [KH,nm] langmuir parameters

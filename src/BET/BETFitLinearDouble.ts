@@ -1,6 +1,6 @@
 import LM from 'ml-levenberg-marquardt';
 
-import { initialGuess, getParams } from '../getParams';
+import { initialGuess, fitData } from '../variousTools/fitData';
 import BETFunction from '../modelFunctions/BETFunction';
 
 //double fit: once the function is fitted, the
@@ -29,7 +29,7 @@ export default function BETFitLinearDouble(data: { x: number[]; y: number[] }) {
     y: data.x.map((x) => BETFunction(fittedParams.parameterValues)(x)),
   };
 
-  return getParams({
+  return fitData({
     x: data.x.slice(0, Math.ceil(newData.x.length / 3)),
     y: data.y.slice(0, Math.ceil(newData.x.length / 3)),
   });

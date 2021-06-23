@@ -8,7 +8,7 @@ import initialGuess from './initialGuess';
  * @param {string} functionName string containing the name of the function to be used
  */
 
-export default function langmuirSingleLoss(functionName: string) {
+export default function getFunction(functionName: string) {
   switch (functionName) {
     case 'langmuirSingle':
       return langmuirSingleFunction;

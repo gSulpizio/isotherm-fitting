@@ -2,10 +2,7 @@ import getN from './getN';
 /**
  * returns initial guess array
  * @param {Array} data array of all the data set objects
- * @param n initial guess, n is for how many parameters of the same type are needed for the function per data set:
- * -langmuir single site, n=1 since there are only one nm and one kh needed per data set
- * -langmuir double site, n=2 since there are two nm and two kh needed per data set
- * -...
+ * @param {string} functionName string containing the name of the desired function
  */
 export default function initialGuess(data: any[], functionName: string) {
   let n = getN(functionName);
