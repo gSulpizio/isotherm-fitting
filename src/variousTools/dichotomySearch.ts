@@ -12,7 +12,7 @@ export default function dichotomySearch(
   value: number,
   lowPoint: number,
   highPoint: number,
-  tolerance: number = 0.001,
+  tolerance: number = 10 ** -5,
 ) {
   let error = 10 * tolerance;
   let middle: number = highPoint;

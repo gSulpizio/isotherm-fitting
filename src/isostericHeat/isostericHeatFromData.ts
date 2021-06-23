@@ -29,13 +29,13 @@ export default function isostericHeatFromData(
     lossFunction(data, functionName),
     parameters,
   );
-  console.log(fittedParameters);
+
   let loadings = getnlnP(data, functionName, fittedParameters);
   let inverseTemperatures = [];
   for (let dataSet of data) {
     inverseTemperatures.push(1 / dataSet.T);
   }
-  let lnP = [];
+  let lnP: number[] = [];
   let deltaH = [];
   for (let i = 0; i < data[0].lnP.length; i++) {
     lnP = [];
@@ -43,8 +43,11 @@ export default function isostericHeatFromData(
       lnP.push(dataSet.lnP[i]);
     }
     regression = new SimpleLinearRegression(inverseTemperatures, lnP);
+    lnP = [];
     deltaH.push(regression.slope);
+    console.log(lnP, regression.slope);
   }
+  //console.log(loadings, data[0].lnP);
   deltaH = deltaH.map((x) => x * R);
   return [loadings, deltaH];
 }

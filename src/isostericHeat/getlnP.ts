@@ -29,19 +29,18 @@ export default function getnlnP(
     Tinverted.push(1 / dataSet.T);
     lnP.push();
   }
-  let deltaH = [];
-  for (let i = 0; i < maxLoading; i += step) {
+
+  for (let i = step; i < maxLoading + step; i += step) {
     loadingList.push(i);
   }
-  let spacing = getN(functionName);
   for (let i = 0; i < data.length; i++) {
-    data[i].lnP = loadingList.map((n) =>
+    data[i].lnP = loadingList.map((loading) =>
       Math.log(
         dichotomySearch(
           getFunction(functionName)(
             getParameters(functionName, i, fittedParameters.x),
           ),
-          n,
+          loading,
           0,
           maxLoading,
         ),
