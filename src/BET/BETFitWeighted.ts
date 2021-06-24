@@ -1,24 +1,11 @@
 import LM from 'ml-levenberg-marquardt';
-
+import getWeights from './getWeights';
 import BETFunction from '../modelFunctions/BETFunction';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 
 export default function BETFitWeighted(data: { x: number[]; y: number[] }) {
-  let weights = [0];
-  for (let i = 1; i < data.x.length - 1; i++) {
-    weights.push(
-      Math.sqrt(
-        (data.x[i] - data.x[i - 1]) ** 2 + (data.y[i] - data.y[i - 1]) ** 2,
-      ) /
-        2 +
-        Math.sqrt(
-          (data.x[i] - data.x[i + 1]) ** 2 + (data.y[i] - data.y[i + 1]) ** 2,
-        ) /
-          2,
-    );
-  }
-  weights.push(0);
+  let weights = getWeights(data);
   let options = {
     damping: 10e-2,
     gradientDifference: 10e-2,
