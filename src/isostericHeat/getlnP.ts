@@ -33,8 +33,21 @@ export default function getnlnP(
   for (let i = step; i < maxLoading + step; i += step) {
     loadingList.push(i);
   }
-  //continuer de debuguer ici
+  let a;
+
+  a = loadingList.map((loading) =>
+    dichotomySearch(
+      getFunction(functionName)(
+        getParameters(functionName, 0, fittedParameters),
+      ),
+      loading,
+      0,
+      maxLoading,
+    ),
+  );
+
   for (let i = 0; i < data.length; i++) {
+    a = getParameters(functionName, i, fittedParameters);
     data[i].lnP = loadingList.map((loading) =>
       Math.log(
         dichotomySearch(
@@ -48,5 +61,6 @@ export default function getnlnP(
       ),
     );
   }
+
   return loadingList;
 }

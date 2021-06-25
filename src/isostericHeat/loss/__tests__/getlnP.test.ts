@@ -10,8 +10,6 @@ describe('test getlnP', () => {
     data.T = 187;
 
     let loadings = getnlnP([data], 'langmuirSingle', [3, 5]);
-    //console.log('original ln p from data:',data.y.map((x: number) => Math.log(x)),);
-    //console.log('returned:', data.lnP);
-    //console.log(data.x[130], loadings[130]);
+    expect(data.lnP[32]).toBeCloseTo(Math.log(data.x[10]), 1);
   });
 });
