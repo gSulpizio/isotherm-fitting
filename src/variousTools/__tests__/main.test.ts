@@ -1,9 +1,9 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import BETFitLinearSingle from '../BET/BETFitLinearSingle';
-import main from '../main';
-import langmuirSingleFunction from '../modelFunctions/langmuirSingleFunction';
+import BETFitLinearSingle from '../../BET/BETFitLinearSingle';
+import main from '../../main';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear fit and deduced BET area', () => {

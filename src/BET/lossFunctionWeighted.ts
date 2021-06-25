@@ -1,13 +1,19 @@
-import logParameters from '../../../dev tools/logParameters';
-import getFunction from './getFunction';
-import getParameters from '../../variousTools/getParameters';
+import getFunction from '../isostericHeat/loss/getFunction';
+import getParameters from '../variousTools/getParameters';
 /**
  * Curried function that returns a cumulated loss function
  * @param {object} data  aggregated data object {{T, x, y}, {T, x, y}, {T, x, y}}
  * @returns {number} cumulated loss
  */
 
-export default function lossFunction(data: any[], functionName: string) {
+export default function lossFunctionWeighted(
+  data: any[],
+  functionName: string,
+  weights: number[] = [],
+) {
+  if (weights === []) {
+    weights = new Array(data[0].x.length).fill(1);
+  }
   let yHat, y;
   let usedFunction = getFunction(functionName);
   return function totalLoss(params: number[]) {
@@ -18,15 +24,9 @@ export default function lossFunction(data: any[], functionName: string) {
           data[i].x[p],
         );
         y = data[i].y[p];
-        cumulatedLoss += (yHat - y) ** 2;
+        cumulatedLoss += weights[p] * (yHat - y) ** 2;
       }
     }
-
-    //this would be to severely punish negative values
-    //if (params.some((item) => item <= 0)) {cumulatedLoss += 1000000;}
-
-    //LOGGING PARAMETERS:
-    //logParameters(params, cumulatedLoss);
     return cumulatedLoss;
   };
 }

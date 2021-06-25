@@ -1,16 +1,12 @@
+import makeNoisyData from '../../variousTools/__tests__/generateData/makeNoisyData';
+import BETFitLinearDoubleWeighted from '../BETFitLinearDoubleWeighted';
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../variousTools/__tests__/generateData/makeNoisyData';
-import BETFitLinearDouble from '../BETFitLinearDouble';
-
-describe('test BET fit', () => {
-  it('simulated dataSet, test linear Single fit and deduced BET area', () => {
-    let data = makeNoisyData([2, 5], 100);
-
-    let [sampledData, regression, score] = BETFitLinearDouble(data);
-    console.log(regression);
-    //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
+describe('test BET weights', () => {
+  it('createdNoisyData test', () => {
+    let data = makeNoisyData([2, 5], 1000, 50);
+    let [sampledData, regression, score] = BETFitLinearDoubleWeighted(data);
 
     //writing results to plot
     writeFileSync(
