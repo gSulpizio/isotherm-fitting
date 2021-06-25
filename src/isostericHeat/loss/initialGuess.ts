@@ -1,3 +1,4 @@
+import { arrayify } from 'tslint/lib/utils';
 import getN from './getN';
 /**
  * returns initial guess array
@@ -11,8 +12,9 @@ export default function initialGuess(data: any[], functionName: string) {
   for (let j = 0; j < n; j++) {
     for (let dataSet of data) {
       saturationLoading = 1.1 * Math.max(...dataSet.y);
-      a = dataSet.x[0] == 0 ? dataSet.x[1] : dataSet.x[0];
-      b = dataSet.y[0] == 0 ? dataSet.y[1] : dataSet.y[0];
+
+      a = getFirstNonZero(dataSet.x);
+      b = getFirstNonZero(dataSet.y);
       parameters.push(b / a / (saturationLoading - dataSet.y[0]));
     }
   }
@@ -23,4 +25,13 @@ export default function initialGuess(data: any[], functionName: string) {
     parameters.push(0.1); //we add N for BET
   }
   return parameters;
+}
+
+function getFirstNonZero(array: number[]) {
+  for (let item of array) {
+    if (item != 0) {
+      return item;
+    }
+  }
+  return array[0];
 }
