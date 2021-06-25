@@ -34,7 +34,7 @@ export function fitDataWeighted(data: { x: number[]; y: number[] }): any[] {
     data,
     getFunction('linearFunction')(regression.x),
   );
-  if (newData.x.length < 5 || score > 0.99) {
+  if (newData.x.length < 5 || score > 0.9999) {
     let finalParameters = {
       slope: regression.x[0],
       intercept: regression.x[1],

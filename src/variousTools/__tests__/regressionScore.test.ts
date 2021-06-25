@@ -1,6 +1,7 @@
 import SimpleLinearRegression from 'ml-regression-simple-linear';
 import linearFunction from '../../modelFunctions/linearFunction';
 import regressionScore from '../regressionScore';
+import makeNoisyData from './generateData/makeNoisyData';
 describe('test regressionScore', () => {
   it('test for simple linear regression', () => {
     let data = {
@@ -23,8 +24,8 @@ describe('test regressionScore', () => {
     let y = x.map((x) => 15 * x + 7);
     y = y.map((item) => item * (1 - Math.random() / 3));
     let data = { x, y };
-    expect(regressionScore(data, linearFunction([15, 7])) - 0.95).toBeLessThan(
-      0.1,
-    );
+    let output = regressionScore(data, linearFunction([15, 7]));
+
+    expect(0.95 - output).toBeLessThan(0.1);
   });
 });
