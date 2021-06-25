@@ -1,4 +1,3 @@
-import { arrayify } from 'tslint/lib/utils';
 import getN from './getN';
 /**
  * returns initial guess array
