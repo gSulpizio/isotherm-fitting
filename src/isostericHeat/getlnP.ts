@@ -10,9 +10,9 @@ import getParameters from '../variousTools/getParameters';
  * @param {Array<number>} fittedParameters array of the fitted parameters for all the datasets, for example for a triple langmuir with two dataSets: [K1(T1),K2(T1),K3(T1),K1(T2),K2(T2),K3(T2),nm1,nm2,nm3]
  */
 export default function getnlnP(
-  data: any,
+  data: any[],
   functionName: string,
-  fittedParameters: { x: number[] },
+  fittedParameters: number[],
 ) {
   let Tinverted = [];
   let lnP = [];
@@ -33,12 +33,13 @@ export default function getnlnP(
   for (let i = step; i < maxLoading + step; i += step) {
     loadingList.push(i);
   }
+  //continuer de debuguer ici
   for (let i = 0; i < data.length; i++) {
     data[i].lnP = loadingList.map((loading) =>
       Math.log(
         dichotomySearch(
           getFunction(functionName)(
-            getParameters(functionName, i, fittedParameters.x),
+            getParameters(functionName, i, fittedParameters),
           ),
           loading,
           0,

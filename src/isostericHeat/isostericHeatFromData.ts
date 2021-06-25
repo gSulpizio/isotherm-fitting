@@ -30,7 +30,7 @@ export default function isostericHeatFromData(
     parameters,
   );
 
-  let loadings = getnlnP(data, functionName, fittedParameters);
+  let loadings = getnlnP(data, functionName, fittedParameters.x);
   let inverseTemperatures = [];
   for (let dataSet of data) {
     inverseTemperatures.push(1 / dataSet.T);
