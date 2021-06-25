@@ -3,6 +3,7 @@ import initialGuess from './loss/initialGuess';
 import lossFunction from './loss/lossFunction';
 import getnlnP from './getlnP';
 import SimpleLinearRegression from 'ml-regression-simple-linear';
+import getConstants from '../variousTools/getConstants';
 
 /**
  * evaluates the isosteric heat of adsorption using the langmuir equation on the isotherm's real data. Takes pressures from 3 isotherms as an input
@@ -21,7 +22,7 @@ export default function isostericHeatFromData(
   }
 
   let regression: any;
-  let R = 0.00831446261815324; //[L⋅bar⋅K−1⋅mol−1]
+  let R = getConstants('R');
 
   let parameters = initialGuess(data, functionName);
   //params: [kh1, kh2, kh3,...,nm]
@@ -43,7 +44,7 @@ export default function isostericHeatFromData(
       lnP.push(dataSet.lnP[i]);
     }
     regression = new SimpleLinearRegression(inverseTemperatures, lnP);
-    lnP = [];
+
     deltaH.push(regression.slope);
   }
   //console.log(loadings, data[0].lnP);
