@@ -19,7 +19,7 @@ describe('test dichotomySearch', () => {
       100,
       0.0001,
     );
-    console.log(result);
+
     expect(result).toBeCloseTo(data.x[173]);
   });
 });
