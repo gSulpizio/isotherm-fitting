@@ -5,6 +5,8 @@ import SimpleLinearRegression from 'ml-regression-simple-linear';
  * @returns {Array} [data, regression, score]:fitted data points, linear regression params and regression score function
  */
 export function fitData(data: { x: number[]; y: number[] }): any[] {
+  //if no weights have been declarded, make an array with ones:
+
   let newData = { x: [...data.x], y: [...data.y] };
   const regression = new SimpleLinearRegression(newData.x, newData.y);
   const score = (x: number[], y: number[]) => regression.score(x, y);

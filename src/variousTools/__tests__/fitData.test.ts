@@ -1,6 +1,6 @@
 import { fitData } from '../fitData';
 
-describe('test getParams', () => {
+describe('test fitData', () => {
   it('test for simple linear function', () => {
     let x = [...Array(100).keys()];
     let y = x.map((x) => 15 * x + 7);

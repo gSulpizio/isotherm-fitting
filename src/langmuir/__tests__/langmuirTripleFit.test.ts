@@ -5,7 +5,7 @@ import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction'
 import langmuirTripleFit from '../langmuirTripleFit';
 
 test('Triple Langmuir fit', () => {
-  it;
+
   let data = {
     x: [
       0.0171192,

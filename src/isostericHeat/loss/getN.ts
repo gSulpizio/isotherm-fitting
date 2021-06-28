@@ -14,6 +14,8 @@ export default function getN(functionName: string) {
       return 3;
     case 'BET':
       return 1;
+    case 'linearFunction':
+      return 1;
     default:
       throw 'getN: FUNCTION NAME NOT RECOGNIZED';
   }

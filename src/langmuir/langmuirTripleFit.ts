@@ -4,7 +4,7 @@ import langmuirDoubleFunction from '../modelFunctions/langmuirDoubleFunction';
 
 //inputOptions has to be fixed so that the input is either the input or a default value
 
-export default function langmuirDoubleFit(
+export default function langmuirTripleFit(
   data: { x: number[]; y: number[] },
   inputOptions: object = {},
 ) {
