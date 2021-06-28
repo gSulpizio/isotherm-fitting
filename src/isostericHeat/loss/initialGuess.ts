@@ -20,9 +20,6 @@ export default function initialGuess(data: any[], functionName: string) {
   for (let j = 0; j < n; j++) {
     parameters.push(saturationLoading);
   }
-  if (functionName == 'BET') {
-    parameters.push(0.1); //we add N for BET
-  }
   return parameters;
 }
 

@@ -52,6 +52,6 @@ export function initialGuess(data: { x: number[]; y: number[] }) {
   let KH =
     data.y[0] / data.x[0] / (saturationLoading - data.y[0]) ||
     data.y[1] / data.x[1] / (saturationLoading - data.y[1]);
-  let N = 0.1;
-  return [KH, saturationLoading, N];
+
+  return [KH, saturationLoading];
 }
