@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../variousTools/__tests__/generateData/makeNoisyData';
+import makeNoisyData from '../../variousTools/makeNoisyData';
 import BETFitLinearDouble from '../BETFitLinearDouble';
 
 describe('test BET fit', () => {

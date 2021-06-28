@@ -1,4 +1,4 @@
-import makeNoisyData from '../../../variousTools/__tests__/generateData/makeNoisyData';
+import makeNoisyData from '../../../variousTools/makeNoisyData';
 import getnlnP from '../../getlnP';
 
 describe('test getlnP', () => {

@@ -1,6 +1,6 @@
 import dichotomySearch from '../dichotomySearch';
 import linearFunction from '../../modelFunctions/linearFunction';
-import makeNoisyData from './generateData/makeNoisyData';
+import makeNoisyData from '../makeNoisyData';
 import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 
 describe('test dichotomySearch', () => {

@@ -20,7 +20,6 @@ export default function isostericHeatFromData(
   }
 
   let regression: any;
-  let R = getConstants('R');
 
   let parameters = initialGuess(data, functionName);
   //params: [kh1, kh2, kh3,...,nm]
@@ -29,7 +28,7 @@ export default function isostericHeatFromData(
     parameters,
   );
 
-  let loadings = getnlnP(data, functionName, fittedParameters.x);
+  let loadings = getnlnP(data, functionName, fittedParameters.x); //adds lnP to data, returns the loadings
   let inverseTemperatures = [];
   for (let dataSet of data) {
     inverseTemperatures.push(1 / dataSet.T);
@@ -45,7 +44,8 @@ export default function isostericHeatFromData(
 
     deltaH.push(regression.slope);
   }
-  //console.log(loadings, data[0].lnP);
+
+  let R = getConstants('R');
   deltaH = deltaH.map((x) => x * R);
 
   return [loadings, deltaH];

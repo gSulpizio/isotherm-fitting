@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../variousTools/__tests__/generateData/makeNoisyData';
+import makeNoisyData from '../../variousTools/makeNoisyData';
 import langmuirFunction from '../../modelFunctions/langmuirSingleFunction';
 import isostericHeatFromData from '../isostericHeatFromData';
 
