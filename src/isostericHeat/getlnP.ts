@@ -1,7 +1,7 @@
 import SimpleLinearRegression from 'ml-regression-simple-linear';
 import dichotomySearch from '../variousTools/dichotomySearch';
 import getFunction from './loss/getFunction';
-import getN from './loss/getN';
+import getN from '../variousTools/getN';
 import getParameters from '../variousTools/getParameters';
 /**
  * gets the isostericHeat from a function that has already been fitted, adds it to the data object

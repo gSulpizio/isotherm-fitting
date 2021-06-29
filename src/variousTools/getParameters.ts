@@ -1,4 +1,4 @@
-import getN from '../isostericHeat/loss/getN';
+import getN from './getN';
 
 /**
  * gives parameters array for a specific data set from an array containing all the parameters for all the data sets.

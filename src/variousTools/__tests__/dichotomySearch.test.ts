@@ -5,8 +5,13 @@ import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction'
 
 describe('test dichotomySearch', () => {
   it('test for simple linear function', () => {
-    let result = dichotomySearch(linearFunction([2, 3]), 0, -50, +50);
+    let result = dichotomySearch(linearFunction([2, 3]), 0, -50, 50);
     expect(result).toBeCloseTo(-3 / 2);
+  });
+  it('test for some other function', () => {
+    const fx = (x: number) => 5 / x + 1;
+    let result = dichotomySearch(fx, 0, -100, -1);
+    expect(result).toBeCloseTo(-5);
   });
 
   it('langmuir single site', () => {

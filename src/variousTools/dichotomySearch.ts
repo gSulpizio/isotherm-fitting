@@ -16,16 +16,27 @@ export default function dichotomySearch(
 ) {
   let error = 10 * tolerance;
   let middle: number = highPoint;
-  let y: number;
+  let yMiddle: number;
+  let yHigh: number;
+  let yLow: number;
   while (error > tolerance) {
     middle = (lowPoint + highPoint) / 2;
-    y = fn(middle);
-    error = Math.abs(y - value);
-    if (y > value) {
+    yMiddle = fn(middle);
+    yHigh = fn(highPoint);
+    yLow = fn(lowPoint);
+    error = Math.abs(yMiddle - value);
+    if ((yLow > value && yHigh > value) || (yLow < value && yHigh < value)) {
+      throw 'dichotomySearch: function not monotonous!!';
+    } else if (yMiddle > value && yLow < value) {
       highPoint = middle;
       continue;
+    } else if (yMiddle > value && yLow > value) {
+      lowPoint = middle;
+    } else if (yMiddle < value && yLow < value) {
+      lowPoint = middle;
+    } else if (yMiddle < value && yLow > value) {
+      highPoint = middle;
     }
-    lowPoint = middle;
   }
   return middle;
 }
