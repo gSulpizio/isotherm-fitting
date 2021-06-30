@@ -9,19 +9,25 @@ describe('test isosteric heat calculations', () => {
   it('first dataSet', () => {
     let rawData = readFileSync(join(__dirname, './data/data.json'));
     let data = JSON.parse(rawData.toString());
+    let saturationPressure: number[] = [];
 
+    saturationPressure.push(Math.max(...data.p1));
+    saturationPressure.push(Math.max(...data.p2));
+    saturationPressure.push(Math.max(...data.p3));
     let [T1, T2, T3] = [273, 283, 293];
     data.p1 = data.p1.map((p: number) => p / Math.max(...data.p1));
     data.p2 = data.p2.map((p: number) => p / Math.max(...data.p2));
     data.p3 = data.p3.map((p: number) => p / Math.max(...data.p3));
+    let aggregatedData = [
+      { T: T1, x: data.p1, y: data.n },
+      { T: T2, x: data.p2, y: data.n },
+      { T: T3, x: data.p3, y: data.n },
+    ];
 
     let [loadings, deltaH] = isostericHeatFromData(
-      [
-        { T: T1, x: data.p1, y: data.n },
-        { T: T2, x: data.p2, y: data.n },
-        { T: T3, x: data.p3, y: data.n },
-      ],
+      aggregatedData,
       'langmuirSingle',
+      saturationPressure,
     );
     console.log(deltaH);
     writeFileSync(
@@ -36,7 +42,7 @@ describe('test isosteric heat calculations', () => {
 
     //for (let i = 0; i < p1.length; i++) {expect(deltaH[i]).toBeCloseTo(data.Hads[i]);}
   });
-
+  /** 
   it('simulated dataset: Taking just one dataSet', () => {
     //clear logging file, only use if you're logging each iteration
     writeFileSync(
@@ -53,7 +59,7 @@ describe('test isosteric heat calculations', () => {
     data2.T = 293;
     let deltaH = isostericHeatFromData([data1, data2], 'langmuirSingle');
     console.log(deltaH);
-    /** 
+    
     writeFileSync(
       join(__dirname, '../../../examples/data1.json'),
       JSON.stringify({ x: data.x, y: data.y }),
@@ -66,6 +72,7 @@ describe('test isosteric heat calculations', () => {
           langmuirFunction([deltaH.x[0], deltaH.x[1]])(x),
         ),
       }),
-    );*/
+    );
   });
+  */
 });
