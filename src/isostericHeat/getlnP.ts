@@ -27,24 +27,22 @@ export default function getnlnP(
 
   for (let dataSet of data) {
     Tinverted.push(1 / dataSet.T);
+    dataSet.lnP = Array();
   }
 
   for (let i = step; i < maxLoading + step; i += step) {
     loadingList.push(i);
   }
   let parameters: number[];
+  let pressure: number;
+
+  let fn = getFunction(functionName);
   for (let i = 0; i < data.length; i++) {
-    parameters = getParameters(functionName, i, fittedParameters);
-    data[i].lnP = loadingList.map((loading) =>
-      Math.log(
-        dichotomySearch(
-          getFunction(functionName)(parameters),
-          loading,
-          0,
-          maxLoading,
-        ),
-      ),
-    );
+    for (let loading of loadingList) {
+      parameters = getParameters(functionName, i, fittedParameters);
+      pressure = dichotomySearch(fn(parameters), loading, 0, maxLoading);
+      data[i].lnP.push(Math.log(pressure));
+    }
   }
 
   return loadingList;

@@ -1,6 +1,5 @@
-//langmuir function
 /**
- *
+ * langmuir function
  * @param {Array}  [KH, nm] : array with equilibrium constant and the saturation loading
  * @returns {function} loading as a function of pressure
  */

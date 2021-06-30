@@ -23,7 +23,8 @@ describe('test getlnP', () => {
     let loadings = getnlnP([data1, data2], 'langmuirSingle', [3, 2, 5]);
 
     expect(data1.lnP[133]).toBeCloseTo(Math.log(data1.x[75]), 1);
-    expect(data1.lnP[149]).toBeCloseTo(Math.log(data1.x[140]), 1);
-    expect(data2.lnP[118]).toBeCloseTo(Math.log(data2.x[75]), 1);
+    expect(data1.lnP[12]).toBeCloseTo(-3.88617455269805, 1);
+    expect(data2.lnP[79]).toBeCloseTo(-1.26851132546351, 1);
+    expect(data1.lnP[79]).toBeCloseTo(-1.67397643357167, 1);
   });
 });
