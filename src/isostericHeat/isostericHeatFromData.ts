@@ -1,5 +1,5 @@
 import { nelderMead } from 'fmin';
-import initialGuess from './loss/initialGuess';
+import initialGuess from '../variousTools/initialGuess';
 import lossFunction from './loss/lossFunction';
 import getnlnP from './getlnP';
 import SimpleLinearRegression from 'ml-regression-simple-linear';
@@ -27,7 +27,6 @@ export default function isostericHeatFromData(
     lossFunction(data, functionName),
     parameters,
   );
-
   let loadings = getnlnP(data, functionName, fittedParameters.x); //adds lnP to data, returns the loadings
   let inverseTemperatures = [];
   for (let dataSet of data) {
@@ -41,7 +40,6 @@ export default function isostericHeatFromData(
       lnP.push(dataSet.lnP[i]);
     }
     regression = new SimpleLinearRegression(inverseTemperatures, lnP);
-
     deltaH.push(regression.slope);
   }
 

@@ -10,7 +10,7 @@ describe('test dichotomySearch', () => {
   });
   it('test for some other function', () => {
     const fx = (x: number) => 5 / x + 1;
-    let result = dichotomySearch(fx, 0, -100, -1);
+    let result = dichotomySearch(fx, 0, -500000000000, -1);
     expect(result).toBeCloseTo(-5);
   });
 
