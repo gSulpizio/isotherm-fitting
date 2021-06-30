@@ -7,17 +7,16 @@ import getConstants from '../variousTools/getConstants';
 
 /**
  * evaluates the isosteric heat of adsorption using the langmuir equation on the isotherm's real data. Takes pressures from 3 isotherms as an input
- * @param {Array} data array of all the data set objects
- * @param {string} functionName string containing the name of the desired function
- * @param {Array} saturationPressure because p is relative, the sat pressure is needed for the heat calculations.
+ * because p is relative, the sat pressure is needed for the heat calculations.
  * If p' is the relative pressure and p0 the saturation pressure, then:
  * p=p'*p0, so ln(p)=ln(p')+ln(p0)
+ * @param {Array} data aggregated data object [{T, x, y,pSat}, {T, x, y,pSat}, {T, x, y,pSat}]
+ * @param {string} functionName string containing the name of the desired function
  * @returns {Number} isosteric heat of adsorption
  */
 export default function isostericHeatFromData(
   data: any[],
   functionName: string,
-  saturationPressure: number[],
 ) {
   if (data.length < 2) {
     throw 'isostericHeat: there are not enough data sets to compute isosteric heat, at least 2 data sets needed';
@@ -41,7 +40,7 @@ export default function isostericHeatFromData(
   for (let i = 0; i < data[0].lnP.length; i++) {
     lnP = [];
     for (let j = 0; j < data.length; j++) {
-      lnP.push(data[j].lnP[i] + Math.log(saturationPressure[j]));
+      lnP.push(data[j].lnP[i] + Math.log(data[j].pSat));
     }
     regression = new SimpleLinearRegression(inverseTemperatures, lnP);
     deltaH.push(regression.slope);

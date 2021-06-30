@@ -1,8 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../variousTools/makeNoisyData';
-import langmuirFunction from '../../modelFunctions/langmuirSingleFunction';
 import isostericHeatFromData from '../isostericHeatFromData';
 
 describe('test isosteric heat calculations', () => {
@@ -11,23 +9,19 @@ describe('test isosteric heat calculations', () => {
     let data = JSON.parse(rawData.toString());
     let saturationPressure: number[] = [];
 
-    saturationPressure.push(Math.max(...data.p1));
-    saturationPressure.push(Math.max(...data.p2));
-    saturationPressure.push(Math.max(...data.p3));
     let [T1, T2, T3] = [273, 283, 293];
-    data.p1 = data.p1.map((p: number) => p / Math.max(...data.p1));
-    data.p2 = data.p2.map((p: number) => p / Math.max(...data.p2));
-    data.p3 = data.p3.map((p: number) => p / Math.max(...data.p3));
+    data.p1R = data.p1.map((p: number) => p / Math.max(...data.p1));
+    data.p2R = data.p2.map((p: number) => p / Math.max(...data.p2));
+    data.p3R = data.p3.map((p: number) => p / Math.max(...data.p3));
     let aggregatedData = [
-      { T: T1, x: data.p1, y: data.n },
-      { T: T2, x: data.p2, y: data.n },
-      { T: T3, x: data.p3, y: data.n },
+      { T: T1, x: data.p1R, y: data.n, pSat: Math.max(...data.p1) },
+      { T: T2, x: data.p2R, y: data.n, pSat: Math.max(...data.p2) },
+      { T: T3, x: data.p3R, y: data.n, pSat: Math.max(...data.p3) },
     ];
 
     let [loadings, deltaH] = isostericHeatFromData(
       aggregatedData,
       'langmuirSingle',
-      saturationPressure,
     );
     console.log(deltaH);
     writeFileSync(
