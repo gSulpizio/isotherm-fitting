@@ -35,7 +35,6 @@ export default function getnlnP(
   let parameters: number[];
   let pressure: number;
   let fn = getFunction(functionName);
-  let ppp: number;
   for (let i = 0; i < data.length; i++) {
     for (let loading of loadingList) {
       parameters = getParameters(functionName, i, fittedParameters);
