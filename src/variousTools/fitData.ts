@@ -4,7 +4,7 @@ import SimpleLinearRegression from 'ml-regression-simple-linear';
  * @param {dataXY} data
  * @returns {Array} [data, regression, score]:fitted data points, linear regression params and regression score function
  */
-export function getParams(data: { x: number[]; y: number[] }): any[] {
+export function fitData(data: { x: number[]; y: number[] }): any[] {
   let newData = { x: [...data.x], y: [...data.y] };
   const regression = new SimpleLinearRegression(newData.x, newData.y);
   const score = (x: number[], y: number[]) => regression.score(x, y);
@@ -41,10 +41,10 @@ export function getParams(data: { x: number[]; y: number[] }): any[] {
     regressionPop.score(newDataPop.x, newDataPop.y).r2 >
     regressionShift.score(newDataShift.x, newDataShift.y).r2
   ) {
-    return getParams(newDataPop);
+    return fitData(newDataPop);
   }
 
-  return getParams(newDataShift);
+  return fitData(newDataShift);
 }
 
 export function initialGuess(data: { x: number[]; y: number[] }) {

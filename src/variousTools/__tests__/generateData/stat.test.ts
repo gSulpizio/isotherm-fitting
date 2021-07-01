@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import main from '../../main';
+import main from '../../../main';
 import { langmuirSingleFunction } from '../modelFunctions/modelFunctions';
 
 describe('tool to make accuracy statistics', () => {

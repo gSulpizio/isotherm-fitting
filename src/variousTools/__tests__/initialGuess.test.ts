@@ -7,6 +7,12 @@ describe('test initial guess', () => {
   ];
   it.only('initialGuess langmuir Single', () => {
     let result = initialGuess(data, 'langmuirSingle');
+
+    expect(result).toStrictEqual([
+      data[0].y[1] / data[0].x[1] / (1.1 * 0.4 - 0),
+      data[1].y[0] / data[1].x[0] / (1.1 * 0.9 - 0.5),
+      1.1 * 0.9,
+    ]);
     expect(result).toHaveLength(3);
   });
   it.only('initialGuess langmuir Double', () => {

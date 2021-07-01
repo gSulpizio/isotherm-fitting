@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../__tests__/generateData/makeNoisyData';
+import makeNoisyData from '../../variousTools/makeNoisyData';
 import BETFitLinearDouble from '../BETFitLinearDouble';
 
 describe('test BET fit', () => {
@@ -9,7 +9,7 @@ describe('test BET fit', () => {
     let data = makeNoisyData([2, 5], 100);
 
     let [sampledData, regression, score] = BETFitLinearDouble(data);
-    console.log(regression);
+
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
     //writing results to plot
@@ -19,7 +19,7 @@ describe('test BET fit', () => {
     );
 
     let simulated = data.x.map(
-      (item) => item * regression.slope + regression.intercept,
+      (item: number) => item * regression.slope + regression.intercept,
     );
     writeFileSync(
       join(__dirname, '../../../examples/BETFit.json'),

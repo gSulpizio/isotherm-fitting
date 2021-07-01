@@ -1,4 +1,4 @@
-import { getParams } from '../getParams';
+import { fitData } from '../variousTools/fitData';
 
 //import SG from 'ml-savitzky-golay-generalized'; //doesn't work in ts??
 
@@ -17,7 +17,7 @@ export default function BETFitLinearSingle(data: { x: number[]; y: number[] }) {
 
   //let newData=BETCriteria(data, SATURATIONPRESSURE)
 
-  return getParams({
+  return fitData({
     x: data.x.slice(0, Math.ceil(data.x.length / 3)),
     y: data.y.slice(0, Math.ceil(data.x.length / 3)),
   });
