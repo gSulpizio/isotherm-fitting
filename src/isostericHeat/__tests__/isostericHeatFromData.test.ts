@@ -19,13 +19,10 @@ describe('test isosteric heat calculations', () => {
       { T: T3, x: data.p3R, y: data.n, pSat: Math.max(...data.p3) },
     ];
 
-    let [loadings, deltaH] = isostericHeatFromData(
-      aggregatedData,
-      'langmuirDouble',
-    );
+    let [loadings, deltaH] = isostericHeatFromData(aggregatedData, 'BET');
     console.log(deltaH);
     writeFileSync(
-      join(__dirname, '../../../examples/data.json'),
+      join(__dirname, '../../../examples/dataBET.json'),
       JSON.stringify({ x: loadings, y: deltaH }),
     );
 
