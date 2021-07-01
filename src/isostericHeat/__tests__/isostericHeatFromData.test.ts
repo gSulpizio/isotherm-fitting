@@ -21,17 +21,12 @@ describe('test isosteric heat calculations', () => {
 
     let [loadings, deltaH] = isostericHeatFromData(
       aggregatedData,
-      'langmuirSingle',
+      'langmuirDouble',
     );
     console.log(deltaH);
     writeFileSync(
-      join(__dirname, '../../../examples/data1.json'),
-      JSON.stringify({ x: data.p1, y: data.n }),
-    );
-
-    writeFileSync(
-      join(__dirname, '../../../examples/data2.json'),
-      JSON.stringify({ x: data.p2, y: data.n }),
+      join(__dirname, '../../../examples/data.json'),
+      JSON.stringify({ x: loadings, y: deltaH }),
     );
 
     //for (let i = 0; i < p1.length; i++) {expect(deltaH[i]).toBeCloseTo(data.Hads[i]);}
