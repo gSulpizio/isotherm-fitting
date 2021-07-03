@@ -1,5 +1,6 @@
-import langmuirSingleFunction from '../modelFunctions/langmuirSingleFunction';
-import getFunction from '../isostericHeat/loss/getFunction';
+import getFunction from '../src/isostericHeat/loss/getFunction';
+import isotherm from '../src/isotherm';
+
 /**
  *generates a langmuir single site isotherm with random gaussian noise
  * @param {Array} [KH,nm] langmuir parameters
@@ -7,21 +8,24 @@ import getFunction from '../isostericHeat/loss/getFunction';
  * @param {number} radius intensity of the noise, bigger number means smaller noise
  * @returns {dataXY} data object
  */
-export default function makeNoisyData(
+export default function makeNoisyDataLoose(
   params: number[],
   n: number,
   radius = 100,
   functionName = 'langmuirSingle',
 ) {
+  interface LooseObject {
+    [key: string]: any
+}
   let x = [...Array(n).keys()];
   x = x.map((x) => x / n);
   const fn = getFunction(functionName)(params);
-  let data: { x: number[]; y: number[] } = {
-    x: x,
-    y: x.map((item: number) => fn(item)),
-  };
-  data.y = data.y.map((item) => (randomGaussian() / radius + 1) * item);
-  return data;
+    let data: LooseObject
+    data=new isotherm(x,x.map((item: number) => fn(item)))
+
+    data.y = data.y.map((item:number) => (randomGaussian() / radius + 1) * item);
+    return data;
+  
 }
 
 /**

@@ -1,9 +1,10 @@
 import LM from 'ml-levenberg-marquardt';
 
-import { initialGuess, fitData } from '../variousTools/fitData';
 import BETFunction from '../modelFunctions/BETFunction';
-import getWeights from './getWeights';
+import { initialGuess, fitData } from '../variousTools/fitData';
+
 import { fitDataWeighted } from './fitDataWeighted';
+import getWeights from './getWeights';
 
 //double fit: once the function is fitted, the
 //monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
@@ -12,7 +13,7 @@ import { fitDataWeighted } from './fitDataWeighted';
 //Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
 //specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
 
-export default function BETFitLinearDouble(data: { x: number[]; y: number[] }) {
+export default function BETFitLinearDoubleWeighted(data: { x: number[]; y: number[] }) {
   //let fluidProperties = getProperties(gasName, temperature);
   interface LooseObject {
     [key: string]: any;
@@ -43,9 +44,12 @@ export default function BETFitLinearDouble(data: { x: number[]; y: number[] }) {
     }
     cutoff++;
   }
-  fit;
-  return fitDataWeighted({
+  let [sampledData, regression, score]=fitDataWeighted({
     x: newData.x.slice(begin, cutoff),
     y: newData.y.slice(begin, cutoff),
-  });
+  })
+  let vm=1/(regression.slope+regression.intercept)
+
+
+  return {sampledData, regression, score, vm};
 }

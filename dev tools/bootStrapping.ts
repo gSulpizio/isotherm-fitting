@@ -1,9 +1,9 @@
-import { xySortX } from 'ml-spectra-processing';
+import { xySortX , xyUniqueX} from 'ml-spectra-processing';
 /**
  * returns bootstrapped data, calls sort algorithm to have it in the same order again
  * @param {Object} dataSet data set object
  */
-export default function bootStrapping(dataSet: { x: number[]; y: number[] }) {
+export default function bootStrapping(dataSet:any) {
   let setLength = dataSet.x.length;
   let bootStrappedData = { x: [], y: [] } as any;
   let index: number;
@@ -12,6 +12,6 @@ export default function bootStrapping(dataSet: { x: number[]; y: number[] }) {
     bootStrappedData.x.push(dataSet.x[index]);
     bootStrappedData.y.push(dataSet.y[index]);
   }
-  let sortedData = xySortX(bootStrappedData);
+  let sortedData= xyUniqueX(dataSet, { isSorted: false })
   return sortedData;
 }

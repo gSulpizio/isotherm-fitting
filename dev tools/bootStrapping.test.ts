@@ -1,4 +1,4 @@
-import makeNoisyData from '../src/variousTools/makeNoisyData';
+import makeNoisyData from './makeNoisyData';
 import bootStrapping from './bootStrapping';
 
 test('test bootstrapping for langmuir double function', () => {
