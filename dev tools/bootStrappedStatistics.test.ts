@@ -1,11 +1,12 @@
-import makeNoisyData from './makeNoisyData';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import bootStrappedStatistics from './bootStrappedStatistics';
-import isotherm from '../src/isotherm'
+
 
 test('test bootstrapping for langmuir double function', () => {
-  let n=20
+  let n=3
   let newData = bootStrappedStatistics(n,{noise:50});
-  for(let i=0;i<newData.length;i++){
-  console.log(newData[i].BET.vm);
-}
+  let vm=[]
+  for(let i=0;i<newData.length;i++){vm.push(newData[i].BET.vm)}
+writeFileSync(join(__dirname,'../examples/BETvm.json'), JSON.stringify(vm))
 });
