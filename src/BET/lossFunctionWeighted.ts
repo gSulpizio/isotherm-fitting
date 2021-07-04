@@ -11,16 +11,20 @@ export default function lossFunctionWeighted(
   functionName: string,
   weights: number[] = [],
 ) {
-  if (weights === []) {
-    weights = new Array(data[0].x.length).fill(1);
+  if (weights.length===0) {
+    for(let i of data[0].x){
+    weights.push(1)
+  }
   }
   let yHat, y;
+  let selectedParameters
   let usedFunction = getFunction(functionName);
   return function totalLoss(params: number[]) {
     let cumulatedLoss = 0;
     for (let i = 0; i < data.length; i++) {
       for (let p = 0; p < data[i].x.length; p++) {
-        yHat = usedFunction(getParameters(functionName, i, params))(
+          selectedParameters=getParameters(functionName, i, params)
+        yHat = usedFunction(selectedParameters)(
           data[i].x[p],
         );
         y = data[i].y[p];

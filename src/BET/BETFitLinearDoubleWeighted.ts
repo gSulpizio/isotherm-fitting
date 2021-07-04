@@ -1,10 +1,14 @@
+import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
+
 
 import BETFunction from '../modelFunctions/BETFunction';
 import { initialGuess, fitData } from '../variousTools/fitData';
 
 import { fitDataWeighted } from './fitDataWeighted';
 import getWeights from './getWeights';
+import lossFunctionWeighted from './lossFunctionWeighted';
+
 
 //double fit: once the function is fitted, the
 //monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
@@ -18,7 +22,6 @@ export default function BETFitLinearDoubleWeighted(data: { x: number[]; y: numbe
   interface LooseObject {
     [key: string]: any;
   }
-  //let newData=BETCriteria(data, SATURATIONPRESSURE)
   let options: LooseObject = {
     damping: 10e-2,
     gradientDifference: 10e-2,
@@ -26,7 +29,9 @@ export default function BETFitLinearDoubleWeighted(data: { x: number[]; y: numbe
     errorTolerance: 10e-3,
     initialValues: initialGuess(data),
   };
-  let fittedParams = LM(data, BETFunction, options);
+  let fittedParams2 = LM(data, BETFunction, options);
+  let fittedParams=nelderMead(lossFunctionWeighted([data], 'BET'),
+  initialGuess(data))
 
   let newData = {
     x: data.x,

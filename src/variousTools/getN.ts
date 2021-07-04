@@ -13,7 +13,7 @@ export default function getN(functionName: string) {
     case 'langmuirTriple':
       return 3;
     case 'BET':
-      return 1;
+      return 2;
     case 'linearFunction':
       return 1;
     default:

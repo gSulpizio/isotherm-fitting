@@ -1,3 +1,4 @@
+import { isPartiallyEmittedExpression } from 'typescript';
 import getN from './getN';
 
 /**
@@ -19,6 +20,12 @@ export default function getParameters(
 ) {
   let n = getN(functionName);
   let parameters = [];
+  if(functionName==='BET'){
+    parameters.push(parameterList[i]);
+    parameters.push(parameterList[parameterList.length-2]);
+    parameters.push(parameterList[parameterList.length-1]);
+    return parameters;
+  }
   for (let j = i * n; j < (i + 1) * n; j++) {
     parameters.push(parameterList[j]);
   }
