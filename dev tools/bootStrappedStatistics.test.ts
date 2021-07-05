@@ -8,7 +8,7 @@ import aggregatedData from '../src/aggregatedData';
 test('test bootstrapping for langmuir double function', () => {
   let n = 15;
 
-  let numberPoints = 150,
+  let numberPoints = 10000,
     parameters = [4, 5],
     functionName = 'langmuirSingle',
     noise = 10000;
