@@ -3,7 +3,7 @@ import { join } from 'path';
 import bootStrappedStatistics from './bootStrappedStatistics';
 
 test('test bootstrapping for langmuir double function', () => {
-  let n = 3;
+  let n = 10000;
   let newData = bootStrappedStatistics(n, { noise: 50 });
   let vm = [];
   for (let i = 0; i < newData.length; i++) {
