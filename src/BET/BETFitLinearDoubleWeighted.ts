@@ -1,14 +1,12 @@
 import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
 
-
 import BETFunction from '../modelFunctions/BETFunction';
 import { initialGuess, fitData } from '../variousTools/fitData';
 
 import { fitDataWeighted } from './fitDataWeighted';
 import getWeights from './getWeights';
 import lossFunctionWeighted from './lossFunctionWeighted';
-
 
 //double fit: once the function is fitted, the
 //monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
@@ -17,7 +15,10 @@ import lossFunctionWeighted from './lossFunctionWeighted';
 //Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
 //specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
 
-export default function BETFitLinearDoubleWeighted(data: { x: number[]; y: number[] }) {
+export default function BETFitLinearDoubleWeighted(data: {
+  x: number[];
+  y: number[];
+}) {
   //let fluidProperties = getProperties(gasName, temperature);
   interface LooseObject {
     [key: string]: any;
@@ -29,13 +30,15 @@ export default function BETFitLinearDoubleWeighted(data: { x: number[]; y: numbe
     errorTolerance: 10e-3,
     initialValues: initialGuess(data),
   };
-  let fittedParams2 = LM(data, BETFunction, options);
-  let fittedParams=nelderMead(lossFunctionWeighted([data], 'BET'),
-  initialGuess(data))
+  //let fittedParams2 = LM(data, BETFunction, options);
+  let fittedParams = nelderMead(
+    lossFunctionWeighted([data], 'BET'),
+    initialGuess(data),
+  );
 
   let newData = {
     x: data.x,
-    y: data.x.map((x) => BETFunction(fittedParams.parameterValues)(x)),
+    y: data.x.map((x) => BETFunction(fittedParams.x)(x)),
   };
   let cutoff = 0;
   let begin = 0;
@@ -49,12 +52,11 @@ export default function BETFitLinearDoubleWeighted(data: { x: number[]; y: numbe
     }
     cutoff++;
   }
-  let [sampledData, regression, score]=fitDataWeighted({
+  let [sampledData, regression, score] = fitDataWeighted({
     x: newData.x.slice(begin, cutoff),
     y: newData.y.slice(begin, cutoff),
-  })
-  let vm=1/(regression.slope+regression.intercept)
+  });
+  let vm = 1 / (regression.slope + regression.intercept);
 
-
-  return {sampledData, regression, score, vm};
+  return { sampledData, regression, score, vm };
 }
