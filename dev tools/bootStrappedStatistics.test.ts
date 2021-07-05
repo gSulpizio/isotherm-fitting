@@ -9,5 +9,8 @@ test('test bootstrapping for langmuir double function', () => {
   for (let i = 0; i < newData.length; i++) {
     vm.push(newData[i].BET.vm);
   }
-  writeFileSync(join(__dirname, '../examples/BETvm.json'), JSON.stringify(vm));
+  writeFileSync(
+    join(__dirname, '../examples/BETvm.json'),
+    JSON.stringify(newData),
+  );
 });
