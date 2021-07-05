@@ -1,21 +1,15 @@
-import makeNoisyDataLoose from './makeNoisyDataLoose';
 import bootStrapping from './bootStrapping';
 import BETFitDoubleWeighted from '../src/BET/BETFitLinearDoubleWeighted';
+import isotherm from '../src/isotherm';
+import aggregatedData from '../src/aggregatedData';
 export default function bootStrappedStatistics(
   numberTimes: number,
-  {
-    numberPoints = 150,
-    parameters = [4, 5],
-    functionName = 'langmuirSingle',
-    noise = 10000,
-  },
+  data: isotherm,
 ) {
-  let data = [];
-  for (let i = 0; i < numberTimes; i++) {
-    data[i] = bootStrapping(
-      makeNoisyDataLoose(parameters, numberPoints, noise, functionName),
-    );
-    data[i].BET = BETFitDoubleWeighted(data[i]);
+  let newData: aggregatedData = [];
+  for (let i: keyof aggregatedData = 0; i < numberTimes; i++) {
+    newData[i] = bootStrapping(data);
+    newData[i].BET = BETFitDoubleWeighted(newData[i]);
   }
-  return data;
+  return newData;
 }

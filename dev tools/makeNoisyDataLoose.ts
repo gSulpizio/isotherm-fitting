@@ -14,18 +14,17 @@ export default function makeNoisyDataLoose(
   radius = 100,
   functionName = 'langmuirSingle',
 ) {
-  interface LooseObject {
-    [key: string]: any
-}
   let x = [...Array(n).keys()];
   x = x.map((x) => x / n);
   const fn = getFunction(functionName)(params);
-    let data: LooseObject
-    data=new isotherm(x,x.map((item: number) => fn(item)))
+  let y = x.map((item: number) => fn(item));
+  let data: isotherm = {
+    x,
+    y,
+  };
 
-    data.y = data.y.map((item:number) => (randomGaussian() / radius + 1) * item);
-    return data;
-  
+  data.y = data.y.map((item: number) => (randomGaussian() / radius + 1) * item);
+  return data;
 }
 
 /**

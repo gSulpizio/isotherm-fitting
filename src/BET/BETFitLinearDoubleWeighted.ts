@@ -1,5 +1,6 @@
 import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
+import isotherm from '../isotherm';
 
 import BETFunction from '../modelFunctions/BETFunction';
 import { initialGuess, fitData } from '../variousTools/fitData';
@@ -15,10 +16,7 @@ import lossFunctionWeighted from './lossFunctionWeighted';
 //Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
 //specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
 
-export default function BETFitLinearDoubleWeighted(data: {
-  x: number[];
-  y: number[];
-}) {
+export default function BETFitLinearDoubleWeighted(data: isotherm) {
   //let fluidProperties = getProperties(gasName, temperature);
   interface LooseObject {
     [key: string]: any;
