@@ -1,0 +1,10 @@
+#!/bin/bash -l
+#SBATCH --nodes=1
+#SBATCH --time=25:10:00
+#SBATCH --job-name "isotherm fitting stats"
+#SBATCH --mem=64GB
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user giustino.sulpizio@epfl.ch
+module purge
+module load gcc/7.4.0
+npx jest bootStrappedS
