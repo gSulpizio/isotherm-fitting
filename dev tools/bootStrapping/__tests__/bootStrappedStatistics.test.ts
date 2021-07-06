@@ -4,7 +4,6 @@ import bootStrappedStatistics from '../bootStrappedStatistics';
 import makeNoisyDataLoose from '../../makeNoisyDataLoose';
 import aggregatedData from '../../../src/aggregatedData';
 import isotherm from '../../../src/isotherm';
-const Papa = require('papaparse'); //to use papaparse
 
 describe('test bootstrapping', () => {
   it('for langmuir single function', () => {
@@ -33,7 +32,7 @@ describe('test bootstrapping', () => {
     );
   });
   it.only('loadData', () => {
-    let n = 100000;
+    let n = 10000;
     let file = readFileSync(join(__dirname, '../../data/M_BTT/MBTT CO2.json'));
 
     let rawData = JSON.parse(file.toString());
