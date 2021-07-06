@@ -1,6 +1,7 @@
 export default interface isotherm {
   x: number[];
   y: number[];
+  name?: string;
   BET?: {
     vm: number;
     sampledData: number[];

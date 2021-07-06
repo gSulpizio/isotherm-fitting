@@ -1,7 +1,7 @@
 import bootStrapping from './bootStrapping';
-import BETFitDoubleWeighted from '../src/BET/BETFitLinearDoubleWeighted';
-import isotherm from '../src/isotherm';
-import aggregatedData from '../src/aggregatedData';
+import BETFitDoubleWeighted from '../../src/BET/BETFitLinearDoubleWeighted';
+import isotherm from '../../src/isotherm';
+import aggregatedData from '../../src/aggregatedData';
 export default function bootStrappedStatistics(
   numberTimes: number,
   data: isotherm,
