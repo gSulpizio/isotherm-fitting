@@ -17,8 +17,22 @@ export default function BETFitLinearSingle(data: { x: number[]; y: number[] }) {
 
   //let newData=BETCriteria(data, SATURATIONPRESSURE)
 
-  return fitData({
-    x: data.x.slice(0, Math.ceil(data.x.length / 3)),
-    y: data.y.slice(0, Math.ceil(data.x.length / 3)),
+  let cutoff = 0;
+  let begin = 0;
+  while (cutoff < data.x.length) {
+    if (data.x[begin] < 0.1) {
+      begin++;
+    }
+    if (data.x[cutoff] > 1 / 3) {
+      break;
+    }
+    cutoff++;
+  }
+  let [sampledData, regression, score] = fitData({
+    x: data.x.slice(begin, cutoff),
+    y: data.y.slice(begin, cutoff),
   });
+  let vm = 1 / (regression.slope + regression.intercept);
+
+  return { sampledData, regression, score, vm };
 }

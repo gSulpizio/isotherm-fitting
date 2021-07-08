@@ -3,12 +3,15 @@
 import json
 import os
 import matplotlib.pyplot as plt
-import math
+import pandas as pd
+import seaborn as sns
 
 print(
     "\nInput file names without extentions. File has to be .json with two arrays KH and nm in an object: {{KH:[1,2,3],nm:[4,5,6]}}\n"
 )
-file1 = "logParams"  # input('name file:\n') or 'data'
+file1 = "BETFit"  # input('name file:\n') or 'data'
+file2 = "BETFitSampled"  # input('name file:\n') or 'data'
+file3 = "data"  # input('name file:\n') or 'data'
 dirname = os.path.dirname(__file__) + "/../examples/"
 filename = file1 + ".json"
 path = os.path.join(dirname, filename)
@@ -16,15 +19,17 @@ with open(path) as myfile:
     data = myfile.read()
 data1 = json.loads(data)
 
+filename = file2 + ".json"
+path = os.path.join(dirname, filename)
+with open(path) as myfile:
+    data = myfile.read()
+data2 = json.loads(data)
+
+filename = file3 + ".json"
+path = os.path.join(dirname, filename)
+with open(path) as myfile:
+    data = myfile.read()
+data3 = json.loads(data)
 dataset = "loss"
 
-y = data1[dataset]
-
-plt.plot(y)
-
-color = "tab:blue"
-plt.xlabel("iteration")
-plt.ylabel(dataset)
-
-
-plt.show()
+print(data3.keys())

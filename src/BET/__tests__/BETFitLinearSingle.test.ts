@@ -1,16 +1,16 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../variousTools/makeNoisyData';
+import makeNoisyData from '../../../dev tools/makeNoisyData';
 import BETFitLinearSingle from '../BETFitLinearSingle';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear Single fit and deduced BET area', () => {
-    let data = makeNoisyData([2, 5], 100);
+    let data = makeNoisyData([2, 5], 150, 10);
 
-    //Here it's a weird error and i have to do this, how to efficiently counter that?
-    let [sampledData, regression, score] = BETFitLinearSingle(data);
-    console.log(regression);
+    let results = BETFitLinearSingle(data);
+
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 
     //writing results to plot
@@ -20,7 +20,8 @@ describe('test BET fit', () => {
     );
 
     let simulated = data.x.map(
-      (item) => item * regression.slope + regression.intercept,
+      (item: number) =>
+        item * results.regression.slope + results.regression.intercept,
     );
     writeFileSync(
       join(__dirname, '../../../examples/BETFit.json'),
@@ -28,7 +29,7 @@ describe('test BET fit', () => {
     );
     writeFileSync(
       join(__dirname, '../../../examples/BETFitSampled.json'),
-      JSON.stringify({ x: sampledData.x, y: sampledData.y }),
+      JSON.stringify({ x: results.sampledData.x, y: results.sampledData.y }),
     );
   });
 });

@@ -21,13 +21,7 @@ export default function BETFitLinearDoubleWeighted(data: isotherm) {
   interface LooseObject {
     [key: string]: any;
   }
-  let options: LooseObject = {
-    damping: 10e-2,
-    gradientDifference: 10e-2,
-    maxIterations: 10000,
-    errorTolerance: 10e-3,
-    initialValues: initialGuess(data),
-  };
+
   //let fittedParams2 = LM(data, BETFunction, options);
   let fittedParams = nelderMead(
     lossFunctionWeighted([data], 'BET'),

@@ -11,10 +11,7 @@ import getFunction from '../isostericHeat/loss/getFunction';
  * @param {dataXY} data
  * @returns {Array} [data, regression, score]:fitted data points, linear regression params and regression score function
  */
-export function fitDataWeighted(
-  data: { x: number[]; y: number[] },
-  weights: number[] = [],
-): any[] {
+export function fitData(data: { x: number[]; y: number[] }): any[] {
   //if no weights have been declarded, make an array with ones:
   let LMOptions = {
     damping: 10e-2,
@@ -28,9 +25,7 @@ export function fitDataWeighted(
 
   //ICI FAUT REMPLACER LM PEUT ETRE PAR UNE LOSS FUNCTION
   let parameters = [1, 0];
-  if (weights === []) {
-    weights = getWeights(newData);
-  }
+  let weights = new Array(data.x.length).fill(1);
   let regression = nelderMead(
     lossFunctionWeighted([data], 'linearFunction', weights),
     parameters,

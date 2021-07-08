@@ -48,7 +48,6 @@ describe('test bootstrapping', () => {
     for (let i = 0; i < bootStrappedData.length; i++) {
       vm.push(bootStrappedData[i]?.BET?.vm);
     }
-    console.log(vm);
     writeFileSync(
       join(__dirname, '../../../examples/BETvm.json'),
       JSON.stringify(bootStrappedData),

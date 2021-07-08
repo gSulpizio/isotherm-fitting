@@ -10,5 +10,4 @@ export default interface isotherm {
   };
   pSat?: number;
   T?: number;
-  isostericHeat?: number[];
 }
