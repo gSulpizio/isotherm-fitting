@@ -46,12 +46,3 @@ export function fitData(data: { x: number[]; y: number[] }): any[] {
 
   return fitData(newDataShift);
 }
-
-export function initialGuess(data: { x: number[]; y: number[] }) {
-  let saturationLoading = 1.1 * Math.max(...data.y);
-  let KH =
-    data.y[0] / data.x[0] / (saturationLoading - data.y[0]) ||
-    data.y[1] / data.x[1] / (saturationLoading - data.y[1]);
-  let N = 0.1;
-  return [KH, saturationLoading, N];
-}
