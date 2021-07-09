@@ -27,7 +27,7 @@ describe('test bootstrapping', () => {
     }
     console.log(vm);
     writeFileSync(
-      join(__dirname, '../../../examples/BETvm1.json'),
+      join(__dirname, '../../../examples/BETvm0.json'),
       JSON.stringify(newData),
     );
   });

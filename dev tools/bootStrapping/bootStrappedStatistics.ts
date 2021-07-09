@@ -13,7 +13,7 @@ export default function bootStrappedStatistics(
   for (let i: keyof aggregatedData = 0; i < numberTimes; i++) {
     newData[i] = bootStrapping(data);
     //newData[i].BET = BETFitDoubleWeighted(newData[i]);
-    newData[i].BET = BETFitLinearDouble(newData[i]);
+    newData[i].BET = BETFitLinearSingle(newData[i]);
   }
   return newData;
 }
