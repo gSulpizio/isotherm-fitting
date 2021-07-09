@@ -6,12 +6,12 @@ import aggregatedData from '../../../src/aggregatedData';
 import isotherm from '../../../src/isotherm';
 
 describe('test bootstrapping', () => {
-  it('for langmuir single function', () => {
+  it.only('for langmuir single function', () => {
     let n = 10000;
 
-    let numberPoints = 150,
-      parameters = [4, 5],
-      functionName = 'langmuirSingle',
+    let numberPoints = 50,
+      parameters = [4, 5, 3, 6],
+      functionName = 'langmuirDouble',
       noise = 10000;
 
     let data = makeNoisyDataLoose(
@@ -31,7 +31,7 @@ describe('test bootstrapping', () => {
       JSON.stringify(newData),
     );
   });
-  it.only('loadData', () => {
+  it('loadData', () => {
     let n = 10000;
     let file = readFileSync(join(__dirname, '../../data/M_BTT/MBTT CO2.json'));
 

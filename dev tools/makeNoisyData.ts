@@ -12,20 +12,19 @@ export default function makeNoisyData(
   radius = 100,
   functionName = 'langmuirSingle',
 ) {
-
   let x = [...Array(n).keys()];
   x = x.map((x) => x / n);
   const fn = getFunction(functionName)(params);
-  let data= {
+  let data = {
     x: x,
     y: x.map((item: number) => fn(item)),
   };
-  data.y = data.y.map((item:number) => (randomGaussian() / radius + 1) * item);
+  data.y = data.y.map((item: number) => (randomGaussian() / radius + 1) * item);
   return data;
 }
 
 /**
- * Generates a random number following a normal distribution
+ * Generates a random number following a normal distribution using the Box-Muller transform.
  * @returns {number}  random number
  */
 function randomGaussian() {
