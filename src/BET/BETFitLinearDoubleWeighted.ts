@@ -1,9 +1,9 @@
 import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
 import isotherm from '../isotherm';
+import initialGuess from '../variousTools/initialGuess';
 
 import BETFunction from '../modelFunctions/BETFunction';
-import { initialGuess, fitData } from '../variousTools/fitData';
 
 import { fitDataWeighted } from './fitDataWeighted';
 import getWeights from './getWeights';
@@ -25,7 +25,7 @@ export default function BETFitLinearDoubleWeighted(data: isotherm) {
   //let fittedParams2 = LM(data, BETFunction, options);
   let fittedParams = nelderMead(
     lossFunctionWeighted([data], 'BET'),
-    initialGuess(data),
+    initialGuess([data], 'BET'),
   );
 
   let newData = {

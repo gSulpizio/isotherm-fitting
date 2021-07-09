@@ -4,9 +4,12 @@ import bootStrappedStatistics from '../bootStrappedStatistics';
 import makeNoisyDataLoose from '../../makeNoisyDataLoose';
 import aggregatedData from '../../../src/aggregatedData';
 import isotherm from '../../../src/isotherm';
+import BETFitLinearDouble from '../../../src/BET/BETFitLinearDouble';
+import BETFitLinearSingle from '../../../src/BET/BETFitLinearSingle';
+import BETFitLinearDoubleWeighted from '../../../src/BET/BETFitLinearDoubleWeighted';
 
-describe('test bootstrapping', () => {
-  it.only('for langmuir single function', () => {
+describe.only('test bootstrapping', () => {
+  it('for langmuir single function', () => {
     let n = 10000;
 
     let numberPoints = 50,
@@ -20,7 +23,11 @@ describe('test bootstrapping', () => {
       noise,
       functionName,
     );
-    let newData: aggregatedData = bootStrappedStatistics(n, data);
+    let newData: aggregatedData = bootStrappedStatistics(
+      n,
+      data,
+      BETFitLinearSingle,
+    );
     let vm = [];
     for (let i = 0; i < newData.length; i++) {
       vm.push(newData[i]?.BET?.vm);
@@ -31,6 +38,66 @@ describe('test bootstrapping', () => {
       JSON.stringify(newData),
     );
   });
+  it('for langmuir single function', () => {
+    let n = 10000;
+
+    let numberPoints = 50,
+      parameters = [4, 5, 3, 6],
+      functionName = 'langmuirDouble',
+      noise = 10000;
+
+    let data = makeNoisyDataLoose(
+      parameters,
+      numberPoints,
+      noise,
+      functionName,
+    );
+    let newData: aggregatedData = bootStrappedStatistics(
+      n,
+      data,
+      BETFitLinearDouble,
+    );
+    let vm = [];
+    for (let i = 0; i < newData.length; i++) {
+      vm.push(newData[i]?.BET?.vm);
+    }
+    console.log(vm);
+    writeFileSync(
+      join(__dirname, '../../../examples/BETvm1.json'),
+      JSON.stringify(newData),
+    );
+  });
+  it('for langmuir single function', () => {
+    let n = 10000;
+
+    let numberPoints = 50,
+      parameters = [4, 5, 3, 6],
+      functionName = 'langmuirDouble',
+      noise = 10000;
+
+    let data = makeNoisyDataLoose(
+      parameters,
+      numberPoints,
+      noise,
+      functionName,
+    );
+    let newData: aggregatedData = bootStrappedStatistics(
+      n,
+      data,
+      BETFitLinearDoubleWeighted,
+    );
+    let vm = [];
+    for (let i = 0; i < newData.length; i++) {
+      vm.push(newData[i]?.BET?.vm);
+    }
+    console.log(vm);
+    writeFileSync(
+      join(__dirname, '../../../examples/BETvm2.json'),
+      JSON.stringify(newData),
+    );
+  });
+});
+describe('real data', () => {
   it('loadData', () => {
     let n = 10000;
     let file = readFileSync(join(__dirname, '../../data/M_BTT/MBTT CO2.json'));
@@ -43,7 +110,11 @@ describe('test bootstrapping', () => {
     let isotherm2: isotherm = getIsotherm(rawData, 3);
     let isotherm3: isotherm = getIsotherm(rawData, 6);
     let data: aggregatedData = [isotherm1, isotherm2, isotherm3];
-    let bootStrappedData: aggregatedData = bootStrappedStatistics(n, isotherm1);
+    let bootStrappedData: aggregatedData = bootStrappedStatistics(
+      n,
+      isotherm1,
+      BETFitLinearDoubleWeighted,
+    );
     let vm = [];
     for (let i = 0; i < bootStrappedData.length; i++) {
       vm.push(bootStrappedData[i]?.BET?.vm);
