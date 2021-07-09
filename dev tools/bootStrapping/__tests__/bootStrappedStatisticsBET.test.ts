@@ -7,7 +7,7 @@ import isotherm from '../../../src/isotherm';
 
 describe('test bootstrapping', () => {
   it.only('for langmuir single function', () => {
-    let n = 20;
+    let n = 10000;
 
     let numberPoints = 50,
       parameters = [4, 5, 3, 6],
