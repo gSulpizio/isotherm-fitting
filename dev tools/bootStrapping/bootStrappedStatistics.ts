@@ -3,6 +3,7 @@ import BETFitDoubleWeighted from '../../src/BET/BETFitLinearDoubleWeighted';
 import isotherm from '../../src/isotherm';
 import aggregatedData from '../../src/aggregatedData';
 import BETFitLinearDouble from '../../src/BET/BETFitLinearDouble';
+import BETFitLinearDoubleWeighted from '../../src/BET/BETFitLinearDoubleWeighted';
 export default function bootStrappedStatistics(
   numberTimes: number,
   data: isotherm,
@@ -11,7 +12,7 @@ export default function bootStrappedStatistics(
   for (let i: keyof aggregatedData = 0; i < numberTimes; i++) {
     newData[i] = bootStrapping(data);
     //newData[i].BET = BETFitDoubleWeighted(newData[i]);
-    newData[i].BET = BETFitLinearDouble(newData[i]);
+    newData[i].BET = BETFitLinearDoubleWeighted(newData[i]);
   }
   return newData;
 }
