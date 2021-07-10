@@ -37,9 +37,7 @@ test('Double Langmuir fit', () => {
     ],
   };
   let results = langmuirDoubleFit(data);
-  let yFit = data.x.map((item) =>
-    langmuirDoubleFunction(results.parameterValues)(item),
-  );
+  let yFit = data.x.map((item) => langmuirDoubleFunction(results.x)(item));
   for (let i = 0; i < yFit.length; i++) {
     expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
   }

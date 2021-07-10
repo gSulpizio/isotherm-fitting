@@ -4,10 +4,15 @@ import getN from './getN';
  * @param {Array} data array of all the data set objects
  * @param {string} functionName string containing the name of the desired function
  */
-export default function initialGuess(data: any[], functionName: string) {
+export default function initialGuess(
+  data: any[],
+  functionName: string,
+): number[] {
   let n = getN(functionName);
-  let parameters = [];
-  let saturationLoading, a, b;
+  let parameters: number[] = [];
+  let saturationLoading: number = 0,
+    a,
+    b;
   for (let j = 0; j < n; j++) {
     for (let dataSet of data) {
       saturationLoading = 1.1 * Math.max(...dataSet.y);
