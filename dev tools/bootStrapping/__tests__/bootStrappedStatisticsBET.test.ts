@@ -12,18 +12,12 @@ import langmuirTripleFunction from '../../../src/modelFunctions/langmuirTripleFu
 
 describe.only('test bootstrapping', () => {
   let n = 10000;
-  let noise = 10000;
+  let noise = 100;
+  let numberPoints = 1000,
+    parameters = [4, 5, 3, 6],
+    functionName = 'langmuirDouble';
+  let data = makeNoisyDataLoose(parameters, numberPoints, noise, functionName);
   it('for langmuir single function', () => {
-    let numberPoints = 50,
-      parameters = [4, 5, 3, 6],
-      functionName = 'langmuirDouble';
-
-    let data = makeNoisyDataLoose(
-      parameters,
-      numberPoints,
-      noise,
-      functionName,
-    );
     let newData: aggregatedData = bootStrappedStatistics(
       n,
       data,
@@ -40,16 +34,6 @@ describe.only('test bootstrapping', () => {
     );
   });
   it('for langmuir single function', () => {
-    let numberPoints = 50,
-      parameters = [4, 5, 3, 6],
-      functionName = 'langmuirDouble';
-
-    let data = makeNoisyDataLoose(
-      parameters,
-      numberPoints,
-      noise,
-      functionName,
-    );
     let newData: aggregatedData = bootStrappedStatistics(
       n,
       data,
@@ -66,16 +50,6 @@ describe.only('test bootstrapping', () => {
     );
   });
   it('for langmuir single function', () => {
-    let numberPoints = 50,
-      parameters = [4, 5, 3, 6],
-      functionName = 'langmuirDouble';
-
-    let data = makeNoisyDataLoose(
-      parameters,
-      numberPoints,
-      noise,
-      functionName,
-    );
     let newData: aggregatedData = bootStrappedStatistics(
       n,
       data,
