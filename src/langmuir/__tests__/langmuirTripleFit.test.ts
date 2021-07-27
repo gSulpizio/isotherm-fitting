@@ -5,7 +5,6 @@ import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction'
 import langmuirTripleFit from '../langmuirTripleFit';
 
 test('Triple Langmuir fit', () => {
-
   let data = {
     x: [
       0.0171192,
@@ -37,9 +36,7 @@ test('Triple Langmuir fit', () => {
     ],
   };
   let results = langmuirTripleFit(data);
-  let yFit = data.x.map((item) =>
-    langmuirTripleFunction(results.parameterValues)(item),
-  );
+  let yFit = data.x.map((item) => langmuirTripleFunction(results.x)(item));
 
   //writing results to plot
   writeFileSync(

@@ -12,6 +12,7 @@ export default function lossFunction(data: any[], functionName: string) {
   let usedFunction = getFunction(functionName);
   return function totalLoss(params: number[]) {
     let cumulatedLoss = 0;
+
     for (let i = 0; i < data.length; i++) {
       for (let p = 0; p < data[i].x.length; p++) {
         yHat = usedFunction(getParameters(functionName, i, params))(
@@ -22,11 +23,6 @@ export default function lossFunction(data: any[], functionName: string) {
       }
     }
 
-    //this would be to severely punish negative values
-    //if (params.some((item) => item <= 0)) {cumulatedLoss += 1000000;}
-
-    //LOGGING PARAMETERS:
-    //logParameters(params, cumulatedLoss);
     return cumulatedLoss;
   };
 }

@@ -37,9 +37,7 @@ describe('test Langmuir fit', () => {
       ],
     };
     let results = langmuirSingleFit(data);
-    let yFit = data.x.map((item) =>
-      langmuirSingleFunction(results.parameterValues)(item),
-    );
+    let yFit = data.x.map((item) => langmuirSingleFunction(results.x)(item));
     for (let i = 0; i < yFit.length; i++) {
       expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
     }
@@ -113,9 +111,7 @@ describe('test Langmuir fit', () => {
       ],
     };
     let results = langmuirSingleFit(data);
-    let yFit = data.x.map((item) =>
-      langmuirSingleFunction(results.parameterValues)(item),
-    );
+    let yFit = data.x.map((item) => langmuirSingleFunction(results.x)(item));
     for (let i = 0; i < yFit.length; i++) {
       expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
     }

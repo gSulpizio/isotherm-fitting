@@ -1,9 +1,11 @@
 import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
+import lossFunction from '../isostericHeat/loss/lossFunction';
 import isotherm from '../isotherm';
 
 import BETFunction from '../modelFunctions/BETFunction';
-import { initialGuess, fitData } from '../variousTools/fitData';
+import { fitData } from '../variousTools/fitData';
+import initialGuess from '../variousTools/initialGuess';
 
 import getWeights from './getWeights';
 import lossFunctionWeighted from './lossFunctionWeighted';
@@ -20,17 +22,11 @@ export default function BETFitLinearDouble(data: isotherm) {
   interface LooseObject {
     [key: string]: any;
   }
-  let options: LooseObject = {
-    damping: 10e-2,
-    gradientDifference: 10e-2,
-    maxIterations: 10000,
-    errorTolerance: 10e-3,
-    initialValues: initialGuess(data),
-  };
+
   //let fittedParams2 = LM(data, BETFunction, options);
   let fittedParams = nelderMead(
-    lossFunctionWeighted([data], 'BET'),
-    initialGuess(data),
+    lossFunction([data], 'BET'),
+    initialGuess([data], 'BET'),
   );
 
   let newData = {

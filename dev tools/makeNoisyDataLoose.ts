@@ -23,7 +23,9 @@ export default function makeNoisyDataLoose(
     y,
   };
 
-  data.y = data.y.map((item: number) => (randomGaussian() / radius + 1) * item);
+  data.y = data.y.map(
+    (item: number) => (randomGaussian() / radius) * Math.max(...data.y) + item,
+  );
   return data;
 }
 

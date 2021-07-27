@@ -1,6 +1,3 @@
-import SimpleLinearRegression from 'ml-regression-simple-linear';
-import LM from 'ml-levenberg-marquardt';
-
 import getWeights from './getWeights';
 import { nelderMead } from 'fmin';
 import lossFunctionWeighted from './lossFunctionWeighted';
@@ -16,17 +13,9 @@ export function fitDataWeighted(
   weights: number[] = [],
 ): any[] {
   //if no weights have been declarded, make an array with ones:
-  let LMOptions = {
-    damping: 10e-2,
-    gradientDifference: 10e-2,
-    maxIterations: 10000,
 
-    initialValues: initialGuess(data),
-    weights: getWeights(data),
-  };
   let newData = { x: [...data.x], y: [...data.y] };
 
-  //ICI FAUT REMPLACER LM PEUT ETRE PAR UNE LOSS FUNCTION
   let parameters = [1, 0];
   if (weights === []) {
     weights = getWeights(newData);
@@ -94,12 +83,4 @@ export function fitDataWeighted(
   }
 
   return fitDataWeighted(newDataShift);
-}
-export function initialGuess(data: { x: number[]; y: number[] }) {
-  let saturationLoading = 1.1 * Math.max(...data.y);
-  let KH =
-    data.y[0] / data.x[0] / (saturationLoading - data.y[0]) ||
-    data.y[1] / data.x[1] / (saturationLoading - data.y[1]);
-  let N = 0.1;
-  return [KH, saturationLoading, N];
 }

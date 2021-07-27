@@ -19,7 +19,9 @@ export default function makeNoisyData(
     x: x,
     y: x.map((item: number) => fn(item)),
   };
-  data.y = data.y.map((item: number) => (randomGaussian() / radius + 1) * item);
+  data.y = data.y.map(
+    (item: number) => (randomGaussian() / radius) * Math.max(...data.y) + item,
+  );
   return data;
 }
 
