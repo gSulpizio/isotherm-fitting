@@ -1,14 +1,11 @@
 import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
+
 import lossFunction from '../isostericHeat/loss/lossFunction';
 import isotherm from '../isotherm';
-
 import BETFunction from '../modelFunctions/BETFunction';
 import { fitData } from '../variousTools/fitData';
 import initialGuess from '../variousTools/initialGuess';
-
-import getWeights from './getWeights';
-import lossFunctionWeighted from './lossFunctionWeighted';
 
 //double fit: once the function is fitted, the
 //monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
@@ -16,6 +13,11 @@ import lossFunctionWeighted from './lossFunctionWeighted';
 //Total surface area: S_total=v_m*N*s/V where N is the avogadro number, s is the adsorption cross section of the adsorbate, V the molar volume of the adsorbate gas (STP)
 //Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
 //specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
+/**
+ *
+ * @param {isotherm} data: isotherm with at least x (pressure) and y (loading) arrays
+ * @returns
+ */
 
 export default function BETFitLinearDouble(data: isotherm) {
   //let fluidProperties = getProperties(gasName, temperature);

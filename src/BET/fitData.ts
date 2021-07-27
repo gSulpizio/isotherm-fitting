@@ -85,10 +85,10 @@ export function fitData(data: { x: number[]; y: number[] }): any[] {
   );
 
   if (popScore > shiftScore) {
-    return fitDataWeighted(newDataPop);
+    return fitData(newDataPop);
   }
 
-  return fitDataWeighted(newDataShift);
+  return fitData(newDataShift);
 }
 export function initialGuess(data: { x: number[]; y: number[] }) {
   let saturationLoading = 1.1 * Math.max(...data.y);
