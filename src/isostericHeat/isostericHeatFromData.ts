@@ -1,5 +1,6 @@
 import { nelderMead } from 'fmin';
 
+import aggregatedData from '../aggregatedData';
 import getConstants from '../variousTools/getConstants';
 import initialGuess from '../variousTools/initialGuess';
 
@@ -17,7 +18,7 @@ import lossFunction from './loss/lossFunction';
  * @returns {Number} isosteric heat of adsorption
  */
 export default function isostericHeatFromData(
-  data: any[],
+  data: aggregatedData,
   functionName: string,
 ) {
   if (data.length < 2) {
