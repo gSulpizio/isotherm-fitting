@@ -1,17 +1,24 @@
 import { fitData } from '../variousTools/fitData';
-
-//import SG from 'ml-savitzky-golay-generalized'; //doesn't work in ts??
-
-//import { MolecularFluid, getProperties } from 'fluid-properties';
-
-//inputOptions has to be fixed so that the input is either the input or a default value
-
-//monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
-//BET constant c=1+slope/intercept
-//Total surface area: S_total=v_m*N*s/V where N is the avogadro number, s is the adsorption cross section of the adsorbate, V the molar volume of the adsorbate gas (STP)
-//Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
-//specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
-
+/**
+ * the linear function is fitted directly on the data
+ *
+ * the monolayer adsorbed gas quantity:
+ *
+ * v_m=1/(Slope+intercept)
+ *
+ * BET constant c=1+slope/intercept
+ *
+ * Total surface area: S_total=v_m*N*s/V where N is the avogadro number,
+ * s is the adsorption cross section of the adsorbate,
+ * V the molar volume of the adsorbate gas (STP)
+ *
+ * Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
+ *
+ * specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
+ *
+ * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
+ * @returns {object} { sampledData, regression, score, vm }
+ */
 export default function BETFitLinearSingle(data: { x: number[]; y: number[] }) {
   //let fluidProperties = getProperties(gasName, temperature);
 

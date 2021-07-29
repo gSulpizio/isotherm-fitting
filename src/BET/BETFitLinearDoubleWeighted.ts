@@ -1,28 +1,38 @@
 import { nelderMead } from 'fmin';
 import LM from 'ml-levenberg-marquardt';
+
 import isotherm from '../isotherm';
+import BETFunction from '../modelFunctions/BETFunction';
 import initialGuess from '../variousTools/initialGuess';
 
-import BETFunction from '../modelFunctions/BETFunction';
 
 import { fitDataWeighted } from './fitDataWeighted';
-import getWeights from './getWeights';
 import lossFunctionWeighted from './lossFunctionWeighted';
 
-//double fit: once the function is fitted, the
-//monolayer adsorbed gas quantity: v_m=1/(Slope+intercept)
-//BET constant c=1+slope/intercept
-//Total surface area: S_total=v_m*N*s/V where N is the avogadro number, s is the adsorption cross section of the adsorbate, V the molar volume of the adsorbate gas (STP)
-//Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
-//specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
-
+/**
+ * weighted: the linear fitting is performed using weights from https://doi.org/10.1016/j.micromeso.2011.05.022
+ *
+ * Double fit: once the function is fitted with a chosen model, the model is fitted with a linear function
+ *
+ *  the monolayer adsorbed gas quantity:
+ *
+ * v_m=1/(Slope+intercept)
+ *
+ * BET constant c=1+slope/intercept
+ *
+ * Total surface area: S_total=v_m*N*s/V where N is the avogadro number,
+ * s is the adsorption cross section of the adsorbate,
+ * V the molar volume of the adsorbate gas (STP)
+ *
+ * Ideal gas: molar volume of the adsorbate gas=V/n=R*T/p
+ *
+ * specific surface area: S_BET=S_total/alpha where alpha is the mass of the solid sample or adsorbent
+ *
+ * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
+ * @returns {object} { sampledData, regression, score, vm }
+ */
 export default function BETFitLinearDoubleWeighted(data: isotherm) {
-  //let fluidProperties = getProperties(gasName, temperature);
-  interface LooseObject {
-    [key: string]: any;
-  }
 
-  //let fittedParams2 = LM(data, BETFunction, options);
   let fittedParams = nelderMead(
     lossFunctionWeighted([data], 'BET'),
     initialGuess([data], 'BET'),
