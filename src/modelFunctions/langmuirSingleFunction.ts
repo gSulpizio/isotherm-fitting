@@ -1,5 +1,5 @@
 /**
- * langmuir function
+ * Returns a function of the langmuir single site model
  * @param {Array}  [KH, nm] : array with equilibrium constant and the saturation loading
  * @returns {function} loading as a function of pressure
  */

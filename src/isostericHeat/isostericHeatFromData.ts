@@ -12,7 +12,7 @@ import lossFunction from './loss/lossFunction';
  * because p is relative, the sat pressure is needed for the heat calculations.
  * If p' is the relative pressure and p0 the saturation pressure, then:
  * p=p'*p0, so ln(p)=ln(p')+ln(p0)
- * @param {Array} data aggregated data object [{T, x, y,pSat}, {T, x, y,pSat}, {T, x, y,pSat}]
+ * @param {Array} data aggregated data object [{T, x, y,pSat}, {T, x, y,pSat}, {T, x, y,pSat}]. At the minimum, the temperature T, the pressure x, the loading y and the saturation pressure pSat are needed
  * @param {string} functionName string containing the name of the desired function
  * @returns {Number} isosteric heat of adsorption
  */

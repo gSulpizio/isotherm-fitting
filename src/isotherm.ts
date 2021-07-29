@@ -1,3 +1,6 @@
+/**
+ * Isotherm interface, contains information for one isotherm
+ */
 export default interface isotherm {
   x: number[];
   y: number[];

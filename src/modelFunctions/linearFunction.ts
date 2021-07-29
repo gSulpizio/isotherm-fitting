@@ -1,6 +1,6 @@
 //BET function
 /**
- *
+ * Returns a linear function
  * @param {Array}  [m,p] : array with the slope and intercept
  * @returns {function} linear function
  */

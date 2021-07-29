@@ -4,7 +4,6 @@
  * @returns {number} n to be used for the initial guess
  */
 export default function getN(functionName: string) {
-  let n: number;
   switch (functionName) {
     case 'langmuirSingle':
       return 1;

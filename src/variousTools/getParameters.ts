@@ -1,4 +1,3 @@
-import { isPartiallyEmittedExpression } from 'typescript';
 import getN from './getN';
 
 /**

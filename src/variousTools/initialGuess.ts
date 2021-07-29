@@ -10,9 +10,9 @@ export default function initialGuess(
 ): number[] {
   let n = getN(functionName);
   let parameters: number[] = [];
-  let saturationLoading: number = 0,
-    a,
-    b;
+  let saturationLoading = 0;
+    let a;
+    let b;
   for (let j = 0; j < n; j++) {
     for (let dataSet of data) {
       saturationLoading = 1.1 * Math.max(...dataSet.y);
@@ -25,7 +25,7 @@ export default function initialGuess(
   for (let j = 0; j < n; j++) {
     parameters.push(saturationLoading);
   }
-  if (functionName == 'BET') {
+  if (functionName === 'BET') {
     parameters.push(0.1); //we add N for BET
   }
   return parameters;
@@ -33,6 +33,7 @@ export default function initialGuess(
 
 function getFirstNonZero(array: number[]) {
   for (let item of array) {
+    // eslint-disable-next-line eqeqeq
     if (item != 0) {
       return item;
     }

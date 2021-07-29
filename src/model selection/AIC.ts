@@ -1,6 +1,16 @@
 import getFunction from '../isostericHeat/loss/getFunction';
 import isotherm from '../isotherm';
+
 import MSE from './simpleMSE';
+
+/**
+ * Computes the Akaike information criterion: https://en.wikipedia.org/wiki/Akaike_information_criterion
+ * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
+ * @param {string} functionName: string containing the name of the model to be evaluated
+ * @param {Array<number>} fittedParams: array of the parameters that were fitted
+ * @returns {number} AIC
+ */
+
 export default function AIC(
   data: isotherm,
   functionName: string,
