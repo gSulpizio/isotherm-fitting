@@ -1,12 +1,13 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
+import isotherm from '../../isotherm';
 import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
 import langmuirDoubleFit from '../langmuirDoubleFit';
 
 test('Double Langmuir fit', () => {
-  it;
-  let data = {
+
+  let data:isotherm = {
     x: [
       0.0171192,
       0.0586318,

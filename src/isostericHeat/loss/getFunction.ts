@@ -1,8 +1,7 @@
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
-import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
-import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
 import BETFunction from '../../modelFunctions/BETFunction';
-import initialGuess from '../../variousTools/initialGuess';
+import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
 import linearFunction from '../../modelFunctions/linearFunction';
 /**
  * Returns the function indicated in the string and the initiation parameters

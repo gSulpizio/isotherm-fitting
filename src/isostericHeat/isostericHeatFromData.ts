@@ -1,10 +1,11 @@
 import { nelderMead } from 'fmin';
-import initialGuess from '../variousTools/initialGuess';
-import lossFunction from './loss/lossFunction';
-import getnlnP from './getlnP';
-import SimpleLinearRegression from 'ml-regression-simple-linear';
+
 import getConstants from '../variousTools/getConstants';
+import initialGuess from '../variousTools/initialGuess';
+
 import getSlopes from './getSlopes';
+import getnlnP from './getlnP';
+import lossFunction from './loss/lossFunction';
 
 /**
  * evaluates the isosteric heat of adsorption using the langmuir equation on the isotherm's real data. Takes pressures from 3 isotherms as an input

@@ -1,6 +1,8 @@
 import dichotomySearch from '../variousTools/dichotomySearch';
-import getFunction from './loss/getFunction';
 import getParameters from '../variousTools/getParameters';
+
+import getFunction from './loss/getFunction';
+
 
 /**
  * gets the isostericHeat from a function that has already been fitted, adds it to the data object
@@ -14,7 +16,7 @@ export default function getnlnP(
   fittedParameters: number[],
 ) {
   let Tinverted = [];
-  let lnP = [];
+
   let loadingList = [];
   let maxLoading = Math.max(...data[0].y);
   for (let dataSet of data) {
@@ -26,7 +28,7 @@ export default function getnlnP(
 
   for (let dataSet of data) {
     Tinverted.push(1 / dataSet.T);
-    dataSet.lnP = Array();
+    dataSet.lnP = [];
   }
 
   for (let i = step; i < maxLoading + step; i += step) {

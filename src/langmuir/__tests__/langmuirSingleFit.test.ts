@@ -1,12 +1,13 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
+import isotherm from '../../isotherm';
 import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
 import langmuirSingleFit from '../langmuirSingleFit';
 
 describe('test Langmuir fit', () => {
-  it.only('first dataSet', () => {
-    let data = {
+  it('first dataSet', () => {
+    let data:isotherm = {
       x: [
         0.0171192,
         0.0586318,
@@ -54,7 +55,7 @@ describe('test Langmuir fit', () => {
     );
   });
   it('second dataSet, with 0 as first point', () => {
-    let data = {
+    let data:isotherm = {
       x: [
         0.0,
         0.5,

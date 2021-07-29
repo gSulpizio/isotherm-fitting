@@ -1,11 +1,12 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
+import isotherm from '../../isotherm';
 import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
 import langmuirTripleFit from '../langmuirTripleFit';
 
 test('Triple Langmuir fit', () => {
-  let data = {
+  let data:isotherm = {
     x: [
       0.0171192,
       0.0586318,

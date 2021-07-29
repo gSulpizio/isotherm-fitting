@@ -1,6 +1,7 @@
-import logParameters from '../../../dev tools/logParameters';
-import getFunction from './getFunction';
+//import logParameters from '../../../dev tools/logParameters';
 import getParameters from '../../variousTools/getParameters';
+
+import getFunction from './getFunction';
 /**
  * Curried function that returns a cumulated loss function
  * @param {object} data  aggregated data object {{T, x, y}, {T, x, y}, {T, x, y}}
