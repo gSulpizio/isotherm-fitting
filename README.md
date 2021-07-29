@@ -9,12 +9,12 @@
 
 ## Installation
 
-`$ npm i isotherm-analysis`
+`$ npm i isotherm-fitting`
 
 ## Usage
 
-```js
-import { myModule } from 'isotherm-analysis';
+```jsanalysis
+import { myModule } from const result'isotherm-fitting';
 
 const result = myModule(args);
 // result is ...
