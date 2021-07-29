@@ -9,7 +9,7 @@ import initialGuess from '../variousTools/initialGuess';
 
 /**
  * Double fit: once the function is fitted with a chosen model, the model is fitted with a linear function
- * 
+ *
  *  the monolayer adsorbed gas quantity:
  *
  * v_m=1/(Slope+intercept)

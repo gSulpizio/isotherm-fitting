@@ -1,11 +1,11 @@
-import SimpleLinearRegression from 'ml-regression-simple-linear';
-import LM from 'ml-levenberg-marquardt';
+import { nelderMead } from 'fmin';
+
+import getFunction from '../isostericHeat/loss/getFunction';
+import regressionScore from '../variousTools/regressionScore';
 
 import getWeights from './getWeights';
-import { nelderMead } from 'fmin';
 import lossFunctionWeighted from './lossFunctionWeighted';
-import regressionScore from '../variousTools/regressionScore';
-import getFunction from '../isostericHeat/loss/getFunction';
+
 /**
  * returns fitted data points, linear regression params and regression score function
  * @param {dataXY} data
@@ -13,14 +13,7 @@ import getFunction from '../isostericHeat/loss/getFunction';
  */
 export function fitData(data: { x: number[]; y: number[] }): any[] {
   //if no weights have been declarded, make an array with ones:
-  let LMOptions = {
-    damping: 10e-2,
-    gradientDifference: 10e-2,
-    maxIterations: 10000,
 
-    initialValues: initialGuess(data),
-    weights: getWeights(data),
-  };
   let newData = { x: [...data.x], y: [...data.y] };
 
   //ICI FAUT REMPLACER LM PEUT ETRE PAR UNE LOSS FUNCTION
@@ -39,7 +32,7 @@ export function fitData(data: { x: number[]; y: number[] }): any[] {
       slope: regression.x[0],
       intercept: regression.x[1],
     };
-    return [data, finalParameters, score]; //    TODO: interpolation should be implemented here
+    return [data, finalParameters, score]; 
   }
 
   //make new dataset without last point

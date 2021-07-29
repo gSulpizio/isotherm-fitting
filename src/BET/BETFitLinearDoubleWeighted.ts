@@ -1,5 +1,4 @@
 import { nelderMead } from 'fmin';
-import LM from 'ml-levenberg-marquardt';
 
 import isotherm from '../isotherm';
 import BETFunction from '../modelFunctions/BETFunction';
