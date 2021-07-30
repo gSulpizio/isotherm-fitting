@@ -36,8 +36,9 @@ export default function getFunction(functionName: string) {
 ```
 Additionally, getN has to be changed to reflect how many parameters of a model have to be used indpendently of the number of isotherms for a thermodynamically consistent fitting. As an example, for a Langmuir triple function, n=3, with two isotherms at different temperatures, the parameters would be:
 ```ts
-parameters=[k11, k21, k31, k12, k22, k32, n1, n2, n3];
-             |    |    |    |              |   |   |   //selected parameters for first isothnerm
+parameters=[k11, k21, k31, k12, k22, k32, nm1, nm2, nm3];
+             |    |    |                   |    |    |  //selected parameters for first isothnerm
+                             |    |    |   |    |    |  //selected parameters for second isothnerm
 ```
 For the first isotherm
 ## License
