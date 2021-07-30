@@ -21,7 +21,8 @@ const result = myModule(args);
 ```
 ## Adding a model
 To add a model, one has to add the function to the modelFunction folder as well as add a script that fits the model to a given data set in the directFitting folder. The models then need to be added to the getN and getFunction files in the variousTools folder. 
-Therefore, if a model 'newModel' has to be added to the library, and the files in the modelFunction folder and in the directFitting folder has already been added, the getFunction file will be changed as follows:
+#### Adding a model to getN, example
+If a model 'newModel' has to be added to the library, and the files in the modelFunction folder and in the directFitting folder has already been added, the getFunction file will be changed as follows:
 ```ts
 import newModel from '../modelFunctions/newModel';
 ...
@@ -38,9 +39,14 @@ Additionally, getN has to be changed to reflect how many parameters of a model h
 ```ts
 parameters=[k11, k21, k31, k12, k22, k32, nm1, nm2, nm3];
              |    |    |                   |    |    |  //selected parameters for first isothnerm
-                             |    |    |   |    |    |  //selected parameters for second isothnerm
+                            |    |    |    |    |    |  //selected parameters for second isothnerm
 ```
-For the first isotherm
+Where the first indice is the site type and the second indice is the isotherm indice. In other words, the first isotherm has the equilibrium constants k11, k21, k31 and the second isotherm has the equilibrium constants k12,k22,k32.
+For the first isotherm, the parameters therefore needed are:
+```ts
+parameters=[k11, k21, k31, nm1, nm2, nm3];
+```
+which means that n=3 as there are 3 parameters needed for 
 ## License
 
 [MIT](./LICENSE)
