@@ -1,5 +1,5 @@
-import getFunction from '../isostericHeat/loss/getFunction';
 import isotherm from '../isotherm';
+import getFunction from '../variousTools/getFunction';
 
 import MSE from './simpleMSE';
 

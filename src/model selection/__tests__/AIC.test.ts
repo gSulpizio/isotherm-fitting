@@ -1,7 +1,7 @@
 import makeNoisyData from '../../../dev tools/makeNoisyData';
-import langmuirSingleFit from '../../langmuir/langmuirSingleFit';
-import langmuirDoubleFit from '../../langmuir/langmuirDoubleFit';
-import langmuirTripleFit from '../../langmuir/langmuirTripleFit';
+import langmuirDoubleFit from '../../directFitting/langmuir/langmuirDoubleFit';
+import langmuirSingleFit from '../../directFitting/langmuir/langmuirSingleFit';
+import langmuirTripleFit from '../../directFitting/langmuir/langmuirTripleFit';
 import AIC from '../AIC';
 
 describe('AIC', () => {

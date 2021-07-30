@@ -1,7 +1,7 @@
 import dichotomySearch from '../variousTools/dichotomySearch';
+import getFunction from '../variousTools/getFunction';
 import getParameters from '../variousTools/getParameters';
 
-import getFunction from './loss/getFunction';
 
 
 /**

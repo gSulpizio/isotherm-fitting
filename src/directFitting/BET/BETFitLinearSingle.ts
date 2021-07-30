@@ -1,4 +1,4 @@
-import { fitData } from '../variousTools/fitData';
+import { fitData } from '../../variousTools/fitData';
 /**
  * the linear function is fitted directly on the data
  *

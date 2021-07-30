@@ -1,8 +1,8 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import isotherm from '../../isotherm';
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import isotherm from '../../../isotherm';
+import langmuirSingleFunction from '../../../modelFunctions/langmuirSingleFunction';
 import langmuirSingleFit from '../langmuirSingleFit';
 
 describe('test Langmuir fit', () => {

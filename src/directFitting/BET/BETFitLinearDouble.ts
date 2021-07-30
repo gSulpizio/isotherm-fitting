@@ -1,10 +1,10 @@
 import { nelderMead } from 'fmin';
 
-import lossFunction from '../isostericHeat/loss/lossFunction';
-import isotherm from '../isotherm';
-import BETFunction from '../modelFunctions/BETFunction';
-import { fitData } from '../variousTools/fitData';
-import initialGuess from '../variousTools/initialGuess';
+import lossFunction from '../../isostericHeat/loss/lossFunction';
+import isotherm from '../../isotherm';
+import BETFunction from '../../modelFunctions/BETFunction';
+import { fitData } from '../../variousTools/fitData';
+import initialGuess from '../../variousTools/initialGuess';
 
 
 /**

@@ -1,8 +1,8 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../../dev tools/makeNoisyData';
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import makeNoisyData from '../../../../dev tools/makeNoisyData';
+import langmuirSingleFunction from '../../../modelFunctions/langmuirSingleFunction';
 import BETFitLinearDoubleWeighted from '../BETFitLinearDoubleWeighted';
 
 describe('test BET weights', () => {

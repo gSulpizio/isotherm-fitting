@@ -1,15 +1,14 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import makeNoisyData from '../../../dev tools/makeNoisyData';
-import BETFitLinearSingle from '../BETFitLinearSingle';
-import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import makeNoisyData from '../../../../dev tools/makeNoisyData';
+import BETFitLinearDouble from '../BETFitLinearDouble';
 
 describe('test BET fit', () => {
   it('simulated dataSet, test linear Single fit and deduced BET area', () => {
-    let data = makeNoisyData([2, 5], 150, 10);
+    let data = makeNoisyData([2, 5], 100);
 
-    let results = BETFitLinearSingle(data);
+    let results = BETFitLinearDouble(data);
 
     //writeFileSync(join(__dirname, '../../examples/BETFit.json'),JSON.stringify(dataSet));
 

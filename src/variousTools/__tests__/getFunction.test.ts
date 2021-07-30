@@ -1,8 +1,8 @@
+import BETFunction from '../../modelFunctions/BETFunction';
+import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
 import getFunction from '../getFunction';
-import langmuirSingleFunction from '../../../modelFunctions/langmuirSingleFunction';
-import langmuirDoubleFunction from '../../../modelFunctions/langmuirDoubleFunction';
-import langmuirTripleFunction from '../../../modelFunctions/langmuirTripleFunction';
-import BETFunction from '../../../modelFunctions/BETFunction';
 
 describe('test getFunction', () => {
   let data = [
@@ -32,7 +32,7 @@ describe('test getFunction', () => {
     );
   });
   it('error testing', () => {
-    expect(() => getFunction('hello')).toThrowError(
+    expect(() => getFunction('hello')).toThrow(
       'getFunction: FUNCTION NAME NOT RECOGNIZED',
     );
   });

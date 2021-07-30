@@ -1,5 +1,5 @@
-import getFunction from '../src/isostericHeat/loss/getFunction';
 import isotherm from '../src/isotherm';
+import getFunction from '../src/variousTools/getFunction';
 
 /**
  *generates a langmuir single site isotherm with random gaussian noise

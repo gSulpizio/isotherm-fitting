@@ -1,8 +1,8 @@
 import { nelderMead } from 'fmin';
 
-import isotherm from '../isotherm';
-import BETFunction from '../modelFunctions/BETFunction';
-import initialGuess from '../variousTools/initialGuess';
+import isotherm from '../../isotherm';
+import BETFunction from '../../modelFunctions/BETFunction';
+import initialGuess from '../../variousTools/initialGuess';
 
 
 import { fitDataWeighted } from './fitDataWeighted';

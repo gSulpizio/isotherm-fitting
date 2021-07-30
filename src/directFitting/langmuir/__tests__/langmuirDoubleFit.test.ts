@@ -1,11 +1,12 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-import isotherm from '../../isotherm';
-import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
-import langmuirTripleFit from '../langmuirTripleFit';
+import isotherm from '../../../isotherm';
+import langmuirDoubleFunction from '../../../modelFunctions/langmuirDoubleFunction';
+import langmuirDoubleFit from '../langmuirDoubleFit';
 
-test('Triple Langmuir fit', () => {
+test('Double Langmuir fit', () => {
+
   let data:isotherm = {
     x: [
       0.0171192,
@@ -36,8 +37,11 @@ test('Triple Langmuir fit', () => {
       242.443,
     ],
   };
-  let results = langmuirTripleFit(data);
-  let yFit = data.x.map((item) => langmuirTripleFunction(results.x)(item));
+  let results = langmuirDoubleFit(data);
+  let yFit = data.x.map((item) => langmuirDoubleFunction(results.x)(item));
+  for (let i = 0; i < yFit.length; i++) {
+    expect(Math.abs(yFit[i] - data.y[i])).toBeLessThan(0.9 * data.y[i]);
+  }
 
   //writing results to plot
   writeFileSync(
@@ -46,7 +50,7 @@ test('Triple Langmuir fit', () => {
   );
 
   writeFileSync(
-    join(__dirname, '../../../examples/TripleFit.json'),
+    join(__dirname, '../../../examples/doubleFit.json'),
     JSON.stringify({ x: data.x, y: yFit }),
   );
 });

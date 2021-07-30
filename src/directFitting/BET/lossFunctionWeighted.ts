@@ -1,5 +1,5 @@
-import getFunction from '../isostericHeat/loss/getFunction';
-import getParameters from '../variousTools/getParameters';
+import getFunction from '../../variousTools/getFunction';
+import getParameters from '../../variousTools/getParameters';
 /**
  * Curried function that returns a cumulated loss function
  * @param {object} data  aggregated data object {{T, x, y}, {T, x, y}, {T, x, y}}
