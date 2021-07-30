@@ -20,7 +20,20 @@ const result = myModule(args);
 // result is ...
 ```
 ## Adding a model
-To add a model, one has to add the function to the modelFunction folder as well as add a script that fits the model to a given data set in the directFitting folder. The models then need to be added to 
+To add a model, one has to add the function to the modelFunction folder as well as add a script that fits the model to a given data set in the directFitting folder. The models then need to be added to the getN and getFunction files in the variousTools folder. 
+Therefore, if a model 'newModel' has to be added to the library, and the files in the modelFunction folder and in the directFitting folder has already been added, the getFunction file will be changed as follows:
+```
+import newModel from '../modelFunctions/newModel';
+...
+export default function getFunction(functionName: string) {
+  switch (functionName) {
+      ...
+      case 'newModel':
+        return newModel;
+      ...
+  }
+
+```
 ## License
 
 [MIT](./LICENSE)
