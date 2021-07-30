@@ -5,12 +5,13 @@ import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction'
 import getFunction from '../getFunction';
 
 describe('test getFunction', () => {
-  let data = [
-    { x: [0, 0.1], y: [0, 0.4], T: 273 },
-    { x: [0.2, 0.4], y: [0.5, 0.9], T: 293 },
-  ];
-  it.only('get langmuir single function', () => {
+  it('get langmuir single function', () => {
     expect(getFunction('langmuirSingle')([2, 5])(0.5)).toStrictEqual(
+      langmuirSingleFunction([2, 5])(0.5),
+    );
+  });
+  it('get langmuir single function with fitting name', () => {
+    expect(getFunction('langmuirSingleFit')([2, 5])(0.5)).toStrictEqual(
       langmuirSingleFunction([2, 5])(0.5),
     );
   });
@@ -31,9 +32,15 @@ describe('test getFunction', () => {
       BETFunction([8, 4, 0.1])(0.5),
     );
   });
+  it('get BET function with double fit name', () => {
+    expect(getFunction('BETFitLinearDouble')([8, 4, 0.1])(0.5)).toStrictEqual(
+      BETFunction([8, 4, 0.1])(0.5),
+    );
+  });
   it('error testing', () => {
     expect(() => getFunction('hello')).toThrow(
-      'getFunction: FUNCTION NAME NOT RECOGNIZED',
+      'getFunction - FUNCTION NAME NOT RECOGNIZED: hello',
     );
+
   });
 });

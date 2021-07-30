@@ -1,3 +1,4 @@
+import isotherm from '../../isotherm';
 import { fitData } from '../../variousTools/fitData';
 /**
  * the linear function is fitted directly on the data
@@ -19,7 +20,7 @@ import { fitData } from '../../variousTools/fitData';
  * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
  * @returns {object} { sampledData, regression, score, vm }
  */
-export default function BETFitLinearSingle(data: { x: number[]; y: number[] }) {
+export default function BETFitLinearSingle(data: isotherm) {
   //let fluidProperties = getProperties(gasName, temperature);
 
   //let newData=BETCriteria(data, SATURATIONPRESSURE)

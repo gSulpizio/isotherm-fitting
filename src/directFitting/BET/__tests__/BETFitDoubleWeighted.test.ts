@@ -20,7 +20,6 @@ describe('test BET weights', () => {
     let simulated = data.x.map(
       (item) => item * result.regression.slope + result.regression.intercept,
     );
-    console.log(result.score);
     writeFileSync(
       join(__dirname, '../../../examples/BETFit.json'),
       JSON.stringify({ x: data.x, y: simulated }),

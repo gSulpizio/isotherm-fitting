@@ -23,7 +23,7 @@ export default function lossFunction(data: any[], functionName: string) {
         cumulatedLoss += (yHat - y) ** 2;
       }
     }
-
+    if(params.some(parameter=>parameter<0)){cumulatedLoss+=10**10}
     return cumulatedLoss;
   };
 }
