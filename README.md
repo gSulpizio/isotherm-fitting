@@ -59,7 +59,7 @@ export default function getN(functionName: string) {
   }
   ...
 ```
-In the case that the model follows a different scheme of how the parameters are structured, it is possible to make a custom parameters selection with an if statement that returns the desired variables *before* the getN call in the getParameters function. 
+In the case that the model follows a different scheme of how the parameters are structured, it is possible to make a custom parameters selection with an if statement that returns the desired variables **before** the getN call in the getParameters function. 
 ## License
 
 [MIT](./LICENSE)
