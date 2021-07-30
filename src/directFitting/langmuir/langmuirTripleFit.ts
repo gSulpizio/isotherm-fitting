@@ -12,7 +12,6 @@ import initialGuess from '../../variousTools/initialGuess';
 
 export default function langmuirTripleFit(
   data: isotherm,
-
 ) {
   let initialValues = initialGuess([data], 'langmuirTriple');
 

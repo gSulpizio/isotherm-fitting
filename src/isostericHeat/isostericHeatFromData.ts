@@ -5,7 +5,7 @@ import getConstants from '../variousTools/getConstants';
 import initialGuess from '../variousTools/initialGuess';
 
 import getSlopes from './getSlopes';
-import getnlnP from './getlnP';
+import getlnP from './getlnP';
 import lossFunction from './loss/lossFunction';
 
 /**
@@ -33,7 +33,7 @@ export default function isostericHeatFromData(
     lossFunction(data, functionName),
     parameters,
   );
-  let loadings = getnlnP(data, functionName, fittedParameters.x); //adds lnP to data, returns the loadings
+  let loadings = getlnP(data, functionName, fittedParameters.x); //adds lnP to data, returns the loadings
   let inverseTemperatures = [];
   for (let dataSet of data) {
     inverseTemperatures.push(1 / dataSet.T);

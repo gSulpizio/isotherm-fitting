@@ -13,7 +13,7 @@ describe('test get parameters, two datasets, langmuir triple', () => {
       8,
     ]);
   });
-  it('test first dataset', () => {
+  it('test second dataset', () => {
     expect(getParameters(functionName, 1, parameterList)).toStrictEqual([
       3,
       4,
