@@ -33,6 +33,7 @@ export default function getFunction(functionName: string) {
         return newModel;
       ...
   }
+  ...
 
 ```
 Additionally, getN has to be changed to reflect how many parameters of a model have to be used indpendently of the number of isotherms for a thermodynamically consistent fitting. As an example, for a Langmuir triple function, n=3, with two isotherms at different temperatures, the parameters would be:
@@ -49,10 +50,14 @@ parameters=[k11, k21, k31, nm1, nm2, nm3];
 which means that n=3 as there are 3 parameters of the same type needed for one isotherm. In getN, this would look like:
 ```ts
 export default function getN(functionName: string) {
+    ...
   switch (functionName) {
+      ...
     case 'newModel':
       return 3;
+      ...
   }
+  ...
 ```
 In the case that the model follows a different scheme of how the parameters are structured, it is possible to make a custom parameters selection with an if statement that returns the desired variables *before* the getN call in the getParameters function. 
 ## License
