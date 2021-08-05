@@ -1,6 +1,6 @@
 import makeNoisyData from '../../../dev tools/makeNoisyData'
 import modelRankingBIC from '../modelRankingBIC'
-import modelScoring from '../modelScoring'
+
 
 describe('testing mondelRanking, please work',()=>{
     it('langmuirSingle',()=>{
