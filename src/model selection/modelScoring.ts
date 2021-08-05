@@ -4,7 +4,15 @@ import isotherm from '../isotherm'
 import AIC from './AIC'
 import BIC from './BIC'
 
-export default function modelRanking(data:isotherm){
+import looseData from './looseData'
+
+/**
+ * Compute AIC and BIC scores
+ * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
+ * @returns {Array} array containing objects: {modelName, AIC, BIC}
+ */
+
+export default function modelScoring(data:isotherm){
     let functionNames:string[]=Object.keys(things)
     let fittingFunctions=Object.values(things)
     let BICScores=[]
@@ -29,9 +37,6 @@ export default function modelRanking(data:isotherm){
     }
     return finalResult
 }
-interface looseObject {
-    [key: string]: any
-}
-interface looseData extends Array<looseObject> {}
+
 
 
