@@ -6,8 +6,9 @@
  */
 export default function MSE(y: number[], yhat: number[]) {
   let cumulatedLoss = 0;
-  for (let i = 0; i < y.length; i++) {
+  let dataLength=y.length
+  for (let i = 0; i < dataLength; i++) {
     cumulatedLoss += (y[i] - yhat[i]) ** 2;
   }
-  return cumulatedLoss;
+  return cumulatedLoss/dataLength;
 }
