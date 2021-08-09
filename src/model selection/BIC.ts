@@ -1,7 +1,7 @@
 import isotherm from '../isotherm';
 import getFunction from '../variousTools/getFunction';
 
-import MSE from './simpleMSE';
+import simpleMSE from './simpleMSE';
 
 /**
  * Computes the Bayesian information criterion: https://en.wikipedia.org/wiki/Bayesian_information_criterion
@@ -13,13 +13,11 @@ import MSE from './simpleMSE';
 
 export default function BIC(
   data: isotherm,
-  functionName: string,
+  MSE:number,
   fittedParams: number[],
 ) {
-  const fn = getFunction(functionName);
-  let yHat = data.x.map((item: number) => fn(fittedParams)(item));
   return (
-    2 * Math.log(MSE(data.y, yHat)) +
+    2 * Math.log(MSE) +
     fittedParams.length * Math.log(data.x.length)
   );
 }

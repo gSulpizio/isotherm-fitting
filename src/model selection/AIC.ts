@@ -1,7 +1,5 @@
 import isotherm from '../isotherm';
-import getFunction from '../variousTools/getFunction';
 
-import MSE from './simpleMSE';
 
 /**
  * Computes the Akaike information criterion: https://en.wikipedia.org/wiki/Akaike_information_criterion
@@ -13,10 +11,8 @@ import MSE from './simpleMSE';
 
 export default function AIC(
   data: isotherm,
-  functionName: string,
+  MSE:number,
   fittedParams: number[],
 ) {
-  const fn = getFunction(functionName);
-  let yHat = data.x.map((item: number) => fn(fittedParams)(item));
-  return data.x.length * Math.log(MSE(data.y, yHat)) + 2 * fittedParams.length;
+  return data.x.length * Math.log(MSE) + 2 * fittedParams.length;
 }

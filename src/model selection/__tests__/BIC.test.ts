@@ -2,6 +2,10 @@ import makeNoisyData from '../../../dev tools/makeNoisyData';
 import langmuirDoubleFit from '../../directFitting/langmuir/langmuirDoubleFit';
 import langmuirSingleFit from '../../directFitting/langmuir/langmuirSingleFit';
 import langmuirTripleFit from '../../directFitting/langmuir/langmuirTripleFit';
+import langmuirDoubleFunction from '../../modelFunctions/langmuirDoubleFunction';
+import langmuirSingleFunction from '../../modelFunctions/langmuirSingleFunction';
+import langmuirTripleFunction from '../../modelFunctions/langmuirTripleFunction';
+import simpleMSE from '../simpleMSE';
 import BIC from '../BIC';
 
 describe('BIC', () => {
@@ -11,9 +15,19 @@ describe('BIC', () => {
     let fittedParams1 = langmuirSingleFit(data).x;
     let fittedParams2 = langmuirDoubleFit(data).x;
     let fittedParams3 = langmuirTripleFit(data).x;
-    let BIC1 = BIC(data, 'langmuirSingle', fittedParams1);
-    let BIC2 = BIC(data, 'langmuirDouble', fittedParams2);
-    let BIC3 = BIC(data, 'langmuirTriple', fittedParams3);
+
+    let yHat1 = data.x.map((item: number) => langmuirSingleFunction(fittedParams1)(item));
+    let yHat2 = data.x.map((item: number) => langmuirDoubleFunction(fittedParams2)(item));
+    let yHat3 = data.x.map((item: number) => langmuirTripleFunction(fittedParams3)(item));
+
+    let MSE1=simpleMSE(data.y, yHat1)
+    let MSE2=simpleMSE(data.y, yHat2)
+    let MSE3=simpleMSE(data.y, yHat3)
+
+    let BIC1 = BIC(data, MSE1, fittedParams1);
+    let BIC2 = BIC(data, MSE2, fittedParams2);
+    let BIC3 = BIC(data, MSE3, fittedParams3);
+
     expect(BIC1).toBeLessThan(BIC2);
     expect(BIC2).toBeLessThan(BIC3);
   });
@@ -23,9 +37,18 @@ describe('BIC', () => {
     let fittedParams1 = langmuirSingleFit(data).x;
     let fittedParams2 = langmuirDoubleFit(data).x;
     let fittedParams3 = langmuirTripleFit(data).x;
-    let BIC1 = BIC(data, 'langmuirSingle', fittedParams1);
-    let BIC2 = BIC(data, 'langmuirDouble', fittedParams2);
-    let BIC3 = BIC(data, 'langmuirTriple', fittedParams3);
+    let yHat1 = data.x.map((item: number) => langmuirSingleFunction(fittedParams1)(item));
+    let yHat2 = data.x.map((item: number) => langmuirDoubleFunction(fittedParams2)(item));
+    let yHat3 = data.x.map((item: number) => langmuirTripleFunction(fittedParams3)(item));
+
+    let MSE1=simpleMSE(data.y, yHat1)
+    let MSE2=simpleMSE(data.y, yHat2)
+    let MSE3=simpleMSE(data.y, yHat3)
+
+    let BIC1 = BIC(data, MSE1, fittedParams1);
+    let BIC2 = BIC(data, MSE2, fittedParams2);
+    let BIC3 = BIC(data, MSE3, fittedParams3);
+
     expect(BIC2).toBeLessThan(BIC1);
     expect(BIC2).toBeLessThan(BIC3);
   });
@@ -35,9 +58,19 @@ describe('BIC', () => {
     let fittedParams1 = langmuirSingleFit(data).x;
     let fittedParams2 = langmuirDoubleFit(data).x;
     let fittedParams3 = langmuirTripleFit(data).x;
-    let BIC1 = BIC(data, 'langmuirSingle', fittedParams1);
-    let BIC2 = BIC(data, 'langmuirDouble', fittedParams2);
-    let BIC3 = BIC(data, 'langmuirTriple', fittedParams3);
+    
+    let yHat1 = data.x.map((item: number) => langmuirSingleFunction(fittedParams1)(item));
+    let yHat2 = data.x.map((item: number) => langmuirDoubleFunction(fittedParams2)(item));
+    let yHat3 = data.x.map((item: number) => langmuirTripleFunction(fittedParams3)(item));
+
+    let MSE1=simpleMSE(data.y, yHat1)
+    let MSE2=simpleMSE(data.y, yHat2)
+    let MSE3=simpleMSE(data.y, yHat3)
+
+    let BIC1 = BIC(data, MSE1, fittedParams1);
+    let BIC2 = BIC(data, MSE2, fittedParams2);
+    let BIC3 = BIC(data, MSE3, fittedParams3);
+
     expect(BIC1).toBeLessThan(BIC3);
     expect(BIC2).toBeLessThan(BIC3);
   });
