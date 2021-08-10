@@ -27,6 +27,7 @@ export default function modelScoring(data: isotherm) {
     let fn = getFunction(functionNames[i]);
     let yHat = data.x.map((item: number) => fn(fittedParameters)(item));
     let MSE = simpleMSE(data.y, yHat);
+    let std = Math.sqrt(MSE);
     try {
       AICScores[i] = AIC(data, MSE, fittedParameters);
     } catch {
@@ -41,6 +42,7 @@ export default function modelScoring(data: isotherm) {
       modelName: functionNames[i],
       AIC: AICScores[i],
       BIC: BICScores[i],
+      standardDeviation: std,
     });
   }
   return finalResult;
