@@ -1,4 +1,7 @@
 import isotherm from '../isotherm';
+import getMSEstd from './getMSEstd';
+import groupAndSort from './groupAndSort';
+import looseData from './looseData';
 import modelScoring from './modelScoring';
 /**
  * Sorts the models from the lowest BIC score (position 0) to the highest BIC score.
@@ -7,9 +10,8 @@ import modelScoring from './modelScoring';
  * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
  * @returns
  */
-export default function modelRankingBIC(data: isotherm) {
+export default function modelRankingBIC(data: isotherm, method: string) {
   let scoredModels = modelScoring(data);
-  let group = 1;
   scoredModels.sort(function (a, b) {
     return a.BIC - b.BIC;
   });
@@ -17,18 +19,7 @@ export default function modelRankingBIC(data: isotherm) {
     scoredModels[i].pBIC = Math.exp(
       (scoredModels[0].BIC - scoredModels[i].BIC) / 2,
     );
-
-    //grouping within std
-    scoredModels[i].groupBIC = group;
-    if (i < scoredModels.length - 1) {
-      if (
-        Math.abs(scoredModels[i].BIC - scoredModels[i + 1].BIC) >
-        scoredModels[0].standardDeviation
-      ) {
-        group++;
-      }
-    }
   }
-
+  groupAndSort(scoredModels, 'BIC');
   return scoredModels;
 }

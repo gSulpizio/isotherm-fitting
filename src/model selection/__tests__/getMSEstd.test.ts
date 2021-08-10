@@ -8,6 +8,7 @@ test('test getMSEstd', () => {
     { name: 'Citroen Trèfle', MSE: 35 },
   ];
   let result = getMSEstd(data);
+  console.log(result);
   expect(result).toStrictEqual(
     Math.sqrt(
       ((0 - 45 / 3) ** 2 + (10 - 45 / 3) ** 2 + (35 - 45 / 3) ** 2) / 3,
