@@ -1,10 +1,12 @@
-import * as things from '../directFitting/models'
-import isotherm from '../isotherm'
+import * as things from '../directFitting/models';
+import isotherm from '../isotherm';
 
-import AIC from './AIC'
-import BIC from './BIC'
+import AIC from './AIC';
+import BIC from './BIC';
+import simpleMSE from './simpleMSE';
+import getFunction from '../variousTools/getFunction';
 
-import looseData from './looseData'
+import looseData from './looseData';
 
 /**
  * Compute AIC and BIC scores
@@ -12,31 +14,34 @@ import looseData from './looseData'
  * @returns {Array} array containing objects: {modelName, AIC, BIC}
  */
 
-export default function modelScoring(data:isotherm){
-    let functionNames:string[]=Object.keys(things)
-    let fittingFunctions=Object.values(things)
-    let BICScores=[]
-    let AICScores=[]
-    let fittedParameters=[]
-    let finalResult:looseData=[]
-    for(let i =0;i< functionNames.length;i++){
-        fittedParameters=fittingFunctions[i](data).x
-        try{
-        AICScores[i]=AIC(data, functionNames[i],fittedParameters)
+export default function modelScoring(data: isotherm) {
+  let functionNames: string[] = Object.keys(things);
+  let fittingFunctions = Object.values(things);
+  let BICScores = [];
+  let AICScores = [];
+  let fittedParameters: number[] = [];
+  let finalResult: looseData = [];
+
+  for (let i = 0; i < functionNames.length; i++) {
+    fittedParameters = fittingFunctions[i](data).x;
+    let fn = getFunction(functionNames[i]);
+    let yHat = data.x.map((item: number) => fn(fittedParameters)(item));
+    let MSE = simpleMSE(data.y, yHat);
+    try {
+      AICScores[i] = AIC(data, MSE, fittedParameters);
+    } catch {
+      AICScores[i] = '???';
     }
-        catch{
-            AICScores[i]='???'
-        }
-        try{
-            BICScores[i]=BIC(data, functionNames[i],fittedParameters)
-        }
-            catch{
-                BICScores[i]='???'
-            }
-        finalResult.push({modelName:functionNames[i],AIC:AICScores[i], BIC:BICScores[i]})
+    try {
+      BICScores[i] = BIC(data, MSE, fittedParameters);
+    } catch {
+      BICScores[i] = '???';
     }
-    return finalResult
+    finalResult.push({
+      modelName: functionNames[i],
+      AIC: AICScores[i],
+      BIC: BICScores[i],
+    });
+  }
+  return finalResult;
 }
-
-
-
