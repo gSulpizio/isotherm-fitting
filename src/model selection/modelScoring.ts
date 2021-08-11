@@ -11,7 +11,7 @@ import looseData from './looseData';
 /**
  * Compute AIC and BIC scores
  * @param {isotherm} data: isotherm with at least x (pressure ) and y (loading) arrays
- * @returns {Array} array containing objects: {modelName, AIC, BIC}
+ * @returns {Array} array containing objects: {modelName, AIC, BIC, MSE}
  */
 
 export default function modelScoring(data: isotherm) {
@@ -41,6 +41,8 @@ export default function modelScoring(data: isotherm) {
       modelName: functionNames[i],
       AIC: AICScores[i],
       BIC: BICScores[i],
+      MSE: MSE,
+      fittedParameters: fittedParameters,
     });
   }
   return finalResult;
