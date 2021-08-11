@@ -1,7 +1,7 @@
 //langmuir double function
 /**
  * Returns a function of the langmuir triple site model
- * @param {Array}  [K1, K2, n1, n2] : array with equilibrium constants and the saturation loadings
+ * @param {Array}  [K1, K2, K3 n1, n2, n3] : array with equilibrium constants and the saturation loadings
  * @returns {function} loading as a function of pressure
  */
 export default function langmuirTripleFunction([
