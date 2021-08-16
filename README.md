@@ -12,12 +12,52 @@
 `$ npm i isotherm-fitting`
 
 ## Usage
-
+Fit a function to a dataset:
 ```ts
-import { myModule } from const result'isotherm-fitting';
+import langmuirSingleFit from 'directFit/langmuir/langmuirSingleFit';
+import langmuirDoubleFit from 'directFit/langmuir/langmuirDoubleFit';
+import langmuirTripleFit from 'directFit/langmuir/langmuirTripleFit';
 
-const result = myModule(args);
-// result is ...
+import BETFitLinearSingle from 'directFit/BET/BETFitLinearSingle';
+import BETFitLinearDouble from 'directFit/BET/BETFitLinearDouble';
+import BETFitLinearDoubleWeighted from 'directFit/BET/BETFitDoubleWeighted';
+let data:isotherm = {
+      x: [
+        0.0171192,
+        0.0586318,
+        0.102329,
+        0.211573,
+        0.303338,
+        0.412581,
+        0.499976,
+        0.60485,
+        0.705355,
+        0.801489,
+        0.901993,
+        0.998128,
+      ],
+      y: [
+        20.6782,
+        69.2916,
+        102.611,
+        143.577,
+        168.157,
+        188.367,
+        199.838,
+        212.947,
+        223.325,
+        230.972,
+        237.527,
+        242.443,
+      ],
+    };
+    let resultsSingle = langmuirSingleFit(data);
+    let resultsDouble = langmuirTripleFit(data);
+    let resultsTriple = langmuirTripleFit(data);
+
+    let BETDirect=BETFitLinearSingle(data)
+    let BETindirect=BETFitLinearDouble(data)
+    let BETindirectWeighted=BETFitDoubleWeighted(data)
 ```
 
 ## Adding a model
